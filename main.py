@@ -1,5 +1,8 @@
+import application as app
+
+
 def main():
-    print("Hello, World.")
+    app.root.mainloop()
 
 
 if __name__ == "__main__":
