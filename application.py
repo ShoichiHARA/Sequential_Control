@@ -6,12 +6,26 @@ from tkinter import messagebox
 class Application(tk.Frame):
     def __init__(self: tk.Tk, master=None):
         super().__init__(master)  # 親クラスの継承
+        self.pack()               # 配置
 
         # ウインドウの設定
         self.master.title("Sequential_Control")  # ウインドウタイトル
-        self.master.geometry("800x600")          # ウインドウサイズ(横x縦)
-        self.master.cvs = tk.Canvas(self.master, bg="white")
-        self.master.cvs.pack(fill=tk.BOTH, expand=True)
+        self.master.geometry("400x300")          # ウインドウサイズ(横x縦)
+
+        # メニューバーの設定
+        self.bar = tk.Menu(self)                  # メニューバー
+        self.master.configure(menu=self.bar)      # メニューバー設定
+        self.file = tk.Menu(self.bar, tearoff=0)  # ファイルメニュー
+        self.bar.add_cascade(label="File", menu=self.file)
+        self.file.add_command(label="Setting")    # 設定
+        self.file.add_separator()                 # 境界線
+        self.file.add_command(label="Exit")       # 終了
+        self.help = tk.Menu(self.bar, tearoff=0)  # ヘルプメニュー
+        self.bar.add_cascade(label="Help", menu=self.help)
+
+        # キャンバスの設定
+        self.cvs = tk.Canvas(self.master, bg="white")  # 背景色
+        self.cvs.pack(fill=tk.BOTH, expand=True)       # 配置
 
         # 実習盤の生成
         self.practice_board()
