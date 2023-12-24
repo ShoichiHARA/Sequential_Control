@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="12/23&#10;デスクトップアプリ試作">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="12/24&#10;マウスイベント追加">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703337142532</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="12/24&#10;マウスイベント追加">
+      <option name="closed" value="true" />
+      <created>1703392875470</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1703392875470</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -179,6 +186,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="12/23&#10;シーケンス制御実習教材開発開始" />
     <MESSAGE value="12/23&#10;デスクトップアプリ試作" />
-    <option name="LAST_COMMIT_MESSAGE" value="12/23&#10;デスクトップアプリ試作" />
+    <MESSAGE value="12/24&#10;マウスイベント追加" />
+    <option name="LAST_COMMIT_MESSAGE" value="12/24&#10;マウスイベント追加" />
   </component>
 </project>
