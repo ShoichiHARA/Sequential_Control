@@ -15,7 +15,7 @@ class MainWin(tk.Frame):
         self.help = None
 
         # ウインドウの設定
-        self.master.title(lg.mw)     # ウインドウタイトル
+        self.master.title(lg.mw)         # ウインドウタイトル
         self.master.geometry("400x300")  # ウインドウサイズ(横x縦)
         self.widgets()                   # ウィジェット
 
@@ -43,12 +43,13 @@ class MainWin(tk.Frame):
     def exit(self):
         self.master.destroy()
 
+    # 実習盤ウインドウ表示
     def pb_win(self):
         self.pb_win = tk.Toplevel(self.master)
         self.app = SubWindow(self.pb_win)
 
 
-# サブウインドウ
+# 実習盤ウインドウ
 class SubWindow(tk.Frame):
     def __init__(self: tk.Tk, master):
         super().__init__(master)  # 親クラスの継承
@@ -70,7 +71,8 @@ class SubWindow(tk.Frame):
         self.cvs.pack(fill=tk.BOTH, expand=True)  # 配置
 
         # 部品の配置 https://imagingsolution.net/program/python/tkinter/canvas_drawing_lines_circles_shapes/#toc14
-        self.cvs.create_oval(200, 400, 240, 440, width=3, fill="#00BFFF", tags="pb1")
+        self.cvs.create_oval(200, 400, 240, 440, tags="pb1", width=3, fill="#00BFFF")
+        self.cvs.create_oval(300, 400, 340, 440, tags="pb2", width=3, fill="#C0C0C0")
 
     def event(self):
         def m_press(e):
@@ -78,10 +80,14 @@ class SubWindow(tk.Frame):
                 print("x=" + str(e.x) + ", y=" + str(e.y))
                 # 要素の設定変更 https://daeudaeu.com/tkinter_canvas_method/
                 self.cvs.itemconfig("pb1", fill="#1E90FF")
+            if e.num == 3:
+                self.cvs.itemconfig("pb2", fill="#A9A9A9")
 
         def m_release(e):
             if e.num == 1:
                 self.cvs.itemconfig("pb1", fill="#00BFFF")
+            if e.num == 3:
+                self.cvs.itemconfig("pb2", fill="#C0C0C0")
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
