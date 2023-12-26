@@ -57,6 +57,7 @@ class SubWindow(tk.Frame):
 
         # 定義
         self.cvs = None
+        self.keep = []
 
         # ウインドウの設定
         self.master.title(lg.pb)         # ウインドウタイトル
@@ -89,8 +90,25 @@ class SubWindow(tk.Frame):
             if e.num == 3:
                 self.cvs.itemconfig("pb2", fill="#C0C0C0")
 
+        def k_press(e):
+            if e.char in self.keep: return
+            self.keep.append(e.char)
+            if e.char == "1":
+                self.cvs.itemconfig("pb1", fill="#1E90FF")
+            if e.char == "2":
+                self.cvs.itemconfig("pb2", fill="#A9A9A9")
+
+        def k_release(e):
+            self.keep.remove(e.char)
+            if e.char == "1":
+                self.cvs.itemconfig("pb1", fill="#00BFFF")
+            if e.char == "2":
+                self.cvs.itemconfig("pb2", fill="#A9A9A9")
+
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
+        self.master.bind("<KeyPress>", k_press)
+        self.master.bind("<KeyRelease>", k_release)
 
 
 # アプリケーション
