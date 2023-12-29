@@ -65,6 +65,8 @@ class SubWin(tk.Frame):
         self.b = 0
         self.pb1n = tk.PhotoImage(file="image/PB1_ON.png")
         self.pb1f = tk.PhotoImage(file="image/PB1_OFF.png")
+        self.pb2n = tk.PhotoImage(file="image/PB2_ON.png")
+        self.pb2f = tk.PhotoImage(file="image/PB2_OFF.png")
 
         # ウインドウの設定
         self.master.title(lg.pb)  # ウインドウタイトル
@@ -80,13 +82,14 @@ class SubWin(tk.Frame):
 
         # 部品の配置 https://imagingsolution.net/program/python/tkinter/canvas_drawing_lines_circles_shapes/#toc14
         self.cvs.create_text(self.x, self.y, tags="ss0_t1", text="SS0", anchor=tk.NW)
-        self.cvs.create_oval(300, 400, 350, 450, tags="pb2", width=3, fill="#C0C0C0")
 
         # 押しボタンスイッチ1
-        # self.pb1n = self.pb1n.subsample(2, 2)
-        self.cvs.create_image(200, 400, tags="pb1n", image=self.pb1n, anchor=tk.NW)
-        # self.pb1f = self.pb1f.subsample(2, 2)
-        self.cvs.create_image(200, 400, tags="pb1f", image=self.pb1f, anchor=tk.NW)
+        self.cvs.create_image(200, 500, tags="pb1n", image=self.pb1n, anchor=tk.NW)
+        self.cvs.create_image(200, 500, tags="pb1f", image=self.pb1f, anchor=tk.NW)
+
+        # 押しボタンスイッチ2
+        self.cvs.create_image(300, 500, tags="pb2n", image=self.pb2n, anchor=tk.NW)
+        self.cvs.create_image(300, 500, tags="pb2f", image=self.pb2f, anchor=tk.NW)
 
         self.cvs.create_text(760, 590, tags="pt", text="x="+str(self.x)+", y="+str(self.y))
         self.cvs.create_text(760, 580, tags="ab", text="a="+str(self.a)+", b="+str(self.b))
@@ -112,7 +115,7 @@ class SubWin(tk.Frame):
             if e.keysym == "1":
                 self.cvs.lift("pb1n", "pb1f")
             if e.keysym == "2":
-                self.cvs.itemconfig("pb2", fill="#A9A9A9")
+                self.cvs.lift("pb2n", "pb2f")
             if e.keysym == "Right":
                 self.x += 2
             if e.keysym == "Left":
@@ -130,7 +133,7 @@ class SubWin(tk.Frame):
             if e.keysym == "1":
                 self.cvs.lift("pb1f", "pb1n")
             if e.keysym == "2":
-                self.cvs.itemconfig("pb2", fill="#C0C0C0")
+                self.cvs.lift("pb2f", "pb2n")
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
