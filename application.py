@@ -1,5 +1,5 @@
 import tkinter as tk
-from PIL import ImageTk
+from PIL import ImageTk, Image
 import language as lg
 
 
@@ -63,6 +63,8 @@ class SubWin(tk.Frame):
         self.y = 500
         self.a = 2
         self.b = 0
+        self.pb1n = tk.PhotoImage(file="image/PB1_ON.png")
+        self.pb1f = tk.PhotoImage(file="image/PB1_OFF.png")
 
         # ウインドウの設定
         self.master.title(lg.pb)  # ウインドウタイトル
@@ -77,9 +79,14 @@ class SubWin(tk.Frame):
         self.cvs.pack(fill=tk.BOTH, expand=True)  # 配置
 
         # 部品の配置 https://imagingsolution.net/program/python/tkinter/canvas_drawing_lines_circles_shapes/#toc14
-        self.cvs.create_text(self.x, self.y, tags="ss0_t0", text="SS0")
-        self.cvs.create_oval(200, 400, 250, 450, tags="pb1", width=3, fill="#00BFFF")
+        self.cvs.create_text(self.x, self.y, tags="ss0_t1", text="SS0", anchor=tk.NW)
         self.cvs.create_oval(300, 400, 350, 450, tags="pb2", width=3, fill="#C0C0C0")
+
+        # 押しボタンスイッチ1
+        # self.pb1n = self.pb1n.subsample(2, 2)
+        self.cvs.create_image(200, 400, tags="pb1n", image=self.pb1n, anchor=tk.NW)
+        # self.pb1f = self.pb1f.subsample(2, 2)
+        self.cvs.create_image(200, 400, tags="pb1f", image=self.pb1f, anchor=tk.NW)
 
         self.cvs.create_text(760, 590, tags="pt", text="x="+str(self.x)+", y="+str(self.y))
         self.cvs.create_text(760, 580, tags="ab", text="a="+str(self.a)+", b="+str(self.b))
@@ -89,22 +96,21 @@ class SubWin(tk.Frame):
             if e.num == 1:
                 print("x=" + str(e.x) + ", y=" + str(e.y))
                 # 要素の設定変更 https://daeudaeu.com/tkinter_canvas_method/
-                self.cvs.itemconfig("pb1", fill="#1E90FF")
             if e.num == 3:
-                self.cvs.itemconfig("pb2", fill="#A9A9A9")
+                pass
 
         def m_release(e):
             if e.num == 1:
-                self.cvs.itemconfig("pb1", fill="#00BFFF")
+                pass
             if e.num == 3:
-                self.cvs.itemconfig("pb2", fill="#C0C0C0")
+                pass
 
         def k_press(e):
             if e.keysym in self.keep:
                 return
             self.keep.append(e.keysym)
             if e.keysym == "1":
-                self.cvs.itemconfig("pb1", fill="#1E90FF")
+                self.cvs.lift("pb1n", "pb1f")
             if e.keysym == "2":
                 self.cvs.itemconfig("pb2", fill="#A9A9A9")
             if e.keysym == "Right":
@@ -115,14 +121,14 @@ class SubWin(tk.Frame):
                 self.y += 2
             if e.keysym == "Up":
                 self.y -= 2
-            self.cvs.moveto("pt", x=self.x, y=self.y)
+            # self.cvs.moveto("pt", x=self.x, y=self.y)
             self.cvs.moveto("ss0_t1", x=self.x, y=self.y)
             self.cvs.itemconfig("pt", text="x="+str(self.x)+", y="+str(self.y))
 
         def k_release(e):
             self.keep.remove(e.keysym)
             if e.keysym == "1":
-                self.cvs.itemconfig("pb1", fill="#00BFFF")
+                self.cvs.lift("pb1f", "pb1n")
             if e.keysym == "2":
                 self.cvs.itemconfig("pb2", fill="#C0C0C0")
 
