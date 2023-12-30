@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="12/28&#10;押しボタンスイッチ作成">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="12/28&#10;押しボタンスイッチ追加">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image.py" beforeDir="false" afterPath="$PROJECT_DIR$/image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/PB1_OFF.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/PB1_OFF.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/SS_Left.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/SS_Left.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/SS_Right.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/SS_Right.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/language.py" beforeDir="false" afterPath="$PROJECT_DIR$/language.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703860627188</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="12/28&#10;押しボタンスイッチ追加">
+      <option name="closed" value="true" />
+      <created>1703861591226</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703861591226</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -261,6 +271,7 @@
     <MESSAGE value="12/27&#10;位置調整用の変数を作成" />
     <MESSAGE value="12/28&#10;pillowのインストール" />
     <MESSAGE value="12/28&#10;押しボタンスイッチ作成" />
-    <option name="LAST_COMMIT_MESSAGE" value="12/28&#10;押しボタンスイッチ作成" />
+    <MESSAGE value="12/28&#10;押しボタンスイッチ追加" />
+    <option name="LAST_COMMIT_MESSAGE" value="12/28&#10;押しボタンスイッチ追加" />
   </component>
 </project>

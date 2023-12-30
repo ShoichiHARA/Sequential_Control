@@ -59,10 +59,14 @@ class SubWin(tk.Frame):
         # 定義
         self.cvs = None
         self.keep = []
-        self.x = 200
-        self.y = 500
+        self.x = 60
+        self.y = 540
         self.a = 2
         self.b = 0
+        self.ss0r = tk.PhotoImage(file="image/SS_Right.png")
+        self.ss0l = tk.PhotoImage(file="image/SS_Left.png")
+        self.ss1r = tk.PhotoImage(file="image/SS_Right.png")
+        self.ss1l = tk.PhotoImage(file="image/SS_Left.png")
         self.pb1n = tk.PhotoImage(file="image/PB1_ON.png")
         self.pb1f = tk.PhotoImage(file="image/PB1_OFF.png")
         self.pb2n = tk.PhotoImage(file="image/PB2_ON.png")
@@ -81,15 +85,21 @@ class SubWin(tk.Frame):
         self.cvs.pack(fill=tk.BOTH, expand=True)  # 配置
 
         # 部品の配置 https://imagingsolution.net/program/python/tkinter/canvas_drawing_lines_circles_shapes/#toc14
-        self.cvs.create_text(self.x, self.y, tags="ss0_t1", text="SS0", anchor=tk.NW)
+        # 切替スイッチ1
+        self.cvs.create_image(40, 450, tags="ss0r", image=self.ss0r, anchor=tk.NW)
+        self.cvs.create_image(40, 450, tags="ss0l", image=self.ss0l, anchor=tk.NW)
+        self.cvs.create_text(44, 540, tags="ss0_t1", text="SS0 (z)", anchor=tk.NW, font=("", 18))
+        self.cvs.create_text(50, 424, tags="ss0_t2", text=lg.mn, font=("", 18))
+        self.cvs.create_text(115, 424, tags="ss0_t3", text=lg.at, font=("", 18))
+        # self.cvs.create_text(self.x, self.y, tags="ss0_t2", text=lg.mn, anchor=tk.NW, font=("", 18))
 
         # 押しボタンスイッチ1
-        self.cvs.create_image(200, 500, tags="pb1n", image=self.pb1n, anchor=tk.NW)
-        self.cvs.create_image(200, 500, tags="pb1f", image=self.pb1f, anchor=tk.NW)
+        self.cvs.create_image(200, 450, tags="pb1n", image=self.pb1n, anchor=tk.NW)
+        self.cvs.create_image(200, 450, tags="pb1f", image=self.pb1f, anchor=tk.NW)
 
         # 押しボタンスイッチ2
-        self.cvs.create_image(300, 500, tags="pb2n", image=self.pb2n, anchor=tk.NW)
-        self.cvs.create_image(300, 500, tags="pb2f", image=self.pb2f, anchor=tk.NW)
+        self.cvs.create_image(300, 450, tags="pb2n", image=self.pb2n, anchor=tk.NW)
+        self.cvs.create_image(300, 450, tags="pb2f", image=self.pb2f, anchor=tk.NW)
 
         self.cvs.create_text(760, 590, tags="pt", text="x="+str(self.x)+", y="+str(self.y))
         self.cvs.create_text(760, 580, tags="ab", text="a="+str(self.a)+", b="+str(self.b))
@@ -116,6 +126,13 @@ class SubWin(tk.Frame):
                 self.cvs.lift("pb1n", "pb1f")
             if e.keysym == "2":
                 self.cvs.lift("pb2n", "pb2f")
+            if e.keysym == "z":
+                if "ss0" in self.keep:
+                    self.cvs.lift("ss0l", "ss0r")
+                    self.keep.remove("ss0")
+                else:
+                    self.cvs.lift("ss0r", "ss0l")
+                    self.keep.append("ss0")
             if e.keysym == "Right":
                 self.x += 2
             if e.keysym == "Left":
@@ -125,7 +142,7 @@ class SubWin(tk.Frame):
             if e.keysym == "Up":
                 self.y -= 2
             # self.cvs.moveto("pt", x=self.x, y=self.y)
-            self.cvs.moveto("ss0_t1", x=self.x, y=self.y)
+            # self.cvs.moveto("ss0_t2", x=self.x, y=self.y)
             self.cvs.itemconfig("pt", text="x="+str(self.x)+", y="+str(self.y))
 
         def k_release(e):

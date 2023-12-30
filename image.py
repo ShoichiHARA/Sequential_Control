@@ -4,18 +4,18 @@ from PIL import Image, ImageDraw
 # 部品図形の生成
 def image(out):
     # 切替スイッチ右
-    ssr = Image.new(mode="RGB", size=(200, 200), color="white")
+    ssr = Image.new(mode="RGB", size=(80, 80), color="white")
     ssr_d = ImageDraw.Draw(ssr)
-    ssr_d.ellipse(xy=[0, 0, 200, 200], outline="black", width=6)
-    ssr_d.line(xy=[152, 18, 18, 152], fill="black", width=7)
-    ssr_d.line(xy=[182, 48, 48, 182], fill="black", width=7)
+    ssr_d.ellipse(xy=[0, 0, 80, 80], outline="black", width=3)
+    ssr_d.line(xy=[60, 5, 5, 60], fill="black", width=3)
+    ssr_d.line(xy=[75, 20, 20, 75], fill="black", width=3)
 
     # 切替スイッチ左
-    ssl = Image.new(mode="RGB", size=(200, 200), color="white")
+    ssl = Image.new(mode="RGB", size=(80, 80), color="white")
     ssl_d = ImageDraw.Draw(ssl)
-    ssl_d.ellipse(xy=[0, 0, 200, 200], outline="black", width=6)
-    ssl_d.line(xy=[48, 18, 182, 152], fill="black", width=7)
-    ssl_d.line(xy=[18, 48, 152, 182], fill="black", width=7)
+    ssl_d.ellipse(xy=[0, 0, 80, 80], outline="black", width=3)
+    ssl_d.line(xy=[20, 5, 75, 60], fill="black", width=3)
+    ssl_d.line(xy=[5, 20, 60, 75], fill="black", width=3)
 
     # 押しボタンスイッチ1OFF
     pb1f = Image.new(mode="RGB", size=(80, 80), color="#64FF64")  # 本体より明るめ
@@ -53,7 +53,7 @@ def image(out):
     pb2n_d.rectangle(xy=(0, 0, 80, 80), outline="black", width=2)
     pb2n_d.rectangle(xy=(10, 10, 70, 70), fill="silver", outline="black", width=2)  # 本体より暗め
 
-    # pb2n.show()
+    # ssl.show()
 
     if out == 1:
         ssr.save("image/SS_Right.png")
@@ -62,4 +62,3 @@ def image(out):
         pb1n.save("image/PB1_ON.png")
         pb2f.save("image/PB2_OFF.png")
         pb2n.save("image/PB2_ON.png")
-
