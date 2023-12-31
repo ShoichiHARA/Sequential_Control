@@ -9,9 +9,12 @@ dic = [
     ["View", "表示"],
     ["Practice Board", "実習盤"],
     ["Help", "ヘルプ"],
+    ["Mode", "運転モード"],
     ["Manu", "手動"],
     ["Auto", "自動"],
-    ["Continuous Operation", "連続運転"]
+    ["Continuous", "連続運転"],
+    ["OFF", "切"],
+    ["ON", "入"]
 ]
 
 for i in range(len(lang)):
@@ -23,5 +26,9 @@ for i in range(len(lang)):
         vw = dic[4][i]
         pb = dic[5][i]
         hp = dic[6][i]
-        mn = dic[7][i]
-        at = dic[8][i]
+        md = dic[7][i]
+        mn = dic[8][i]
+        at = dic[9][i]
+        co = dic[10][i]
+        of = dic[11][i]
+        on = dic[12][i]

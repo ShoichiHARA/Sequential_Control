@@ -59,8 +59,9 @@ class SubWin(tk.Frame):
         # 定義
         self.cvs = None
         self.keep = []
-        self.x = 60
-        self.y = 540
+        self.sw_on = []
+        self.x = 350
+        self.y = 460
         self.a = 2
         self.b = 0
         self.ss0r = tk.PhotoImage(file="image/SS_Right.png")
@@ -71,6 +72,12 @@ class SubWin(tk.Frame):
         self.pb1f = tk.PhotoImage(file="image/PB1_OFF.png")
         self.pb2n = tk.PhotoImage(file="image/PB2_ON.png")
         self.pb2f = tk.PhotoImage(file="image/PB2_OFF.png")
+        self.pb3n = tk.PhotoImage(file="image/PB3_ON.png")
+        self.pb3f = tk.PhotoImage(file="image/PB3_OFF.png")
+        self.pb4n = tk.PhotoImage(file="image/PB4_ON.png")
+        self.pb4f = tk.PhotoImage(file="image/PB4_OFF.png")
+        self.pb5n = tk.PhotoImage(file="image/PB5_ON.png")
+        self.pb5f = tk.PhotoImage(file="image/PB5_OFF.png")
 
         # ウインドウの設定
         self.master.title(lg.pb)  # ウインドウタイトル
@@ -85,21 +92,41 @@ class SubWin(tk.Frame):
         self.cvs.pack(fill=tk.BOTH, expand=True)  # 配置
 
         # 部品の配置 https://imagingsolution.net/program/python/tkinter/canvas_drawing_lines_circles_shapes/#toc14
+        # 切替スイッチ0
+        self.cvs.create_image(30, 450, tags="ss0r", image=self.ss0r, anchor=tk.NW)
+        self.cvs.create_image(30, 450, tags="ss0l", image=self.ss0l, anchor=tk.NW)
+        self.cvs.create_text(68, 545, tags="ss0_t1", text="SS0 (z)", font=("", 12, "bold"))
+        self.cvs.create_text(48, 435, tags="ss0_t2", text=lg.mn, font=("", 12, "bold"))
+        self.cvs.create_text(97, 435, tags="ss0_t3", text=lg.at, font=("", 12, "bold"))
+        self.cvs.create_text(72, 415, tags="ss0_t4", text=lg.md, font=("", 12, "bold"))
+
         # 切替スイッチ1
-        self.cvs.create_image(40, 450, tags="ss0r", image=self.ss0r, anchor=tk.NW)
-        self.cvs.create_image(40, 450, tags="ss0l", image=self.ss0l, anchor=tk.NW)
-        self.cvs.create_text(44, 540, tags="ss0_t1", text="SS0 (z)", anchor=tk.NW, font=("", 18))
-        self.cvs.create_text(50, 424, tags="ss0_t2", text=lg.mn, font=("", 18))
-        self.cvs.create_text(115, 424, tags="ss0_t3", text=lg.at, font=("", 18))
-        # self.cvs.create_text(self.x, self.y, tags="ss0_t2", text=lg.mn, anchor=tk.NW, font=("", 18))
+        self.cvs.create_image(130, 450, tags="ss1r", image=self.ss1r, anchor=tk.NW)
+        self.cvs.create_image(130, 450, tags="ss1l", image=self.ss1l, anchor=tk.NW)
+        self.cvs.create_text(170, 545, tags="ss1_t1", text="SS1 (x)", font=("", 12, "bold"))
+        self.cvs.create_text(148, 435, tags="ss1_t2", text=lg.of, font=("", 12, "bold"))
+        self.cvs.create_text(197, 435, tags="ss1_t3", text=lg.on, font=("", 12, "bold"))
+        self.cvs.create_text(170, 415, tags="ss1_t4", text=lg.co, font=("", 12, "bold"))
 
         # 押しボタンスイッチ1
-        self.cvs.create_image(200, 450, tags="pb1n", image=self.pb1n, anchor=tk.NW)
-        self.cvs.create_image(200, 450, tags="pb1f", image=self.pb1f, anchor=tk.NW)
+        self.cvs.create_image(240, 460, tags="pb1n", image=self.pb1n, anchor=tk.NW)
+        self.cvs.create_image(240, 460, tags="pb1f", image=self.pb1f, anchor=tk.NW)
 
         # 押しボタンスイッチ2
-        self.cvs.create_image(300, 450, tags="pb2n", image=self.pb2n, anchor=tk.NW)
-        self.cvs.create_image(300, 450, tags="pb2f", image=self.pb2f, anchor=tk.NW)
+        self.cvs.create_image(320, 460, tags="pb2n", image=self.pb2n, anchor=tk.NW)
+        self.cvs.create_image(320, 460, tags="pb2f", image=self.pb2f, anchor=tk.NW)
+
+        # 押しボタンスイッチ3
+        self.cvs.create_image(400, 460, tags="pb3n", image=self.pb3n, anchor=tk.NW)
+        self.cvs.create_image(400, 460, tags="pb3f", image=self.pb3f, anchor=tk.NW)
+
+        # 押しボタンスイッチ4
+        self.cvs.create_image(480, 460, tags="pb4n", image=self.pb4n, anchor=tk.NW)
+        self.cvs.create_image(480, 460, tags="pb4f", image=self.pb4f, anchor=tk.NW)
+
+        # 押しボタンスイッチ5
+        self.cvs.create_image(560, 450, tags="pb5n", image=self.pb5n, anchor=tk.NW)
+        self.cvs.create_image(560, 450, tags="pb5f", image=self.pb5f, anchor=tk.NW)
 
         self.cvs.create_text(760, 590, tags="pt", text="x="+str(self.x)+", y="+str(self.y))
         self.cvs.create_text(760, 580, tags="ab", text="a="+str(self.a)+", b="+str(self.b))
@@ -123,16 +150,34 @@ class SubWin(tk.Frame):
                 return
             self.keep.append(e.keysym)
             if e.keysym == "1":
-                self.cvs.lift("pb1n", "pb1f")
+                self.cvs.lift("pb1n", "pb1f")  # tk.Canvas.lift(前面に移動させたいタグ)
+                self.sw_on.append("pb1")
             if e.keysym == "2":
                 self.cvs.lift("pb2n", "pb2f")
+                self.sw_on.append("pb2")
+            if e.keysym == "3":
+                self.cvs.lift("pb3n", "pb3f")
+                self.sw_on.append("pb3")
+            if e.keysym == "4":
+                self.cvs.lift("pb4n", "pb4f")
+                self.sw_on.append("pb4")
+            if e.keysym == "5":
+                self.cvs.lift("pb5n", "pb5f")
+                self.sw_on.append("pb5")
             if e.keysym == "z":
-                if "ss0" in self.keep:
+                if "ss0" in self.sw_on:
                     self.cvs.lift("ss0l", "ss0r")
-                    self.keep.remove("ss0")
+                    self.sw_on.remove("ss0")
                 else:
                     self.cvs.lift("ss0r", "ss0l")
-                    self.keep.append("ss0")
+                    self.sw_on.append("ss0")
+            if e.keysym == "x":
+                if "ss1" in self.sw_on:
+                    self.cvs.lift("ss1l", "ss1r")
+                    self.sw_on.remove("ss1")
+                else:
+                    self.cvs.lift("ss1r", "ss1l")
+                    self.sw_on.append("ss1")
             if e.keysym == "Right":
                 self.x += 2
             if e.keysym == "Left":
@@ -142,15 +187,26 @@ class SubWin(tk.Frame):
             if e.keysym == "Up":
                 self.y -= 2
             # self.cvs.moveto("pt", x=self.x, y=self.y)
-            # self.cvs.moveto("ss0_t2", x=self.x, y=self.y)
+            # self.cvs.moveto("pb2f", x=self.x, y=self.y)
             self.cvs.itemconfig("pt", text="x="+str(self.x)+", y="+str(self.y))
 
         def k_release(e):
             self.keep.remove(e.keysym)
             if e.keysym == "1":
                 self.cvs.lift("pb1f", "pb1n")
+                self.sw_on.remove("pb1")
             if e.keysym == "2":
                 self.cvs.lift("pb2f", "pb2n")
+                self.sw_on.remove("pb2")
+            if e.keysym == "3":
+                self.cvs.lift("pb3f", "pb3n")
+                self.sw_on.remove("pb3")
+            if e.keysym == "4":
+                self.cvs.lift("pb4f", "pb4n")
+                self.sw_on.remove("pb4")
+            if e.keysym == "5":
+                self.cvs.lift("pb5f", "pb5n")
+                self.sw_on.remove("pb5")
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
