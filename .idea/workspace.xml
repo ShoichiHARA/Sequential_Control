@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="12/31&#10;押しボタンスイッチ追加">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/1&#10;製品追加&#10;マウスによる製品の位置調整可能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image.py" beforeDir="false" afterPath="$PROJECT_DIR$/image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/PB5_OFF.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/PB5_OFF.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/PB5_ON.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/PB5_ON.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/SS_Left.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/SS_Left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/SS_Right.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/SS_Right.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704032235834</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="1/1&#10;製品追加&#10;マウスによる製品の位置調整可能">
+      <option name="closed" value="true" />
+      <created>1704120920841</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1704120920841</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -291,6 +294,7 @@
     <MESSAGE value="12/28&#10;押しボタンスイッチ追加" />
     <MESSAGE value="12/30&#10;切替スイッチ追加" />
     <MESSAGE value="12/31&#10;押しボタンスイッチ追加" />
-    <option name="LAST_COMMIT_MESSAGE" value="12/31&#10;押しボタンスイッチ追加" />
+    <MESSAGE value="1/1&#10;製品追加&#10;マウスによる製品の位置調整可能" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/1&#10;製品追加&#10;マウスによる製品の位置調整可能" />
   </component>
 </project>

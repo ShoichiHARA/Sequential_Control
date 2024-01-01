@@ -60,7 +60,8 @@ class SubWin(tk.Frame):
         self.cvs = None
         self.keep = []
         self.sw_on = []
-        self.pall_p = [400, 120]  # 製品x座標
+        self.pall_x = 400  # 製品x座標
+        self.pall_d = 0    # マウス移動用変数
         self.x = 350  # 位置調整用x座標
         self.y = 460  # 位置調整用y座標
         self.a = 2
@@ -135,11 +136,11 @@ class SubWin(tk.Frame):
         self.cvs.create_image(560, 450, tags="pb5f", image=self.pb5f, anchor=tk.NW)
 
         # 製品
-        self.cvs.create_image(self.pall_p[0], 120, tags="pall", image=self.pall)
-        self.cvs.create_image(self.pall_p[0], 75, tags="prd1", image=self.prd1)
-        self.cvs.create_image(self.pall_p[0], 105, tags="prd2", image=self.prd2)
-        self.cvs.create_image(self.pall_p[0], 135, tags="prd3", image=self.prd3)
-        self.cvs.create_image(self.pall_p[0], 165, tags="prd4", image=self.prd4)
+        self.cvs.create_image(self.pall_x, 120, tags="pall", image=self.pall)
+        self.cvs.create_image(self.pall_x, 75, tags="prd1", image=self.prd1)
+        self.cvs.create_image(self.pall_x, 105, tags="prd2", image=self.prd2)
+        self.cvs.create_image(self.pall_x, 135, tags="prd3", image=self.prd3)
+        self.cvs.create_image(self.pall_x, 165, tags="prd4", image=self.prd4)
 
         self.cvs.create_text(760, 590, tags="pt", text="x="+str(self.x)+", y="+str(self.y))
         self.cvs.create_text(760, 580, tags="ab", text="a="+str(self.a)+", b="+str(self.b))
@@ -147,9 +148,32 @@ class SubWin(tk.Frame):
     def event(self):
         def m_press(e):
             if e.num == 1:
-                if self.pall_p[0]-80 < e.x < self.pall_p[0]+80:
-                    self.keep.append("prod")
-                    self.pall_p[1] = e.x
+                if self.pall_x-80 < e.x < self.pall_x+80:  # パレット移動
+                    if 60 < e.y < 180:
+                        self.keep.append("prod")
+                        self.pall_d = self.pall_x - e.x
+                if self.pall_x-15 < e.x < self.pall_x+15:  # 製品選択
+                    if 60 < e.y < 90:
+                        if "prd1" in self.keep:
+                            self.keep.remove("prd1")
+                            self.cvs.lift("prd1", "pall")
+                        else:
+                            self.keep.append("prd1")
+                            self.cvs.lower("prd1", "pall")  # tk.Canvas.lower(背面に移動させたいタグ)
+                    if 90 < e.y < 120:
+                        if "prd2" in self.keep:
+                            self.keep.remove("prd2")
+                            self.cvs.lift("prd2", "pall")
+                        else:
+                            self.keep.append("prd2")
+                            self.cvs.lower("prd2", "pall")
+                    if 120 < e.y < 150:
+                        if "prd3" in self.keep:
+                            self.keep.remove("prd3")
+                            self.cvs.lift("prd3", "pall")
+                        else:
+                            self.keep.append("prd3")
+                            self.cvs.lower("prd3", "pall")
                 print("x=" + str(e.x) + ", y=" + str(e.y))
                 # 要素の設定変更 https://daeudaeu.com/tkinter_canvas_method/
             if e.num == 3:
@@ -164,10 +188,13 @@ class SubWin(tk.Frame):
 
         def m_move(e):
             if "prod" in self.keep:
-                self.cvs.move("pall", e.x-self.pall_p[1], 0)
-                self.pall_p[1] = e.x
-                # self.pall_p[0] = e.x
-                # self.cvs.moveto("pall", x=self.pall_p[0]-80, y=60)
+                if 150 < e.x+self.pall_d < 650:
+                    self.pall_x = e.x + self.pall_d
+                    self.cvs.moveto("pall", x=self.pall_x-80, y=60)
+                    self.cvs.moveto("prd1", x=self.pall_x-15, y=60)
+                    self.cvs.moveto("prd2", x=self.pall_x-15, y=90)
+                    self.cvs.moveto("prd3", x=self.pall_x-15, y=120)
+                    self.cvs.moveto("prd4", x=self.pall_x-15, y=150)
 
         def k_press(e):
             if e.keysym in self.keep:
