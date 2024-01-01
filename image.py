@@ -6,16 +6,16 @@ def image(out):
     # 切替スイッチ右
     ssr = Image.new(mode="RGB", size=(80, 80), color="white")
     ssr_d = ImageDraw.Draw(ssr)
-    ssr_d.ellipse(xy=[0, 0, 80, 80], outline="black", width=3)
-    ssr_d.line(xy=[60, 5, 5, 60], fill="black", width=3)
-    ssr_d.line(xy=[75, 20, 20, 75], fill="black", width=3)
+    ssr_d.ellipse(xy=[1, 1, 79, 79], outline="black", width=2)
+    ssr_d.line(xy=[59, 6, 6, 59], fill="black", width=2)
+    ssr_d.line(xy=[74, 21, 21, 74], fill="black", width=2)
 
     # 切替スイッチ左
     ssl = Image.new(mode="RGB", size=(80, 80), color="white")
     ssl_d = ImageDraw.Draw(ssl)
-    ssl_d.ellipse(xy=[0, 0, 80, 80], outline="black", width=3)
-    ssl_d.line(xy=[20, 5, 75, 60], fill="black", width=3)
-    ssl_d.line(xy=[5, 20, 60, 75], fill="black", width=3)
+    ssl_d.ellipse(xy=[1, 1, 79, 79], outline="black", width=2)
+    ssl_d.line(xy=[21, 6, 74, 59], fill="black", width=2)
+    ssl_d.line(xy=[6, 21, 59, 74], fill="black", width=2)
 
     # 押しボタンスイッチ1OFF
     pb1f = Image.new(mode="RGB", size=(60, 60), color="#64FF64")  # 本体より明るめ
@@ -47,7 +47,7 @@ def image(out):
     # 押しボタンスイッチ2ON
     pb2n = Image.new(mode="RGB", size=(60, 60), color="whitesmoke")  # 本体と同じ
     pb2n_d = ImageDraw.Draw(pb2n)
-    pb2n_d.polygon(xy=[0, 60, 60, 0, 0, 0], fill="darkgrey")  # 本体より暗めより暗め
+    pb2n_d.polygon(xy=[0, 60, 60, 0, 0, 0], fill="darkgray")  # 本体より暗めより暗め
     pb2n_d.line(xy=[0, 0, 60, 60], fill="black", width=2)
     pb2n_d.line(xy=[0, 60, 60, 0], fill="black", width=2)
     pb2n_d.rectangle(xy=(0, 0, 60, 60), outline="black", width=2)
@@ -92,16 +92,32 @@ def image(out):
     # 押しボタンスイッチ5OFF
     pb5f = Image.new(mode="RGB", size=(80, 80), color="white")
     pb5f_d = ImageDraw.Draw(pb5f)
-    pb5f_d.ellipse(xy=[0, 0, 80, 80], fill="red", outline="black", width=3)
-    pb5f_d.ellipse(xy=[15, 15, 65, 65], fill="#FF2828", outline="black", width=3)
+    pb5f_d.ellipse(xy=[1, 1, 79, 79], fill="red", outline="black", width=2)
+    pb5f_d.ellipse(xy=[15, 15, 65, 65], fill="#FF2828", outline="black", width=2)
 
     # 押しボタンスイッチ5ON
     pb5n = Image.new(mode="RGB", size=(80, 80), color="white")
     pb5n_d = ImageDraw.Draw(pb5n)
-    pb5n_d.ellipse(xy=[5, 5, 75, 75], fill="#D20000", outline="black", width=3)
-    pb5n_d.ellipse(xy=[18, 18, 62, 62], fill="#E60000", outline="black", width=3)
+    pb5n_d.ellipse(xy=[5, 5, 75, 75], fill="#D20000", outline="black", width=2)
+    pb5n_d.ellipse(xy=[18, 18, 62, 62], fill="#E60000", outline="black", width=2)
 
-    # pb5n.show()
+    # パレット
+    pall = Image.new(mode="RGB", size=(160, 120), color="silver")
+    pall_d = ImageDraw.Draw(pall)
+    pall_d.rectangle(xy=(0, 0, 160, 120), outline="black", width=2)
+
+    # 製品
+    prod = Image.new(mode="RGB", size=(30, 30))
+    prod_d = ImageDraw.Draw(prod)
+    prod_d.ellipse(xy=[2, 2, 28, 28], fill="darkgray", outline="black", width=1)
+    prod_d.line(xy=[0, 0, 30, 30], fill="black", width=2)
+    prod_d.line(xy=[0, 30, 30, 0], fill="black", width=2)
+    put = Image.new(mode="L", size=(30, 30), color="black")
+    put_d = ImageDraw.Draw(put)
+    put_d.ellipse(xy=[1, 1, 29, 29], fill="white")
+    prod.putalpha(put)
+
+    # prod.show()
 
     if out == 1:
         ssr.save("image/SS_Right.png")
@@ -116,3 +132,5 @@ def image(out):
         pb4n.save("image/PB4_ON.png")
         pb5f.save("image/PB5_OFF.png")
         pb5n.save("image/PB5_ON.png")
+        pall.save("image/Pallet.png")
+        prod.save("image/Product.png")
