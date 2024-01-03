@@ -104,7 +104,7 @@ def image(out):
     # パレット
     pall = Image.new(mode="RGB", size=(160, 120), color="silver")
     pall_d = ImageDraw.Draw(pall)
-    pall_d.rectangle(xy=(0, 0, 160, 120), outline="black", width=2)
+    pall_d.rectangle(xy=(1, 1, 159, 119), outline="black", width=2)
 
     # 製品
     prod = Image.new(mode="RGB", size=(30, 30))
