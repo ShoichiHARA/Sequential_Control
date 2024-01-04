@@ -43,6 +43,11 @@ class Ladder:
                 self.lst = self.opt            # 前回値更新
             if self.typ == "C":                # カウンタ出力命令の場合
                 pass                           #
+            if self.tpy == "St":               # セット命令の場合
+                if self.ext+self.opt > 0:      # 前回出力ONまたはセット命令ONの場合
+                    self.opt = 1               # 出力ON
+                else:                          # 前回出力OFFかつセット命令OFFの場合
+                    self.opt = 0               # 出力OFF
 
     def add(self, typ, brc, tag="", set=0):
         self.row.append(self.Comp(typ, brc))  # 行に追加
@@ -106,12 +111,13 @@ class Ladder:
                 self.ladder[i][-1].out()                                     # 出力命令演算
                 self.change(self.ladder[i][-1].tag, self.ladder[i][-1].opt)  # 出力を入力に反映
 
-        for i in range(len(self.ladder)):                                 # 行数繰り返し
-            if self.ladder[i][-1].typ == "Rs":                            # リセット命令の場合
-                for j in range(len(self.ladder)):                         # 行数繰り返し
-                    if self.ladder[i][-1].tag == self.ladder[j][-1].tag:  # 同じ名前の場合
-                        self.ladder[j][-1].c = 0                          # カウンタリセット
-                self.change(self.ladder[i][-1].tag, 0)                    # 入力にリセットを反映
+        for i in range(len(self.ladder)):                                     # 行数繰り返し
+            if self.ladder[i][-1].typ == "Rs":                                # リセット命令の場合
+                if self.ladder[i][-1].opt == 1:                               # リセット命令がONの場合
+                    for j in range(len(self.ladder)):                         # 行数繰り返し
+                        if self.ladder[i][-1].tag == self.ladder[j][-1].tag:  # 同じ名前の場合
+                            self.ladder[j][-1].c = 0                          # カウンタリセット
+                    self.change(self.ladder[i][-1].tag, 0)                    # 入力にリセットを反映
 
     def check(self):
         for i in range(len(self.ladder)):
@@ -125,6 +131,28 @@ class Ladder:
 
 
 def test():
+    ld = Ladder()
+    ld.add("M", 1, tag="x0")
+    ld.add("St", 0, tag="m0")
+    ld.add("M", 1, tag="x1")
+    ld.add("Rs", 0, tag="m0")
+    ld.add("M", 0, tag="m0")
+    ld.add("R", 0, tag="y0")
+
+    for t in range(10):
+        print("t=" + str(t))
+        if t == 1:
+            ld.change("x0")
+        if t == 2:
+            ld.change("x0")
+        if t == 5:
+            ld.change("x1")
+        if t == 6:
+            ld.change("x1")
+        ld.run()
+        ld.check()
+
+    """
     ld = Ladder()
     ld.add("M", 1, tag="x0")
     ld.add("B", 1, tag="t0")
@@ -144,3 +172,4 @@ def test():
             ld.change("x0")
         ld.run()
         ld.check()
+    """
