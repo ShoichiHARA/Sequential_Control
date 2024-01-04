@@ -1,7 +1,7 @@
 class Ladder:
     tag_list = ["M", "B", "P", "F", "R", "T", "C", "St", "Rs"]  # 名付命令リスト
     in_list = ["M", "B", "P", "F", "Ln"]  # 入力命令リスト
-    out_list = ["R", "T", "C", "St", "Rs"]  # 出力命令リスト
+    out_list = ["R", "T", "C", "St"]  # 出力命令リスト(リセット命令以外)
     end_list = ["R", "T", "C", "St", "Rs", "En"]  # 改行命令リスト
 
     def __init__(self):
@@ -29,6 +29,9 @@ class Ladder:
             elif self.typ in Ladder.out_list:  # 出力命令
                 if self.opt == 0:
                     self.opt = ipt
+            elif self.typ == "Rs":  # リセット命令
+                if self.opt == 0:
+                    self.opt = ipt
             return self.opt
 
         def out(self):
@@ -43,7 +46,7 @@ class Ladder:
                 self.lst = self.opt            # 前回値更新
             if self.typ == "C":                # カウンタ出力命令の場合
                 pass                           #
-            if self.tpy == "St":               # セット命令の場合
+            if self.typ == "St":               # セット命令の場合
                 if self.ext+self.opt > 0:      # 前回出力ONまたはセット命令ONの場合
                     self.opt = 1               # 出力ON
                 else:                          # 前回出力OFFかつセット命令OFFの場合
