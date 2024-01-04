@@ -55,13 +55,13 @@ class Ladder:
             self.row = []                     # 行を初期化
 
     def change(self, tag, ext=None):
-        for i in range(len(self.ladder)):
-            for j in range(len(self.ladder[i])):
-                if tag == self.ladder[i][j].tag:
-                    if None == ext:
-                        self.ladder[i][j].ext = abs(self.ladder[i][j].ext - 1)
-                    else:
-                        self.ladder[i][j].ext = ext
+        for i in range(len(self.ladder)):  # 行数繰り返し
+            for j in range(len(self.ladder[i])):  # 列数繰り返し
+                if tag == self.ladder[i][j].tag:  # 引数のタグを見つけた場合
+                    if None == ext:                                             # 設定値が指定されていない場合
+                        self.ladder[i][j].ext = abs(self.ladder[i][j].ext - 1)  # 反転
+                    else:                                                       # 設定値が指定されている場合
+                        self.ladder[i][j].ext = ext                             # 変更
 
     def run(self):
         for i in range(len(self.ladder)):  # 行数繰り返し
@@ -78,20 +78,20 @@ class Ladder:
 
             # print(str(i) + ", " + str(j))
             if self.ladder[i][j].brc == 1:  # 下に分岐がある場合
-                k.append([i, j, b])                   # 現在位置情報を記録
+                k.append([i, j, b])         # 現在位置情報を記録
 
             b = self.ladder[i][j].cal(b)  # 演算
 
-            if self.ladder[i][j].typ in self.in_list:         # 現在位置が入力命令の場合
-                j += 1                                        # 右へ
-                while True:                                   # 上がなくなるまで繰り返し
-                    if i == 0:                                # 一行目の場合
-                        break                                 # 繰り返し終了
-                    if self.ladder[i-1][j].brc == 1:  # 上に分岐がある場合
-                        i -= 1                                # 上へ
-                    else:                                     # 上に分岐がない場合
-                        break                                 # 繰り返し終了
-                continue                                      # 下の分岐確認へ
+            if self.ladder[i][j].typ in self.in_list:  # 現在位置が入力命令の場合
+                j += 1                                 # 右へ
+                while True:                            # 上がなくなるまで繰り返し
+                    if i == 0:                         # 一行目の場合
+                        break                          # 繰り返し終了
+                    if self.ladder[i-1][j].brc == 1:   # 上に分岐がある場合
+                        i -= 1                         # 上へ
+                    else:                              # 上に分岐がない場合
+                        break                          # 繰り返し終了
+                continue                               # 下の分岐確認へ
 
             if len(k) > 0:       # 位置情報の記録がある場合
                 i = k[0][0] + 1  # 位置情報の一つ下
