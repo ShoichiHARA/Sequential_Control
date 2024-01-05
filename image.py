@@ -125,6 +125,30 @@ def image(out):
     pl2n_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
     pl2n_d.ellipse(xy=[5, 5, 54, 54], fill="whitesmoke", outline="black", width=2)
 
+    # パイロットランプ3OFF
+    pl3f = Image.new(mode="RGB", size=(60, 60), color="white")
+    pl3f_d = ImageDraw.Draw(pl3f)
+    pl3f_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
+    pl3f_d.ellipse(xy=[5, 5, 54, 54], fill="royalblue", outline="black", width=2)
+
+    # パイロットランプ3ON
+    pl3n = Image.new(mode="RGB", size=(60, 60), color="white")
+    pl3n_d = ImageDraw.Draw(pl3n)
+    pl3n_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
+    pl3n_d.ellipse(xy=[5, 5, 54, 54], fill="deepskyblue", outline="black", width=2)
+
+    # パイロットランプ4OFF
+    pl4f = Image.new(mode="RGB", size=(60, 60), color="white")
+    pl4f_d = ImageDraw.Draw(pl4f)
+    pl4f_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
+    pl4f_d.ellipse(xy=[5, 5, 54, 54], fill="#AAAA00", outline="black", width=2)
+
+    # パイロットランプ4ON
+    pl4n = Image.new(mode="RGB", size=(60, 60), color="white")
+    pl4n_d = ImageDraw.Draw(pl4n)
+    pl4n_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
+    pl4n_d.ellipse(xy=[5, 5, 54, 54], fill="yellow", outline="black", width=2)
+
     # パレット
     pall = Image.new(mode="RGB", size=(160, 120), color="silver")
     pall_d = ImageDraw.Draw(pall)
@@ -141,7 +165,7 @@ def image(out):
     put_d.ellipse(xy=[1, 1, 29, 29], fill="white")
     prod.putalpha(put)
 
-    pl2n.show()
+    pl4n.show()
 
     if out == 1:
         ssr.save("image/SS_Right.png")
@@ -160,5 +184,9 @@ def image(out):
         pl1n.save("image/PL1_ON.png")
         pl2f.save("image/PL2_OFF.png")
         pl2n.save("image/PL2_ON.png")
+        pl3f.save("image/PL3_OFF.png")
+        pl3n.save("image/PL3_ON.png")
+        pl4f.save("image/PL4_OFF.png")
+        pl4n.save("image/PL4_ON.png")
         pall.save("image/Pallet.png")
         prod.save("image/Product.png")

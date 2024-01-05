@@ -82,6 +82,12 @@ class SubWin(tk.Frame):
         self.pb5f = tk.PhotoImage(file="image/PB5_OFF.png")
         self.pl1f = tk.PhotoImage(file="image/PL1_OFF.png")
         self.pl1n = tk.PhotoImage(file="image/PL1_ON.png")
+        self.pl2f = tk.PhotoImage(file="image/PL2_OFF.png")
+        self.pl2n = tk.PhotoImage(file="image/PL2_ON.png")
+        self.pl3f = tk.PhotoImage(file="image/PL3_OFF.png")
+        self.pl3n = tk.PhotoImage(file="image/PL3_ON.png")
+        self.pl4f = tk.PhotoImage(file="image/PL4_OFF.png")
+        self.pl4n = tk.PhotoImage(file="image/PL4_ON.png")
         self.pall = tk.PhotoImage(file="image/Pallet.png")
         self.prd1 = tk.PhotoImage(file="image/Product.png")
         self.prd2 = tk.PhotoImage(file="image/Product.png")
@@ -140,6 +146,18 @@ class SubWin(tk.Frame):
         # パイロットランプ1
         self.cvs.create_image(350, 370, tags="pl1n", image=self.pl1n)
         self.cvs.create_image(350, 370, tags="pl1f", image=self.pl1f)
+
+        # パイロットランプ2
+        self.cvs.create_image(430, 370, tags="pl2n", image=self.pl2n)
+        self.cvs.create_image(430, 370, tags="pl2f", image=self.pl2f)
+
+        # パイロットランプ3
+        self.cvs.create_image(510, 370, tags="pl3n", image=self.pl3n)
+        self.cvs.create_image(510, 370, tags="pl3f", image=self.pl3f)
+
+        # パイロットランプ4
+        self.cvs.create_image(590, 370, tags="pl4n", image=self.pl4n)
+        self.cvs.create_image(590, 370, tags="pl4f", image=self.pl4f)
 
         # 製品
         self.cvs.create_image(self.pall_x, 120, tags="pall", image=self.pall)
@@ -223,6 +241,9 @@ class SubWin(tk.Frame):
                 self.sw_on.append("pb5")
             if e.keysym == "c":
                 self.cvs.lift("pl1n", "pl1f")
+                self.cvs.lift("pl2n", "pl2f")
+                self.cvs.lift("pl3n", "pl3f")
+                self.cvs.lift("pl4n", "pl4f")
             if e.keysym == "z":
                 if "ss0" in self.sw_on:
                     self.cvs.lift("ss0l", "ss0r")
@@ -268,6 +289,9 @@ class SubWin(tk.Frame):
                 self.sw_on.remove("pb5")
             if e.keysym == "c":
                 self.cvs.lift("pl1f", "pl1n")
+                self.cvs.lift("pl2f", "pl2n")
+                self.cvs.lift("pl3f", "pl3n")
+                self.cvs.lift("pl4f", "pl4n")
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)

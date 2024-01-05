@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/4&#10;リセット命令調整">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/5&#10;実習盤配置の変更&#10;パイロットランプ作成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/image.py" beforeDir="false" afterPath="$PROJECT_DIR$/image.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/PB5_OFF.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/PB5_OFF.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/Pallet.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/Pallet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/SS_Left.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/SS_Left.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image/SS_Right.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/SS_Right.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -289,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704350306362</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="1/5&#10;実習盤配置の変更&#10;パイロットランプ作成">
+      <option name="closed" value="true" />
+      <created>1704466565027</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1704466565027</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -328,6 +332,7 @@
     <MESSAGE value="1/1&#10;マウスによる製品の位置調整改良&#10;製品の選択追加" />
     <MESSAGE value="1/3&#10;ラダープログラム改良&#10;タイマ命令完成" />
     <MESSAGE value="1/4&#10;リセット命令調整" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/4&#10;リセット命令調整" />
+    <MESSAGE value="1/5&#10;実習盤配置の変更&#10;パイロットランプ作成" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/5&#10;実習盤配置の変更&#10;パイロットランプ作成" />
   </component>
 </project>
