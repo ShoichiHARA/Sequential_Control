@@ -4,9 +4,9 @@ import image as img
 
 
 def main():
-    # img.image(1)
+    img.image(0)
     # app.application()
-    ldd.test()
+    # ldd.test()
 
 
 if __name__ == "__main__":

@@ -6,14 +6,14 @@ def image(out):
     # 切替スイッチ右
     ssr = Image.new(mode="RGB", size=(80, 80), color="white")
     ssr_d = ImageDraw.Draw(ssr)
-    ssr_d.ellipse(xy=[1, 1, 79, 79], outline="black", width=2)
+    ssr_d.ellipse(xy=[0, 0, 79, 79], outline="black", width=2)
     ssr_d.line(xy=[59, 6, 6, 59], fill="black", width=2)
     ssr_d.line(xy=[74, 21, 21, 74], fill="black", width=2)
 
     # 切替スイッチ左
     ssl = Image.new(mode="RGB", size=(80, 80), color="white")
     ssl_d = ImageDraw.Draw(ssl)
-    ssl_d.ellipse(xy=[1, 1, 79, 79], outline="black", width=2)
+    ssl_d.ellipse(xy=[0, 0, 79, 79], outline="black", width=2)
     ssl_d.line(xy=[21, 6, 74, 59], fill="black", width=2)
     ssl_d.line(xy=[6, 21, 59, 74], fill="black", width=2)
 
@@ -92,7 +92,7 @@ def image(out):
     # 押しボタンスイッチ5OFF
     pb5f = Image.new(mode="RGB", size=(80, 80), color="white")
     pb5f_d = ImageDraw.Draw(pb5f)
-    pb5f_d.ellipse(xy=[1, 1, 79, 79], fill="red", outline="black", width=2)
+    pb5f_d.ellipse(xy=[0, 0, 79, 79], fill="red", outline="black", width=2)
     pb5f_d.ellipse(xy=[15, 15, 65, 65], fill="#FF2828", outline="black", width=2)
 
     # 押しボタンスイッチ5ON
@@ -101,10 +101,34 @@ def image(out):
     pb5n_d.ellipse(xy=[5, 5, 75, 75], fill="#D20000", outline="black", width=2)
     pb5n_d.ellipse(xy=[18, 18, 62, 62], fill="#E60000", outline="black", width=2)
 
+    # パイロットランプ1OFF
+    pl1f = Image.new(mode="RGB", size=(60, 60), color="white")
+    pl1f_d = ImageDraw.Draw(pl1f)
+    pl1f_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
+    pl1f_d.ellipse(xy=[5, 5, 54, 54], fill="#00B400", outline="black", width=2)
+
+    # パイロットランプ1ON
+    pl1n = Image.new(mode="RGB", size=(60, 60), color="white")
+    pl1n_d = ImageDraw.Draw(pl1n)
+    pl1n_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
+    pl1n_d.ellipse(xy=[5, 5, 54, 54], fill="lime", outline="black", width=2)
+
+    # パイロットランプ2OFF
+    pl2f = Image.new(mode="RGB", size=(60, 60), color="white")
+    pl2f_d = ImageDraw.Draw(pl2f)
+    pl2f_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
+    pl2f_d.ellipse(xy=[5, 5, 54, 54], fill="darkgray", outline="black", width=2)
+
+    # パイロットランプ2ON
+    pl2n = Image.new(mode="RGB", size=(60, 60), color="white")
+    pl2n_d = ImageDraw.Draw(pl2n)
+    pl2n_d.ellipse(xy=[0, 0, 59, 59], fill="silver", outline="black", width=2)
+    pl2n_d.ellipse(xy=[5, 5, 54, 54], fill="whitesmoke", outline="black", width=2)
+
     # パレット
     pall = Image.new(mode="RGB", size=(160, 120), color="silver")
     pall_d = ImageDraw.Draw(pall)
-    pall_d.rectangle(xy=(1, 1, 159, 119), outline="black", width=2)
+    pall_d.rectangle(xy=(0, 0, 159, 119), outline="black", width=2)
 
     # 製品
     prod = Image.new(mode="RGB", size=(30, 30))
@@ -117,7 +141,7 @@ def image(out):
     put_d.ellipse(xy=[1, 1, 29, 29], fill="white")
     prod.putalpha(put)
 
-    # prod.show()
+    pl2n.show()
 
     if out == 1:
         ssr.save("image/SS_Right.png")
@@ -132,5 +156,9 @@ def image(out):
         pb4n.save("image/PB4_ON.png")
         pb5f.save("image/PB5_OFF.png")
         pb5n.save("image/PB5_ON.png")
+        pl1f.save("image/PL1_OFF.png")
+        pl1n.save("image/PL1_ON.png")
+        pl2f.save("image/PL2_OFF.png")
+        pl2n.save("image/PL2_ON.png")
         pall.save("image/Pallet.png")
         prod.save("image/Product.png")

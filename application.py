@@ -80,6 +80,8 @@ class SubWin(tk.Frame):
         self.pb4f = tk.PhotoImage(file="image/PB4_OFF.png")
         self.pb5n = tk.PhotoImage(file="image/PB5_ON.png")
         self.pb5f = tk.PhotoImage(file="image/PB5_OFF.png")
+        self.pl1f = tk.PhotoImage(file="image/PL1_OFF.png")
+        self.pl1n = tk.PhotoImage(file="image/PL1_ON.png")
         self.pall = tk.PhotoImage(file="image/Pallet.png")
         self.prd1 = tk.PhotoImage(file="image/Product.png")
         self.prd2 = tk.PhotoImage(file="image/Product.png")
@@ -100,40 +102,44 @@ class SubWin(tk.Frame):
 
         # 部品の配置 https://imagingsolution.net/program/python/tkinter/canvas_drawing_lines_circles_shapes/#toc14
         # 切替スイッチ0
-        self.cvs.create_image(30, 450, tags="ss0r", image=self.ss0r, anchor=tk.NW)
-        self.cvs.create_image(30, 450, tags="ss0l", image=self.ss0l, anchor=tk.NW)
-        self.cvs.create_text(68, 545, tags="ss0_t1", text="SS0 (z)", font=("", 12, "bold"))
-        self.cvs.create_text(48, 435, tags="ss0_t2", text=lg.mn, font=("", 12, "bold"))
-        self.cvs.create_text(97, 435, tags="ss0_t3", text=lg.at, font=("", 12, "bold"))
-        self.cvs.create_text(72, 415, tags="ss0_t4", text=lg.md, font=("", 12, "bold"))
+        self.cvs.create_image(50, 330, tags="ss0r", image=self.ss0r, anchor=tk.NW)
+        self.cvs.create_image(50, 330, tags="ss0l", image=self.ss0l, anchor=tk.NW)
+        self.cvs.create_text(88, 425, tags="ss0_t1", text="SS0 (z)", font=("", 12, "bold"))
+        self.cvs.create_text(68, 315, tags="ss0_t2", text=lg.mn, font=("", 12, "bold"))
+        self.cvs.create_text(117, 315, tags="ss0_t3", text=lg.at, font=("", 12, "bold"))
+        self.cvs.create_text(92, 295, tags="ss0_t4", text=lg.md, font=("", 12, "bold"))
 
         # 切替スイッチ1
-        self.cvs.create_image(130, 450, tags="ss1r", image=self.ss1r, anchor=tk.NW)
-        self.cvs.create_image(130, 450, tags="ss1l", image=self.ss1l, anchor=tk.NW)
-        self.cvs.create_text(170, 545, tags="ss1_t1", text="SS1 (x)", font=("", 12, "bold"))
-        self.cvs.create_text(148, 435, tags="ss1_t2", text=lg.of, font=("", 12, "bold"))
-        self.cvs.create_text(197, 435, tags="ss1_t3", text=lg.on, font=("", 12, "bold"))
-        self.cvs.create_text(170, 415, tags="ss1_t4", text=lg.co, font=("", 12, "bold"))
+        self.cvs.create_image(160, 330, tags="ss1r", image=self.ss1r, anchor=tk.NW)
+        self.cvs.create_image(160, 330, tags="ss1l", image=self.ss1l, anchor=tk.NW)
+        self.cvs.create_text(200, 425, tags="ss1_t1", text="SS1 (x)", font=("", 12, "bold"))
+        self.cvs.create_text(178, 315, tags="ss1_t2", text=lg.of, font=("", 12, "bold"))
+        self.cvs.create_text(227, 315, tags="ss1_t3", text=lg.on, font=("", 12, "bold"))
+        self.cvs.create_text(200, 295, tags="ss1_t4", text=lg.co, font=("", 12, "bold"))
 
         # 押しボタンスイッチ1
-        self.cvs.create_image(240, 460, tags="pb1n", image=self.pb1n, anchor=tk.NW)
-        self.cvs.create_image(240, 460, tags="pb1f", image=self.pb1f, anchor=tk.NW)
+        self.cvs.create_image(320, 460, tags="pb1n", image=self.pb1n, anchor=tk.NW)
+        self.cvs.create_image(320, 460, tags="pb1f", image=self.pb1f, anchor=tk.NW)
 
         # 押しボタンスイッチ2
-        self.cvs.create_image(320, 460, tags="pb2n", image=self.pb2n, anchor=tk.NW)
-        self.cvs.create_image(320, 460, tags="pb2f", image=self.pb2f, anchor=tk.NW)
+        self.cvs.create_image(400, 460, tags="pb2n", image=self.pb2n, anchor=tk.NW)
+        self.cvs.create_image(400, 460, tags="pb2f", image=self.pb2f, anchor=tk.NW)
 
         # 押しボタンスイッチ3
-        self.cvs.create_image(400, 460, tags="pb3n", image=self.pb3n, anchor=tk.NW)
-        self.cvs.create_image(400, 460, tags="pb3f", image=self.pb3f, anchor=tk.NW)
+        self.cvs.create_image(480, 460, tags="pb3n", image=self.pb3n, anchor=tk.NW)
+        self.cvs.create_image(480, 460, tags="pb3f", image=self.pb3f, anchor=tk.NW)
 
         # 押しボタンスイッチ4
-        self.cvs.create_image(480, 460, tags="pb4n", image=self.pb4n, anchor=tk.NW)
-        self.cvs.create_image(480, 460, tags="pb4f", image=self.pb4f, anchor=tk.NW)
+        self.cvs.create_image(560, 460, tags="pb4n", image=self.pb4n, anchor=tk.NW)
+        self.cvs.create_image(560, 460, tags="pb4f", image=self.pb4f, anchor=tk.NW)
 
         # 押しボタンスイッチ5
-        self.cvs.create_image(560, 450, tags="pb5n", image=self.pb5n, anchor=tk.NW)
-        self.cvs.create_image(560, 450, tags="pb5f", image=self.pb5f, anchor=tk.NW)
+        self.cvs.create_image(660, 450, tags="pb5n", image=self.pb5n, anchor=tk.NW)
+        self.cvs.create_image(660, 450, tags="pb5f", image=self.pb5f, anchor=tk.NW)
+
+        # パイロットランプ1
+        self.cvs.create_image(350, 370, tags="pl1n", image=self.pl1n)
+        self.cvs.create_image(350, 370, tags="pl1f", image=self.pl1f)
 
         # 製品
         self.cvs.create_image(self.pall_x, 120, tags="pall", image=self.pall)
@@ -215,6 +221,8 @@ class SubWin(tk.Frame):
             if e.keysym == "5":
                 self.cvs.lift("pb5n", "pb5f")
                 self.sw_on.append("pb5")
+            if e.keysym == "c":
+                self.cvs.lift("pl1n", "pl1f")
             if e.keysym == "z":
                 if "ss0" in self.sw_on:
                     self.cvs.lift("ss0l", "ss0r")
@@ -258,6 +266,8 @@ class SubWin(tk.Frame):
             if e.keysym == "5":
                 self.cvs.lift("pb5f", "pb5n")
                 self.sw_on.remove("pb5")
+            if e.keysym == "c":
+                self.cvs.lift("pl1f", "pl1n")
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
