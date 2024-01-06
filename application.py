@@ -1,5 +1,4 @@
 import tkinter as tk
-# from PIL import ImageTk, Image
 import language as lg
 
 
@@ -14,10 +13,12 @@ class MainWin(tk.Frame):
         self.file = None
         self.view = None
         self.help = None
+        self.cvs = None
+        self.csr = [0, 0]  # カーソル座標
 
         # ウインドウの設定
         self.master.title(lg.mw)  # ウインドウタイトル
-        self.master.geometry("400x300")  # ウインドウサイズ(横x縦)
+        self.master.geometry("800x600")  # ウインドウサイズ(横x縦)
         self.widgets()  # ウィジェット
 
         # サブウインドウの定義
@@ -39,6 +40,10 @@ class MainWin(tk.Frame):
         self.view.add_command(label=lg.pb, command=self.pb_win)  # 実習盤
         self.help = tk.Menu(self.bar, tearoff=0)  # ヘルプメニュー
         self.bar.add_cascade(label=lg.hp, menu=self.help)
+
+        # キャンバスの設定
+        self.cvs = tk.Canvas(self.master, bg="white")  # 背景色
+        self.cvs.pack(fill=tk.BOTH, expand=True)  # 配置
 
     # 終了
     def exit(self):
@@ -357,5 +362,5 @@ class SubWin(tk.Frame):
 # アプリケーション
 def application():
     root = tk.Tk()  # Tkinterインスタンスの生成
-    app = SubWin(master=root)  # アプリケーション実行
+    app = MainWin(master=root)  # アプリケーション実行
     app.mainloop()  # ウインドウの描画

@@ -165,7 +165,48 @@ def image(out):
     put_d.ellipse(xy=[1, 1, 29, 29], fill="white")
     prod.putalpha(put)
 
-    # pl4n.show()
+    # 導線
+    line = Image.new(mode="RGB", size=(100, 80), color="white")
+    line_d = ImageDraw.Draw(line)
+    line_d.line(xy=[0, 40, 100, 40], fill="black", width=3)
+
+    # a接点
+    make = Image.new(mode="RGB", size=(100, 80), color="white")
+    make_d = ImageDraw.Draw(make)
+    make_d.line(xy=[40, 25, 40, 55], fill="black", width=3)
+    make_d.line(xy=[60, 25, 60, 55], fill="black", width=3)
+    make_d.line(xy=[0, 40, 40, 40], fill="black", width=3)
+    make_d.line(xy=[60, 40, 100, 40], fill="black", width=3)
+
+    # b接点
+    brek = make.copy()
+    brek_d = ImageDraw.Draw(brek)
+    brek_d.line(xy=[70, 25, 30, 55], fill="black", width=3)
+
+    # 立ち上がりパルス
+    plse = make.copy()
+    plse_d = ImageDraw.Draw(plse)
+    plse_d.line(xy=[50, 25, 50, 55], fill="black", width=3)
+    plse_d.line(xy=[45, 40, 50, 25, 55, 40], fill="black", width=3)
+
+    # 立ち下がりパルス
+    fall = make.copy()
+    fall_d = ImageDraw.Draw(fall)
+    fall_d.line(xy=[50, 25, 50, 55], fill="black", width=3)
+    fall_d.line(xy=[45, 40, 50, 55, 55, 40], fill="black", width=3)
+
+    # 基本出力
+    base = Image.new(mode="RGB", size=(100, 80), color="white")
+    base_d = ImageDraw.Draw(base)
+    base_d.arc(xy=[10, 10, 90, 70], start=152, end=208, fill="black", width=3)
+    base_d.arc(xy=[10, 10, 90, 70], start=332, end=28, fill="black", width=3)
+    base_d.line(xy=[0, 40, 10, 40], fill="black", width=3)
+    base_d.line(xy=[90, 40, 100, 40], fill="black", width=3)
+
+    # 応用出力
+    # aply = Image.new(mode="RGB", size=(100, 80), color="white")
+
+    line.show()
 
     if out == 1:
         ssr.save("image/SS_Right.png")
@@ -190,3 +231,9 @@ def image(out):
         pl4n.save("image/PL4_ON.png")
         pall.save("image/Pallet.png")
         prod.save("image/Product.png")
+        line.save("image/Line.png")
+        make.save("image/Make.png")
+        brek.save("image/Break.png")
+        plse.save("image/Pulse.png")
+        fall.save("image/Falling.png")
+        base.save("image/Base_Out.png")
