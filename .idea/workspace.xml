@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/6&#10;スイッチ動作を関数化&#10;マウスでスイッチの動作を可能">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/6&#10;ラダー図記号の作成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image.py" beforeDir="false" afterPath="$PROJECT_DIR$/image.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -309,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704542808767</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="1/6&#10;ラダー図記号の作成">
+      <option name="closed" value="true" />
+      <created>1704549333276</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1704549333276</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -351,6 +358,7 @@
     <MESSAGE value="1/5&#10;実習盤配置の変更&#10;パイロットランプ作成" />
     <MESSAGE value="1/6&#10;パイロットランプ追加" />
     <MESSAGE value="1/6&#10;スイッチ動作を関数化&#10;マウスでスイッチの動作を可能" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/6&#10;スイッチ動作を関数化&#10;マウスでスイッチの動作を可能" />
+    <MESSAGE value="1/6&#10;ラダー図記号の作成" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/6&#10;ラダー図記号の作成" />
   </component>
 </project>

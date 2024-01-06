@@ -15,11 +15,13 @@ class MainWin(tk.Frame):
         self.help = None
         self.cvs = None
         self.csr = [0, 0]  # カーソル座標
+        self.keep = []
 
         # ウインドウの設定
         self.master.title(lg.mw)  # ウインドウタイトル
         self.master.geometry("800x600")  # ウインドウサイズ(横x縦)
         self.widgets()  # ウィジェット
+        self.event()  # イベント
 
         # サブウインドウの定義
         self.pb_win = None
@@ -45,6 +47,12 @@ class MainWin(tk.Frame):
         self.cvs = tk.Canvas(self.master, bg="white")  # 背景色
         self.cvs.pack(fill=tk.BOTH, expand=True)  # 配置
 
+        # カーソル
+        self.cvs.create_rectangle(
+            self.csr[0], self.csr[1], self.csr[0]+100, self.csr[1]+80,
+            tags="csr", outline="blue", width=3
+        )
+
     # 終了
     def exit(self):
         self.master.destroy()
@@ -53,6 +61,38 @@ class MainWin(tk.Frame):
     def pb_win(self):
         self.pb_win = tk.Toplevel(self.master)
         self.app = SubWin(self.pb_win)
+
+    def event(self):
+        def m_press(e):
+            if e.num == 1:
+                pass
+
+        def m_release(e):
+            if e.num == 1:
+                pass
+
+        def k_press(e):
+            if e.keysym in self.keep:
+                return
+            self.keep.append(e.keysym)
+            if e.keysym == "Right":
+                self.csr[0] += 100
+            if e.keysym == "Left":
+                self.csr[0] -= 100
+            if e.keysym == "Down":
+                self.csr[1] += 80
+            if e.keysym == "Up":
+                self.csr[1] -= 80
+            if e.keysym in ["Up", "Down", "Left", "Right"]:
+                self.cvs.moveto("csr", self.csr[0], self.csr[1])
+
+        def k_release(e):
+            self.keep.remove(e.keysym)
+
+        self.master.bind("<ButtonPress>", m_press)
+        self.master.bind("<ButtonRelease>", m_release)
+        self.master.bind("<KeyPress>", k_press)
+        self.master.bind("<KeyRelease>", k_release)
 
 
 # 実習盤ウインドウ

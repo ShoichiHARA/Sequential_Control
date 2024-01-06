@@ -4,8 +4,8 @@ import image as img
 
 
 def main():
-    img.image(1)
-    # app.application()
+    # img.image(1)
+    app.application()
     # ldd.test()
 
 
