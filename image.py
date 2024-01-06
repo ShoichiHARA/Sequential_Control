@@ -14,8 +14,8 @@ def image(out):
     ssl = Image.new(mode="RGB", size=(80, 80), color="white")
     ssl_d = ImageDraw.Draw(ssl)
     ssl_d.ellipse(xy=[0, 0, 79, 79], outline="black", width=2)
-    ssl_d.line(xy=[21, 6, 74, 59], fill="black", width=2)
-    ssl_d.line(xy=[6, 21, 59, 74], fill="black", width=2)
+    ssl_d.line(xy=[21, 6, 73, 58], fill="black", width=2)
+    ssl_d.line(xy=[6, 21, 58, 73], fill="black", width=2)
 
     # 押しボタンスイッチ1OFF
     pb1f = Image.new(mode="RGB", size=(60, 60), color="#64FF64")  # 本体より明るめ
@@ -165,7 +165,7 @@ def image(out):
     put_d.ellipse(xy=[1, 1, 29, 29], fill="white")
     prod.putalpha(put)
 
-    pl4n.show()
+    # pl4n.show()
 
     if out == 1:
         ssr.save("image/SS_Right.png")

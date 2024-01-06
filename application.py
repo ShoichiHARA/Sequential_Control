@@ -1,5 +1,5 @@
 import tkinter as tk
-from PIL import ImageTk, Image
+# from PIL import ImageTk, Image
 import language as lg
 
 
@@ -59,7 +59,7 @@ class SubWin(tk.Frame):
         # 定義
         self.cvs = None
         self.keep = []
-        self.sw_on = []
+        self.sw_on = []  # スイッチ情報
         self.pall_x = 400  # 製品x座標
         self.pall_d = 0    # マウス移動用変数
         self.x = 350  # 位置調整用x座標
@@ -108,40 +108,40 @@ class SubWin(tk.Frame):
 
         # 部品の配置 https://imagingsolution.net/program/python/tkinter/canvas_drawing_lines_circles_shapes/#toc14
         # 切替スイッチ0
-        self.cvs.create_image(50, 330, tags="ss0r", image=self.ss0r, anchor=tk.NW)
-        self.cvs.create_image(50, 330, tags="ss0l", image=self.ss0l, anchor=tk.NW)
-        self.cvs.create_text(88, 425, tags="ss0_t1", text="SS0 (z)", font=("", 12, "bold"))
-        self.cvs.create_text(68, 315, tags="ss0_t2", text=lg.mn, font=("", 12, "bold"))
-        self.cvs.create_text(117, 315, tags="ss0_t3", text=lg.at, font=("", 12, "bold"))
-        self.cvs.create_text(92, 295, tags="ss0_t4", text=lg.md, font=("", 12, "bold"))
+        self.cvs.create_image(90, 350, tags="ss0r", image=self.ss0r)
+        self.cvs.create_image(90, 350, tags="ss0l", image=self.ss0l)
+        self.cvs.create_text(88, 405, tags="ss0_t1", text="SS0 (z)", font=("", 12, "bold"))
+        self.cvs.create_text(68, 295, tags="ss0_t2", text=lg.mn, font=("", 12, "bold"))
+        self.cvs.create_text(117, 295, tags="ss0_t3", text=lg.at, font=("", 12, "bold"))
+        self.cvs.create_text(92, 275, tags="ss0_t4", text=lg.md, font=("", 12, "bold"))
 
         # 切替スイッチ1
-        self.cvs.create_image(160, 330, tags="ss1r", image=self.ss1r, anchor=tk.NW)
-        self.cvs.create_image(160, 330, tags="ss1l", image=self.ss1l, anchor=tk.NW)
-        self.cvs.create_text(200, 425, tags="ss1_t1", text="SS1 (x)", font=("", 12, "bold"))
-        self.cvs.create_text(178, 315, tags="ss1_t2", text=lg.of, font=("", 12, "bold"))
-        self.cvs.create_text(227, 315, tags="ss1_t3", text=lg.on, font=("", 12, "bold"))
-        self.cvs.create_text(200, 295, tags="ss1_t4", text=lg.co, font=("", 12, "bold"))
+        self.cvs.create_image(200, 350, tags="ss1r", image=self.ss1r)
+        self.cvs.create_image(200, 350, tags="ss1l", image=self.ss1l)
+        self.cvs.create_text(200, 405, tags="ss1_t1", text="SS1 (x)", font=("", 12, "bold"))
+        self.cvs.create_text(178, 295, tags="ss1_t2", text=lg.of, font=("", 12, "bold"))
+        self.cvs.create_text(227, 295, tags="ss1_t3", text=lg.on, font=("", 12, "bold"))
+        self.cvs.create_text(200, 275, tags="ss1_t4", text=lg.co, font=("", 12, "bold"))
 
         # 押しボタンスイッチ1
-        self.cvs.create_image(320, 460, tags="pb1n", image=self.pb1n, anchor=tk.NW)
-        self.cvs.create_image(320, 460, tags="pb1f", image=self.pb1f, anchor=tk.NW)
+        self.cvs.create_image(350, 490, tags="pb1n", image=self.pb1n)
+        self.cvs.create_image(350, 490, tags="pb1f", image=self.pb1f)
 
         # 押しボタンスイッチ2
-        self.cvs.create_image(400, 460, tags="pb2n", image=self.pb2n, anchor=tk.NW)
-        self.cvs.create_image(400, 460, tags="pb2f", image=self.pb2f, anchor=tk.NW)
+        self.cvs.create_image(430, 490, tags="pb2n", image=self.pb2n)
+        self.cvs.create_image(430, 490, tags="pb2f", image=self.pb2f)
 
         # 押しボタンスイッチ3
-        self.cvs.create_image(480, 460, tags="pb3n", image=self.pb3n, anchor=tk.NW)
-        self.cvs.create_image(480, 460, tags="pb3f", image=self.pb3f, anchor=tk.NW)
+        self.cvs.create_image(510, 490, tags="pb3n", image=self.pb3n)
+        self.cvs.create_image(510, 490, tags="pb3f", image=self.pb3f)
 
         # 押しボタンスイッチ4
-        self.cvs.create_image(560, 460, tags="pb4n", image=self.pb4n, anchor=tk.NW)
-        self.cvs.create_image(560, 460, tags="pb4f", image=self.pb4f, anchor=tk.NW)
+        self.cvs.create_image(590, 490, tags="pb4n", image=self.pb4n)
+        self.cvs.create_image(590, 490, tags="pb4f", image=self.pb4f)
 
         # 押しボタンスイッチ5
-        self.cvs.create_image(660, 450, tags="pb5n", image=self.pb5n, anchor=tk.NW)
-        self.cvs.create_image(660, 450, tags="pb5f", image=self.pb5f, anchor=tk.NW)
+        self.cvs.create_image(700, 490, tags="pb5n", image=self.pb5n)
+        self.cvs.create_image(700, 490, tags="pb5f", image=self.pb5f)
 
         # パイロットランプ1
         self.cvs.create_image(350, 370, tags="pl1n", image=self.pl1n)
@@ -169,6 +169,7 @@ class SubWin(tk.Frame):
         self.cvs.create_text(760, 590, tags="pt", text="x="+str(self.x)+", y="+str(self.y))
         self.cvs.create_text(760, 580, tags="ab", text="a="+str(self.a)+", b="+str(self.b))
 
+    # イベント
     def event(self):
         def m_press(e):
             if e.num == 1:
@@ -180,24 +181,42 @@ class SubWin(tk.Frame):
                     if 60 < e.y < 90:
                         if "prd1" in self.keep:
                             self.keep.remove("prd1")
-                            self.cvs.lift("prd1", "pall")
+                            self.cvs.lift("prd1", "pall")   # tk.Canvas.lift(前面に移動させたいタグ)
                         else:
                             self.keep.append("prd1")
                             self.cvs.lower("prd1", "pall")  # tk.Canvas.lower(背面に移動させたいタグ)
-                    if 90 < e.y < 120:
+                    elif 90 < e.y < 120:
                         if "prd2" in self.keep:
                             self.keep.remove("prd2")
                             self.cvs.lift("prd2", "pall")
                         else:
                             self.keep.append("prd2")
                             self.cvs.lower("prd2", "pall")
-                    if 120 < e.y < 150:
+                    elif 120 < e.y < 150:
                         if "prd3" in self.keep:
                             self.keep.remove("prd3")
                             self.cvs.lift("prd3", "pall")
                         else:
                             self.keep.append("prd3")
                             self.cvs.lower("prd3", "pall")
+                if 310 < e.y < 390:  # 切替スイッチ
+                    if 50 < e.x < 130:  # 切替スイッチ0
+                        self.sw_func("ss0", 0)
+                    elif 160 < e.x < 240:  # 切替スイッチ1
+                        self.sw_func("ss1", 0)
+                elif 460 < e.y < 520:  # 押しボタンスイッチ
+                    if 320 < e.x < 380:
+                        self.sw_func("pb1", 2)
+                    elif 400 < e.x < 460:
+                        self.sw_func("pb2", 2)
+                    elif 480 < e.x < 540:
+                        self.sw_func("pb3", 2)
+                    elif 560 < e.x < 620:
+                        self.sw_func("pb4", 2)
+                if 450 < e.y < 530:  # 押しボタンスイッチ5
+                    if 660 < e.x < 740:
+                        self.sw_func("pb5", 2)
+
                 print("x=" + str(e.x) + ", y=" + str(e.y))
                 # 要素の設定変更 https://daeudaeu.com/tkinter_canvas_method/
             if e.num == 3:
@@ -207,6 +226,16 @@ class SubWin(tk.Frame):
             if e.num == 1:
                 if "prod" in self.keep:
                     self.keep.remove("prod")
+                if "pb1" in self.sw_on:
+                    self.sw_func("pb1", 1)
+                elif "pb2" in self.sw_on:
+                    self.sw_func("pb2", 1)
+                elif "pb3" in self.sw_on:
+                    self.sw_func("pb3", 1)
+                elif "pb4" in self.sw_on:
+                    self.sw_func("pb4", 1)
+                elif "pb5" in self.sw_on:
+                    self.sw_func("pb5", 1)
             if e.num == 3:
                 pass
 
@@ -224,40 +253,25 @@ class SubWin(tk.Frame):
             if e.keysym in self.keep:
                 return
             self.keep.append(e.keysym)
-            if e.keysym == "1":
-                self.cvs.lift("pb1n", "pb1f")  # tk.Canvas.lift(前面に移動させたいタグ)
-                self.sw_on.append("pb1")
-            if e.keysym == "2":
-                self.cvs.lift("pb2n", "pb2f")
-                self.sw_on.append("pb2")
-            if e.keysym == "3":
-                self.cvs.lift("pb3n", "pb3f")
-                self.sw_on.append("pb3")
-            if e.keysym == "4":
-                self.cvs.lift("pb4n", "pb4f")
-                self.sw_on.append("pb4")
-            if e.keysym == "5":
-                self.cvs.lift("pb5n", "pb5f")
-                self.sw_on.append("pb5")
             if e.keysym == "c":
                 self.cvs.lift("pl1n", "pl1f")
                 self.cvs.lift("pl2n", "pl2f")
                 self.cvs.lift("pl3n", "pl3f")
                 self.cvs.lift("pl4n", "pl4f")
             if e.keysym == "z":
-                if "ss0" in self.sw_on:
-                    self.cvs.lift("ss0l", "ss0r")
-                    self.sw_on.remove("ss0")
-                else:
-                    self.cvs.lift("ss0r", "ss0l")
-                    self.sw_on.append("ss0")
+                self.sw_func("ss0", 0)
             if e.keysym == "x":
-                if "ss1" in self.sw_on:
-                    self.cvs.lift("ss1l", "ss1r")
-                    self.sw_on.remove("ss1")
-                else:
-                    self.cvs.lift("ss1r", "ss1l")
-                    self.sw_on.append("ss1")
+                self.sw_func("ss1", 0)
+            if e.keysym == "v":
+                self.sw_func("pb1", 2)
+            if e.keysym == "b":
+                self.sw_func("pb2", 2)
+            if e.keysym == "n":
+                self.sw_func("pb3", 2)
+            if e.keysym == "m":
+                self.sw_func("pb4", 2)
+            if e.keysym == "space":
+                self.sw_func("pb5", 2)
             if e.keysym == "Right":
                 self.x += 2
             if e.keysym == "Left":
@@ -272,32 +286,72 @@ class SubWin(tk.Frame):
 
         def k_release(e):
             self.keep.remove(e.keysym)
-            if e.keysym == "1":
-                self.cvs.lift("pb1f", "pb1n")
-                self.sw_on.remove("pb1")
-            if e.keysym == "2":
-                self.cvs.lift("pb2f", "pb2n")
-                self.sw_on.remove("pb2")
-            if e.keysym == "3":
-                self.cvs.lift("pb3f", "pb3n")
-                self.sw_on.remove("pb3")
-            if e.keysym == "4":
-                self.cvs.lift("pb4f", "pb4n")
-                self.sw_on.remove("pb4")
-            if e.keysym == "5":
-                self.cvs.lift("pb5f", "pb5n")
-                self.sw_on.remove("pb5")
             if e.keysym == "c":
                 self.cvs.lift("pl1f", "pl1n")
                 self.cvs.lift("pl2f", "pl2n")
                 self.cvs.lift("pl3f", "pl3n")
                 self.cvs.lift("pl4f", "pl4n")
+            if e.keysym == "v":
+                self.sw_func("pb1", 1)
+            if e.keysym == "b":
+                self.sw_func("pb2", 1)
+            if e.keysym == "n":
+                self.sw_func("pb3", 1)
+            if e.keysym == "m":
+                self.sw_func("pb4", 1)
+            if e.keysym == "space":
+                self.sw_func("pb5", 1)
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
         self.master.bind("<Motion>", m_move)
         self.master.bind("<KeyPress>", k_press)
         self.master.bind("<KeyRelease>", k_release)
+
+    # スイッチ動作
+    def sw_func(self, tag, p):
+        if p == 0:
+            if tag in self.sw_on:  # ONからOFFへ
+                if tag == "ss0":
+                    self.cvs.lift("ss0l", "ss0r")
+                elif tag == "ss1":
+                    self.cvs.lift("ss1l", "ss1r")
+                self.sw_on.remove(tag)
+            else:                  # OFFからONへ
+                if tag == "ss0":
+                    self.cvs.lift("ss0r", "ss0l")
+                elif tag == "ss1":
+                    self.cvs.lift("ss1r", "ss1l")
+                self.sw_on.append(tag)
+        else:
+            if p == 1:    # ONからOFFへ
+                if tag == "pb1":
+                    self.cvs.lift("pb1f", "pb1n")
+                elif tag == "pb2":
+                    self.cvs.lift("pb2f", "pb2n")
+                elif tag == "pb3":
+                    self.cvs.lift("pb3f", "pb3n")
+                elif tag == "pb4":
+                    self.cvs.lift("pb4f", "pb4n")
+                elif tag == "pb5":
+                    self.cvs.lift("pb5f", "pb5n")
+                else:
+                    return
+                self.sw_on.remove(tag)
+            elif p == 2:  # OFFからONへ
+                if tag == "pb1":
+                    self.cvs.lift("pb1n", "pb1f")
+                elif tag == "pb2":
+                    self.cvs.lift("pb2n", "pb2f")
+                elif tag == "pb3":
+                    self.cvs.lift("pb3n", "pb3f")
+                elif tag == "pb4":
+                    self.cvs.lift("pb4n", "pb4f")
+                elif tag == "pb5":
+                    self.cvs.lift("pb5n", "pb5f")
+                else:
+                    return
+                self.sw_on.append(tag)
 
 
 # アプリケーション
