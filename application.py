@@ -14,7 +14,7 @@ class MainWin(tk.Frame):
         self.view = None
         self.help = None
         self.cvs = None
-        self.csr = [0, 0]  # カーソル座標
+        self.csr = [50, 20]  # カーソル座標
         self.keep = []
 
         # ウインドウの設定
@@ -49,9 +49,9 @@ class MainWin(tk.Frame):
 
         # カーソル
         self.cvs.create_rectangle(
-            self.csr[0], self.csr[1], self.csr[0]+100, self.csr[1]+80,
-            tags="csr", outline="blue", width=3
+            0, 0, 100, 80, tags="csr", outline="blue", width=3
         )
+        self.cvs.moveto("csr", self.csr[0], self.csr[1])
 
     # 終了
     def exit(self):
@@ -62,6 +62,7 @@ class MainWin(tk.Frame):
         self.pb_win = tk.Toplevel(self.master)
         self.app = SubWin(self.pb_win)
 
+    # イベント
     def event(self):
         def m_press(e):
             if e.num == 1:
@@ -76,15 +77,15 @@ class MainWin(tk.Frame):
                 return
             self.keep.append(e.keysym)
             if e.keysym == "Right":
-                self.csr[0] += 100
+                pass
             if e.keysym == "Left":
-                self.csr[0] -= 100
+                pass
             if e.keysym == "Down":
-                self.csr[1] += 80
+                pass
             if e.keysym == "Up":
-                self.csr[1] -= 80
+                pass
             if e.keysym in ["Up", "Down", "Left", "Right"]:
-                self.cvs.moveto("csr", self.csr[0], self.csr[1])
+                self.csr_move(e.keysym)
 
         def k_release(e):
             self.keep.remove(e.keysym)
@@ -93,6 +94,21 @@ class MainWin(tk.Frame):
         self.master.bind("<ButtonRelease>", m_release)
         self.master.bind("<KeyPress>", k_press)
         self.master.bind("<KeyRelease>", k_release)
+
+    def csr_move(self, d):
+        if d == "Right":
+            if self.csr[0] < 600:
+                self.csr[0] += 100
+        elif d == "Left":
+            if self.csr[0] > 100:
+                self.csr[0] -= 100
+        elif d == "Down":
+            if self.csr[1] < 500:
+                self.csr[1] += 80
+        elif d == "Up":
+            if self.csr[1] > 50:
+                self.csr[1] -= 80
+        self.cvs.moveto("csr", self.csr[0], self.csr[1])
 
 
 # 実習盤ウインドウ
