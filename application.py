@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import language as lg
 
 
@@ -14,7 +15,7 @@ class MainWin(tk.Frame):
         self.view = None
         self.help = None
         self.cvs = None
-        self.csr = [50, 20]  # カーソル座標
+        self.csr = [0, 0]  # カーソル座標
         self.keep = []
 
         # ウインドウの設定
@@ -24,6 +25,7 @@ class MainWin(tk.Frame):
         self.event()  # イベント
 
         # サブウインドウの定義
+        self.in_win = None
         self.pb_win = None
         self.app = None
 
@@ -51,22 +53,30 @@ class MainWin(tk.Frame):
         self.cvs.create_rectangle(
             0, 0, 100, 80, tags="csr", outline="blue", width=3
         )
-        self.cvs.moveto("csr", self.csr[0], self.csr[1])
+        self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
 
     # 終了
     def exit(self):
         self.master.destroy()
 
+    def in_win(self):
+        self.in_win = tk.Toplevel(self.master)
+        self.app = InWin(self.in_win)
+
     # 実習盤ウインドウ表示
     def pb_win(self):
         self.pb_win = tk.Toplevel(self.master)
-        self.app = SubWin(self.pb_win)
+        self.app = PBWin(self.pb_win)
 
     # イベント
     def event(self):
         def m_press(e):
             if e.num == 1:
-                pass
+                if 50 < e.x < 750:
+                    if 20 < e.y < 580:
+                        self.csr[0] = (e.x - 50) // 100
+                        self.csr[1] = (e.y - 20) // 80
+                        self.csr_move()
 
         def m_release(e):
             if e.num == 1:
@@ -76,8 +86,8 @@ class MainWin(tk.Frame):
             if e.keysym in self.keep:
                 return
             self.keep.append(e.keysym)
-            if e.keysym == "Right":
-                pass
+            if e.keysym == "space":
+                print(self.csr)
             if e.keysym == "Left":
                 pass
             if e.keysym == "Down":
@@ -95,24 +105,50 @@ class MainWin(tk.Frame):
         self.master.bind("<KeyPress>", k_press)
         self.master.bind("<KeyRelease>", k_release)
 
-    def csr_move(self, d):
+    def csr_move(self, d=""):
         if d == "Right":
-            if self.csr[0] < 600:
-                self.csr[0] += 100
+            if self.csr[0] < 6:
+                self.csr[0] += 1
         elif d == "Left":
-            if self.csr[0] > 100:
-                self.csr[0] -= 100
+            if self.csr[0] > 0:
+                self.csr[0] -= 1
         elif d == "Down":
-            if self.csr[1] < 500:
-                self.csr[1] += 80
+            if self.csr[1] < 6:
+                self.csr[1] += 1
         elif d == "Up":
-            if self.csr[1] > 50:
-                self.csr[1] -= 80
-        self.cvs.moveto("csr", self.csr[0], self.csr[1])
+            if self.csr[1] > 0:
+                self.csr[1] -= 1
+        self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
+
+
+# 命令入力ウインドウ
+class InWin(tk.Frame):
+    def __init__(self: tk.Tk, master):
+        super().__init__(master)
+        self.pack()
+
+        # 定義
+        self.frm = None
+        self.ctyp = None
+
+        # ウインドウの設定
+        self.master.title(lg.ic)
+        self.master.geometry("400x100")
+        self.widgets()
+
+    def widgets(self: tk.Tk):
+        # フレームの設定
+        self.frm = tk.Frame(self.master)
+        self.frm.pack(fill=tk.BOTH, expand=True)
+
+        # 命令タイプ
+        ls = [lg.mk, lg.br, lg.rp, lg.fp, lg.ot]
+        self.ctyp = ttk.Combobox(self.frm, values=ls)
+        self.ctyp.pack(side=tk.LEFT)
 
 
 # 実習盤ウインドウ
-class SubWin(tk.Frame):
+class PBWin(tk.Frame):
     def __init__(self: tk.Tk, master):
         super().__init__(master)  # 親クラスの継承
         self.pack()  # 配置
@@ -418,5 +454,5 @@ class SubWin(tk.Frame):
 # アプリケーション
 def application():
     root = tk.Tk()  # Tkinterインスタンスの生成
-    app = MainWin(master=root)  # アプリケーション実行
+    app = InWin(master=root)  # アプリケーション実行
     app.mainloop()  # ウインドウの描画
