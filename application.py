@@ -16,9 +16,13 @@ class MainWin(tk.Frame):
         self.view = None
         self.help = None
         self.cvs = None
+        self.row = 7  # 列数
         self.csr = [0, 0]  # 画面上カーソル座標
         self.keep = []
-        self.in_e = None  # 命令入力欄
+        self.com_frm = None  # 命令入力フレーム
+        self.com_ent = None  # 命令入力欄
+        self.com_str = ""  # 命令入力文字列
+        self.com_num = 0  # 命令数
         self.line = tk.PhotoImage(file="image/Line.png")
         self.make = tk.PhotoImage(file="image/Make.png")
         self.brek = tk.PhotoImage(file="image/Break.png")
@@ -30,7 +34,7 @@ class MainWin(tk.Frame):
         self.master.title(lg.mw)  # ウインドウタイトル
         self.master.geometry("800x600")  # ウインドウサイズ(横x縦)
         self.widgets()  # ウィジェット
-        self.coin = self.ComInput()  # 入力フレーム
+        # self.coin = self.ComInput()  # 入力フレーム
         self.event()  # イベント
 
         # サブウインドウの定義
@@ -84,7 +88,7 @@ class MainWin(tk.Frame):
     def event(self):
         def m_press(e):
             if e.num == 1:
-                if self.coin.val == 0:
+                if self.com_frm is None:
                     if 50 < e.x < 750:
                         if 20 < e.y < 580:
                             self.csr[0] = (e.x - 50) // 100
@@ -97,32 +101,30 @@ class MainWin(tk.Frame):
 
         def mm_press(e):
             if e.num == 1:
-                if self.coin.val == 0:
+                if self.com_frm is None:
                     if 50 < e.x < 750:
                         if 20 < e.y < 580:
-                            self.coin.com_input(self.cvs, self.csr)
-                            # self.com_display(self.csr, self.coin.get)
+                            self.com_input()
 
         def k_press(e):
             if e.keysym in self.keep:
                 return
             self.keep.append(e.keysym)
-            print(e.keysym)
+            # print(e.keysym)
             if e.keysym == "Return":
-                if self.coin.val == 1:
-                    self.coin.ok_ck()
+                if self.com_frm is not None:
+                    self.com_ok()
                 else:
-                    self.coin.com_input(self.cvs, self.csr)
-                    # self.com_display(self.csr, self.coin.get)
+                    self.com_input()
             if e.keysym == "Escape":
-                if self.coin.val == 1:
-                    self.coin.cn_ck()
+                if self.com_frm is not None:
+                    self.com_cn()
                 else:
                     self.exit()
             if e.keysym == "Up":
                 pass
             if e.keysym in ["Up", "Down", "Left", "Right"]:
-                if self.coin.val == 0:
+                if self.com_frm is None:
                     self.csr_move(e.keysym)
 
         def k_release(e):
@@ -152,6 +154,68 @@ class MainWin(tk.Frame):
         self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
 
     # 命令入力
+    def com_input(self):
+        self.com_frm = tk.Frame(  # 入力フレーム追加
+            self.cvs, width=300, height=120,
+            relief=tk.RIDGE, bd=2
+        )
+        ti_l = tk.Label(self.com_frm, text=lg.ic)  # テキスト追加
+        self.com_ent = tk.Entry(self.com_frm, width=34)  # 入力欄追加
+        ok_b = tk.Button(self.com_frm, text=lg.ok, width=8, command=self.com_ok)  # 決定ボタン追加
+        cn_b = tk.Button(self.com_frm, text=lg.cn, width=8, command=self.com_cn)  # 取消ボタン追加
+        ti_l.place(x=10, y=10)
+        self.com_ent.place(x=10, y=40)
+        ok_b.place(x=130, y=75)
+        cn_b.place(x=210, y=75)
+        self.com_frm.place(x=250, y=240)
+        self.com_ent.focus_set()  # 入力欄有効
+
+    def com_ok(self):
+        print("ok")
+        self.com_str = self.com_ent.get()
+        self.com_frm.destroy()  # 入力フレーム削除
+        self.com_frm = None     # 入力フレーム無効
+        self.com_dsp()
+
+    def com_cn(self):
+        print("cancel")
+        self.com_frm.destroy()
+        self.com_frm = None
+
+    # 命令表示
+    def com_dsp(self):
+        print("x=" + str(self.csr[0]) + ", y=" + str(self.csr[1]))
+        print(self.com_str)
+        comp = ld.Ladder.Comp("", 0)
+        err = comp.dec(self.com_str)
+        if err == 1:  # 命令タイプがない
+            return
+        elif err == 2:  # 設定値がない
+            return
+        elif err == 3:  # 出力の種類が不明
+            return
+        else:
+            print("typ=" + comp.typ)
+            print("tag=" + comp.tag)
+            print("set=" + str(comp.set))
+            if comp.typ == "M":
+                self.cvs.create_image(
+                    self.csr[0]*100+100, self.csr[1]*80+60,
+                    tags="com"+str(self.com_num), image=self.make
+                )
+            elif comp.typ == "B":
+                self.cvs.create_image(
+                    self.csr[0]*100+100, self.csr[1]*80+60,
+                    tags="com"+str(self.com_num), image=self.brek
+                )
+            elif comp.typ == "R":
+                pass
+
+            self.cvs.lower("com"+str(self.com_num))
+        self.com_str = ""
+        self.com_num += 1
+
+    # 命令入力クラス
     class ComInput:
         def __init__(self):
             self.get = ""
@@ -190,11 +254,6 @@ class MainWin(tk.Frame):
             print("cancel")
             self.frm.destroy()  # 入力フレーム削除
             self.val = 0
-
-    # 命令表示
-    def com_display(self, csr, com):
-        print(csr)
-        print(com)
 
 
 # 命令入力ウインドウ
