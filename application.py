@@ -90,8 +90,6 @@ class MainWin(tk.Frame):
                 return
             self.keep.append(e.keysym)
             print(e.keysym)
-            if e.keysym == "space":
-                pass
             if e.keysym == "Return":
                 if self.coin.val == 1:
                     self.coin.ok_ck()

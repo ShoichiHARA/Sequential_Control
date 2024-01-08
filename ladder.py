@@ -19,6 +19,35 @@ class Ladder:
             self.c = 0       # カウント現在値
             self.lst = 0     # 前回値
 
+        def dec(self, st):
+            com = st.split()
+            if com[0] == "ld":
+                self.typ = "M"
+            elif com[0] == "ldi":
+                self.typ = "B"
+            elif com[0] == "ldp":
+                self.typ = "P"
+            elif com[0] == "ldf":
+                self.typ = "F"
+            elif com[0] == "out":
+                if com[1][0] in ["m", "y"]:
+                    self.typ = "R"
+                elif com[1][0] == "t":
+                    self.typ = "T"
+                elif com[1][0] == "c":
+                    self.typ = "C"
+            elif com[0] == "set":
+                self.typ = "St"
+            elif com[0] == "rst":
+                self.typ = "Rs"
+            else:
+                print("No Command")
+                return
+            if self.typ in Ladder.tag_list:
+                self.tag = com[1]
+            if self.typ in ["T", "C"]:
+                self.set = int(com[2][1:])
+
         def cal(self, ipt):
             if self.typ == "Ln":  # 導線命令
                 self.opt = ipt
@@ -133,7 +162,7 @@ class Ladder:
                     print(tp_t + " " + tg_t + " : " + ex_t + ", " + ot_t)
 
 
-def test():
+def test1():
     ld = Ladder()
     ld.add("M", 1, tag="x0")
     ld.add("St", 0, tag="m0")
@@ -176,3 +205,12 @@ def test():
         ld.run()
         ld.check()
     """
+
+
+def test2():
+    com = "out t0 k1"
+    comp = Ladder.Comp("", 0)
+    comp.dec(com)
+    print("typ=" + comp.typ)
+    print("tag=" + comp.tag)
+    print("set=" + str(comp.set))
