@@ -5,8 +5,8 @@ import image as img
 
 def main():
     # img.image(1)
-    # app.application()
-    ldd.test2()
+    app.application()
+    # ldd.test2()
 
 
 if __name__ == "__main__":

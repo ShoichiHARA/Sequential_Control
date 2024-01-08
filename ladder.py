@@ -36,17 +36,25 @@ class Ladder:
                     self.typ = "T"
                 elif com[1][0] == "c":
                     self.typ = "C"
+                else:
+                    print("No Command")
+                    return 3  # コイルの種類が不明
             elif com[0] == "set":
                 self.typ = "St"
             elif com[0] == "rst":
                 self.typ = "Rs"
             else:
                 print("No Command")
-                return
+                return 1  # 命令タイプがない
             if self.typ in Ladder.tag_list:
                 self.tag = com[1]
-            if self.typ in ["T", "C"]:
-                self.set = int(com[2][1:])
+            try:
+                if self.typ in ["T", "C"]:
+                    self.set = int(com[2][1:])
+            except IndexError:
+                print("Index Error")
+                return 2  # 設定値がない
+            return 0
 
         def cal(self, ipt):
             if self.typ == "Ln":  # 導線命令

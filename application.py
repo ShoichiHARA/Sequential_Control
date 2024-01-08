@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import ladder as ld
 import language as lg
 
 
@@ -18,6 +19,12 @@ class MainWin(tk.Frame):
         self.csr = [0, 0]  # 画面上カーソル座標
         self.keep = []
         self.in_e = None  # 命令入力欄
+        self.line = tk.PhotoImage(file="image/Line.png")
+        self.make = tk.PhotoImage(file="image/Make.png")
+        self.brek = tk.PhotoImage(file="image/Break.png")
+        self.plse = tk.PhotoImage(file="image/Pulse.png")
+        self.fall = tk.PhotoImage(file="image/Falling.png")
+        self.base = tk.PhotoImage(file="image/Base_Out.png")
 
         # ウインドウの設定
         self.master.title(lg.mw)  # ウインドウタイトル
@@ -50,6 +57,8 @@ class MainWin(tk.Frame):
         # キャンバスの設定
         self.cvs = tk.Canvas(self.master, bg="white")  # 背景色
         self.cvs.pack(fill=tk.BOTH, expand=True)  # 配置
+        self.cvs.create_line(50, 20, 50, 580, fill="black", width=3)
+        self.cvs.create_line(750, 20, 750, 580, fill="black", width=3)
 
         # カーソル
         self.cvs.create_rectangle(
@@ -75,15 +84,24 @@ class MainWin(tk.Frame):
     def event(self):
         def m_press(e):
             if e.num == 1:
-                if 50 < e.x < 750:
-                    if 20 < e.y < 580:
-                        self.csr[0] = (e.x - 50) // 100
-                        self.csr[1] = (e.y - 20) // 80
-                        self.csr_move()
+                if self.coin.val == 0:
+                    if 50 < e.x < 750:
+                        if 20 < e.y < 580:
+                            self.csr[0] = (e.x - 50) // 100
+                            self.csr[1] = (e.y - 20) // 80
+                            self.csr_move()
 
         def m_release(e):
             if e.num == 1:
                 pass
+
+        def mm_press(e):
+            if e.num == 1:
+                if self.coin.val == 0:
+                    if 50 < e.x < 750:
+                        if 20 < e.y < 580:
+                            self.coin.com_input(self.cvs, self.csr)
+                            # self.com_display(self.csr, self.coin.get)
 
         def k_press(e):
             if e.keysym in self.keep:
@@ -94,7 +112,8 @@ class MainWin(tk.Frame):
                 if self.coin.val == 1:
                     self.coin.ok_ck()
                 else:
-                    self.coin.com_input(self.cvs)
+                    self.coin.com_input(self.cvs, self.csr)
+                    # self.com_display(self.csr, self.coin.get)
             if e.keysym == "Escape":
                 if self.coin.val == 1:
                     self.coin.cn_ck()
@@ -112,6 +131,7 @@ class MainWin(tk.Frame):
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
+        self.master.bind("<Double-ButtonPress>", mm_press)
         self.master.bind("<KeyPress>", k_press)
         self.master.bind("<KeyRelease>", k_release)
 
@@ -136,10 +156,13 @@ class MainWin(tk.Frame):
         def __init__(self):
             self.get = ""
             self.val = 0
+            self.csr = []
             self.frm = None
             self.in_e = None
 
-        def com_input(self, frm):
+        def com_input(self, frm, csr):
+            self.csr = csr
+            self.get = ""
             self.frm = tk.Frame(  # 入力フレーム追加
                 frm, width=300, height=120,
                 relief=tk.RIDGE, bd=2
@@ -158,8 +181,8 @@ class MainWin(tk.Frame):
 
         def ok_ck(self):
             print("ok")
+            # print(self.csr)
             print(self.in_e.get())
-            self.get = self.in_e.get()
             self.frm.destroy()  # 入力フレーム削除
             self.val = 0
 
@@ -167,6 +190,11 @@ class MainWin(tk.Frame):
             print("cancel")
             self.frm.destroy()  # 入力フレーム削除
             self.val = 0
+
+    # 命令表示
+    def com_display(self, csr, com):
+        print(csr)
+        print(com)
 
 
 # 命令入力ウインドウ
