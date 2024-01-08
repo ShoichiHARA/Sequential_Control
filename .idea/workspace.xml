@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/7&#10;カーソル移動を関数化">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/7&#10;命令入力ウインドウの作成&#10;命令種類の選択肢完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/language.py" beforeDir="false" afterPath="$PROJECT_DIR$/language.py" afterDir="false" />
@@ -332,7 +332,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704629625056</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="1/7&#10;命令入力ウインドウの作成&#10;命令種類の選択肢完成">
+      <option name="closed" value="true" />
+      <created>1704637109003</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1704637109003</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,6 +385,7 @@
     <MESSAGE value="1/6&#10;ラダー図記号の作成" />
     <MESSAGE value="1/6&#10;カーソルの作成" />
     <MESSAGE value="1/7&#10;カーソル移動を関数化" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/7&#10;カーソル移動を関数化" />
+    <MESSAGE value="1/7&#10;命令入力ウインドウの作成&#10;命令種類の選択肢完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/7&#10;命令入力ウインドウの作成&#10;命令種類の選択肢完成" />
   </component>
 </project>

@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import time
 import language as lg
 
 
@@ -15,8 +16,10 @@ class MainWin(tk.Frame):
         self.view = None
         self.help = None
         self.cvs = None
-        self.csr = [0, 0]  # カーソル座標
+        self.csr = [0, 0]  # 画面上カーソル座標
         self.keep = []
+        self.coin = None  # 入力フレーム
+        self.in_e = None  # 命令入力欄
 
         # ウインドウの設定
         self.master.title(lg.mw)  # ウインドウタイトル
@@ -59,7 +62,8 @@ class MainWin(tk.Frame):
     def exit(self):
         self.master.destroy()
 
-    def in_win(self):
+    # 命令入力ウインドウ表示
+    def in_win(self, e):
         self.in_win = tk.Toplevel(self.master)
         self.app = InWin(self.in_win)
 
@@ -86,25 +90,33 @@ class MainWin(tk.Frame):
             if e.keysym in self.keep:
                 return
             self.keep.append(e.keysym)
+            print(e.keysym)
             if e.keysym == "space":
-                print(self.csr)
-            if e.keysym == "Left":
-                pass
+                if self.coin is None:
+                    self.com_input()
+            if e.keysym == "Return":
+                if self.coin is None:
+                    self.com_input()
             if e.keysym == "Down":
                 pass
             if e.keysym == "Up":
                 pass
             if e.keysym in ["Up", "Down", "Left", "Right"]:
-                self.csr_move(e.keysym)
+                if self.coin is None:
+                    self.csr_move(e.keysym)
 
         def k_release(e):
-            self.keep.remove(e.keysym)
+            if e.keysym in self.keep:
+                self.keep.remove(e.keysym)
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
+        # self.master.bind("<Double-ButtonPress-1>", self.in_win)
         self.master.bind("<KeyPress>", k_press)
         self.master.bind("<KeyRelease>", k_release)
+        # self.master.bind("<Return>", self.in_win)
 
+    # カーソル移動
     def csr_move(self, d=""):
         if d == "Right":
             if self.csr[0] < 6:
@@ -119,6 +131,42 @@ class MainWin(tk.Frame):
             if self.csr[1] > 0:
                 self.csr[1] -= 1
         self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
+
+    # 命令入力
+    def com_input(self):
+        def ok_ck():
+            print("ok")
+            print(self.in_e.get())
+            self.coin.destroy()  # 入力フレーム削除
+            self.coin = None
+
+        def cn_ck():
+            print("cancel")
+            self.coin.destroy()  # 入力フレーム削除
+            self.coin = None
+
+        def en_ps(e):
+            print("ok")
+            print(self.in_e.get())
+            self.coin.destroy()  # 入力フレーム削除
+            self.coin = None
+
+        self.coin = tk.Frame(                             # 入力フレーム追加
+            self.cvs, width=300, height=120,
+            relief=tk.RIDGE, bd=2
+        )
+        # self.coin.winfo_geometry("300x200")
+        ti_l = tk.Label(self.coin, text=lg.ic)            # テキスト追加
+        self.in_e = tk.Entry(self.coin, width=34)         # 入力欄追加
+        ok_b = tk.Button(self.coin, text=lg.ok, width=8, command=ok_ck)  # 決定ボタン追加
+        ok_b.bind("<Return>", en_ps)
+        cn_b = tk.Button(self.coin, text=lg.cn, width=8, command=cn_ck)  # 取消ボタン追加
+        ti_l.place(x=10, y=10)
+        self.in_e.place(x=10, y=40)
+        ok_b.place(x=130, y=75)
+        cn_b.place(x=210, y=75)
+        self.coin.place(x=250, y=240)
+        self.in_e.focus_set()
 
 
 # 命令入力ウインドウ
@@ -454,5 +502,5 @@ class PBWin(tk.Frame):
 # アプリケーション
 def application():
     root = tk.Tk()  # Tkinterインスタンスの生成
-    app = InWin(master=root)  # アプリケーション実行
+    app = MainWin(master=root)  # アプリケーション実行
     app.mainloop()  # ウインドウの描画
