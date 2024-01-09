@@ -142,9 +142,17 @@ class MainWin(tk.Frame):
         if d == "Right":
             if self.csr[0] < 6:
                 self.csr[0] += 1
+            else:
+                if self.csr[1] < 6:
+                    self.csr[0] = 0
+                    self.csr[1] += 1
         elif d == "Left":
             if self.csr[0] > 0:
                 self.csr[0] -= 1
+            else:
+                if self.csr[1] > 0:
+                    self.csr[0] = 6
+                    self.csr[1] -= 1
         elif d == "Down":
             if self.csr[1] < 6:
                 self.csr[1] += 1
@@ -221,8 +229,18 @@ class MainWin(tk.Frame):
                     tags="com"+str(self.com_num), image=self.fall
                 )
             elif comp.typ == "R":
-                pass
+                while self.csr[0] < self.row-1:
+                    self.cvs.create_image(
+                        self.csr[0]*100+100, self.csr[1]*80+60,
+                        tags="com"+str(self.com_num), image=self.line
+                    )
+                    self.csr_move("Right")
+                self.cvs.create_image(
+                    self.csr[0]*100+100, self.csr[1]*80+60,
+                    tags="com"+str(self.com_num), image=self.base
+                )
             self.cvs.lower("com"+str(self.com_num))
+            self.csr_move("Right")
         self.com_str = ""
         self.com_num += 1
 
