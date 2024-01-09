@@ -100,11 +100,11 @@ class MainWin(tk.Frame):
                 pass
 
         def mm_press(e):
-            if e.num == 1:
+            if e.num == 1:  # マウス左ダブルクリック
                 if self.com_frm is None:
                     if 50 < e.x < 750:
                         if 20 < e.y < 580:
-                            self.com_input()
+                            self.com_input()  # 命令入力
 
         def k_press(e):
             if e.keysym in self.keep:
@@ -113,14 +113,14 @@ class MainWin(tk.Frame):
             # print(e.keysym)
             if e.keysym == "Return":
                 if self.com_frm is not None:
-                    self.com_ok()
+                    self.com_ok()  # 命令入力決定
                 else:
-                    self.com_input()
+                    self.com_input()  # 命令入力
             if e.keysym == "Escape":
                 if self.com_frm is not None:
-                    self.com_cn()
+                    self.com_cn()  # 命令入力取消
                 else:
-                    self.exit()
+                    self.exit()  # プログラム終了
             if e.keysym == "Up":
                 pass
             if e.keysym in ["Up", "Down", "Left", "Right"]:
@@ -170,13 +170,15 @@ class MainWin(tk.Frame):
         self.com_frm.place(x=250, y=240)
         self.com_ent.focus_set()  # 入力欄有効
 
+    # 命令入力決定
     def com_ok(self):
         print("ok")
-        self.com_str = self.com_ent.get()
+        self.com_str = self.com_ent.get()  # 入力文字列取得
         self.com_frm.destroy()  # 入力フレーム削除
         self.com_frm = None     # 入力フレーム無効
         self.com_dsp()
 
+    # 命令入力取消
     def com_cn(self):
         print("cancel")
         self.com_frm.destroy()
@@ -186,8 +188,8 @@ class MainWin(tk.Frame):
     def com_dsp(self):
         print("x=" + str(self.csr[0]) + ", y=" + str(self.csr[1]))
         print(self.com_str)
-        comp = ld.Ladder.Comp("", 0)
-        err = comp.dec(self.com_str)
+        comp = ld.Ladder.Comp("", 0)  # 命令インスタンスの生成
+        err = comp.dec(self.com_str)  # 文字列から命令を判断
         if err == 1:  # 命令タイプがない
             return
         elif err == 2:  # 設定値がない
@@ -208,9 +210,18 @@ class MainWin(tk.Frame):
                     self.csr[0]*100+100, self.csr[1]*80+60,
                     tags="com"+str(self.com_num), image=self.brek
                 )
+            elif comp.typ == "P":
+                self.cvs.create_image(
+                    self.csr[0]*100+100, self.csr[1]*80+60,
+                    tags="com"+str(self.com_num), image=self.plse
+                )
+            elif comp.typ == "F":
+                self.cvs.create_image(
+                    self.csr[0]*100+100, self.csr[1]*80+60,
+                    tags="com"+str(self.com_num), image=self.fall
+                )
             elif comp.typ == "R":
                 pass
-
             self.cvs.lower("com"+str(self.com_num))
         self.com_str = ""
         self.com_num += 1
