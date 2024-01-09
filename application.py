@@ -239,6 +239,11 @@ class MainWin(tk.Frame):
                     self.csr[0]*100+100, self.csr[1]*80+60,
                     tags="com"+str(self.com_num), image=self.base
                 )
+            if comp.typ in ld.Ladder.in_list:
+                self.cvs.create_text(
+                    self.csr[0]*100+100, self.csr[1]*80+30,
+                    tags="txt"+str(self.com_num), text=comp.tag, font=("", 12, "bold")
+                )
             self.cvs.lower("com"+str(self.com_num))
             self.csr_move("Right")
         self.com_str = ""
