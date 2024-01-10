@@ -21,7 +21,10 @@ class Ladder:
 
         def dec(self, st):
             com = st.split()
-            if com[0] == "ld":
+            if com[0] == "br":
+                self.brc = 1
+                return 0
+            elif com[0] == "ld":
                 self.typ = "M"
             elif com[0] == "ldi":
                 self.typ = "B"
