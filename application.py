@@ -20,6 +20,7 @@ class MainWin(tk.Frame):
         self.row = 7  # 列数
         self.csr = [0, 0]  # 画面上カーソル座標
         self.keep = []
+        self.lad = ld.Ladder()
         self.com_frm = None  # 命令入力フレーム
         self.com_ent = None  # 命令入力欄
         self.com_str = ""  # 命令入力文字列

@@ -92,7 +92,16 @@ class Ladder:
                 else:                          # 前回出力OFFかつセット命令OFFの場合
                     self.opt = 0               # 出力OFF
 
-    def add(self, typ, brc, tag="", set=0):
+    def add(self, x, y, comp: Comp):
+        while x >= len(self.ladder):
+            self.ladder.append([])
+        # print("x=" + str(x) + ", len=" + str(len(self.ladder)))
+        # print("y=" + str(y) + ", len=" + str(len(self.ladder[x])))
+        while y >= len(self.ladder[x]):
+            self.ladder[x].append(self.Comp("Bl", 0))
+        self.ladder[x][y] = comp
+
+    def add1(self, typ, brc, tag="", set=0):
         self.row.append(self.Comp(typ, brc))  # 行に追加
         if typ in self.tag_list:              # 名付命令の場合
             self.row[-1].tag = tag            # 名前を登録
@@ -184,12 +193,12 @@ class Ladder:
 
 def test1():
     ld = Ladder()
-    ld.add("M", 1, tag="x0")
-    ld.add("St", 0, tag="m0")
-    ld.add("M", 1, tag="x1")
-    ld.add("Rs", 0, tag="m0")
-    ld.add("M", 0, tag="m0")
-    ld.add("R", 0, tag="y0")
+    ld.add1("M", 1, tag="x0")
+    ld.add1("St", 0, tag="m0")
+    ld.add1("M", 1, tag="x1")
+    ld.add1("Rs", 0, tag="m0")
+    ld.add1("M", 0, tag="m0")
+    ld.add1("R", 0, tag="y0")
 
     for t in range(10):
         print("t=" + str(t))
@@ -234,3 +243,45 @@ def test2():
     print("typ=" + comp.typ)
     print("tag=" + comp.tag)
     print("set=" + str(comp.set))
+
+
+def test3():
+    ld = Ladder()
+    x0a = Ladder.Comp("M", 1)
+    x0a.tag = "x0"
+    x1b = Ladder.Comp("B", 1)
+    x1b.tag = "x1"
+    m0r = Ladder.Comp("R", 0)
+    m0r.tag = "m0"
+    m0a = Ladder.Comp("M", 1)
+    m0a.tag = "m0"
+    bl0 = Ladder.Comp("Bl", 0)
+    en0 = Ladder.Comp("En", 0)
+    m0e = Ladder.Comp("M", 0)
+    m0e.tag = "m0"
+    ln0 = Ladder.Comp("Ln", 0)
+    y0r = Ladder.Comp("R", 0)
+    y0r.tag = "y0"
+
+    ld.add(0, 0, x0a)
+    ld.add(0, 1, x1b)
+    ld.add(0, 2, m0r)
+    ld.add(1, 0, m0a)
+    ld.add(1, 1, bl0)
+    ld.add(1, 2, en0)
+    ld.add(2, 0, m0e)
+    ld.add(2, 1, ln0)
+    ld.add(2, 2, y0r)
+
+    for t in range(10):
+        print("t=" + str(t))
+        if t == 1:
+            ld.change("x0")
+        if t == 2:
+            ld.change("x0")
+        if t == 5:
+            ld.change("x1")
+        if t == 6:
+            ld.change("x1")
+        ld.run()
+        ld.check()

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/9&#10;入力したらカーソルを右へ&#10;出力命令は自動で右端へ">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/10&#10;命令タグを表示">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
     </list>
@@ -387,7 +387,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704812123687</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="1/10&#10;命令タグを表示">
+      <option name="closed" value="true" />
+      <created>1704812931817</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1704812931817</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -408,7 +416,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="12/24&#10;ファイルの追加&#10;サブウインドウの追加" />
     <MESSAGE value="12/25&#10;押しボタンの作成" />
     <MESSAGE value="12/27&#10;位置調整用の変数を作成" />
     <MESSAGE value="12/28&#10;pillowのインストール" />
@@ -433,6 +440,7 @@
     <MESSAGE value="1/8&#10;細かな加筆修正" />
     <MESSAGE value="1/9&#10;コマンド通りに画面上に表示&#10;命令タグを表示予定" />
     <MESSAGE value="1/9&#10;入力したらカーソルを右へ&#10;出力命令は自動で右端へ" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/9&#10;入力したらカーソルを右へ&#10;出力命令は自動で右端へ" />
+    <MESSAGE value="1/10&#10;命令タグを表示" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/10&#10;命令タグを表示" />
   </component>
 </project>
