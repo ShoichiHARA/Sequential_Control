@@ -108,9 +108,18 @@ class Ladder:
                     else:                                                       # 設定値が指定されている場合
                         self.ladder[i][j].ext = ext                             # 変更
 
+    def clr_out(self):
+        for i in range(len(self.ladder)):         # 行数繰り返し
+            for j in range(len(self.ladder[i])):  # 列数繰り返し
+                self.ladder[i][j].opt = 0         # 出力結果初期化
+
+    def clr_ext(self):
+        for i in range(len(self.ladder)):         # 行数繰り返し
+            for j in range(len(self.ladder[i])):  # 列数繰り返し
+                self.ladder[i][j].ext = 0         # 外部入力初期化
+
     def run(self):
-        for i in range(len(self.ladder)):  # 行数繰り返し
-            self.ladder[i][-1].opt = 0     # 出力結果リセット
+        self.clr_out()  # 出力結果初期化
 
         i = 0   # 行番号
         j = 0   # 列番号
