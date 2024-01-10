@@ -8,6 +8,9 @@ dic = [
     ["Exit", "終了"],
     ["View", "表示"],
     ["Practice Board", "実習盤"],
+    ["Simulation", "シミュレーション"],
+    ["Run", "実行"],
+    ["Stop", "停止"],
     ["Help", "ヘルプ"],
     ["Input Command", "命令入力"],
     ["OK", "決定"],
@@ -33,18 +36,21 @@ for i in range(len(lang)):
         ex = dic[3][i]
         vw = dic[4][i]
         pb = dic[5][i]
-        hp = dic[6][i]
-        ic = dic[7][i]
-        ok = dic[8][i]
-        cn = dic[9][i]
-        mk = dic[10][i]
-        br = dic[11][i]
-        rp = dic[12][i]
-        fp = dic[13][i]
-        ot = dic[14][i]
-        md = dic[15][i]
-        mn = dic[16][i]
-        at = dic[17][i]
-        co = dic[18][i]
-        of = dic[19][i]
-        on = dic[20][i]
+        sm = dic[6][i]
+        rn = dic[7][i]
+        sp = dic[8][i]
+        hp = dic[9][i]
+        ic = dic[10][i]
+        ok = dic[11][i]
+        cn = dic[12][i]
+        mk = dic[13][i]
+        br = dic[14][i]
+        rp = dic[15][i]
+        fp = dic[16][i]
+        ot = dic[17][i]
+        md = dic[18][i]
+        mn = dic[19][i]
+        at = dic[20][i]
+        co = dic[21][i]
+        of = dic[22][i]
+        on = dic[23][i]
