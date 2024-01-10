@@ -11,11 +11,12 @@ class MainWin(tk.Frame):
         self.pack()  # 配置
 
         # 定義
-        self.bar = None
-        self.file = None
-        self.view = None
-        self.help = None
-        self.cvs = None
+        self.bar = tk.Menu(self)  # メニューバー
+        self.file = tk.Menu(self.bar, tearoff=0)  # ファイルメニュー
+        self.simu = tk.Menu(self.bar, tearoff=0)  # シミュレーションメニュー
+        self.view = tk.Menu(self.bar, tearoff=0)  # 表示メニュー
+        self.help = tk.Menu(self.bar, tearoff=0)  # ヘルプメニュー
+        self.cvs = tk.Canvas(self.master, bg="white")  # キャンバス
         self.row = 7  # 列数
         self.csr = [0, 0]  # 画面上カーソル座標
         self.keep = []
@@ -45,24 +46,23 @@ class MainWin(tk.Frame):
     # ウィジェット
     def widgets(self: tk.Tk):
         # メニューバー
-        self.bar = tk.Menu(self)
-        self.master.configure(menu=self.bar)
-        self.file = tk.Menu(self.bar, tearoff=0)  # ファイルメニュー
-        self.bar.add_cascade(label=lg.fl, menu=self.file)
-        self.file.add_command(label=lg.st)  # 設定
-        self.file.add_separator()  # 境界線
-        self.file.add_command(label=lg.ex, command=self.exit)  # 終了
-        self.view = tk.Menu(self.bar, tearoff=0)  # 表示メニュー
-        self.bar.add_cascade(label=lg.vw, menu=self.view)
+        self.master.configure(menu=self.bar)                     # メニューバー追加
+        self.bar.add_cascade(label=lg.fl, menu=self.file)        # ファイルメニュー追加
+        self.file.add_command(label=lg.st)                       # 設定
+        self.file.add_separator()                                # 境界線
+        self.file.add_command(label=lg.ex, command=self.exit)    # 終了
+        self.bar.add_cascade(label=lg.sm, menu=self.simu)        # シミュレーションメニュー追加
+        self.simu.add_command(label=lg.rn, command=self.sm_run)  # シミュレーション実行
+        self.simu.add_separator()                                # 境界線
+        self.simu.add_command(label=lg.sp)                       # シミュレーション停止
+        self.bar.add_cascade(label=lg.vw, menu=self.view)        # 表示メニュー追加
         self.view.add_command(label=lg.pb, command=self.pb_win)  # 実習盤
-        self.help = tk.Menu(self.bar, tearoff=0)  # ヘルプメニュー
-        self.bar.add_cascade(label=lg.hp, menu=self.help)
+        self.bar.add_cascade(label=lg.hp, menu=self.help)        # ヘルプメニュー追加
 
         # キャンバスの設定
-        self.cvs = tk.Canvas(self.master, bg="white")  # 背景色
-        self.cvs.pack(fill=tk.BOTH, expand=True)  # 配置
-        self.cvs.create_line(50, 20, 50, 580, fill="black", width=3)
-        self.cvs.create_line(750, 20, 750, 580, fill="black", width=3)
+        self.cvs.pack(fill=tk.BOTH, expand=True)                        # キャンバス配置
+        self.cvs.create_line(50, 20, 50, 580, fill="black", width=3)    # 左側母線
+        self.cvs.create_line(750, 20, 750, 580, fill="black", width=3)  # 右側母線
 
         # カーソル
         self.cvs.create_rectangle(
@@ -73,6 +73,10 @@ class MainWin(tk.Frame):
     # 終了
     def exit(self):
         self.master.destroy()
+
+    # シミュレーション
+    def sm_run(self):
+        pass
 
     # 命令入力ウインドウ表示
     def in_win(self):
