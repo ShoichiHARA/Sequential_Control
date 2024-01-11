@@ -92,14 +92,37 @@ class Ladder:
                 else:                          # 前回出力OFFかつセット命令OFFの場合
                     self.opt = 0               # 出力OFF
 
-    def add(self, x, y, comp: Comp):
-        while x >= len(self.ladder):
-            self.ladder.append([])
+    def add(self, xy, comp: Comp):
+        while xy[0] >= len(self.ladder):               # 指定した行があるまで繰り返し
+            self.ladder.append([])                     # 行追加
         # print("x=" + str(x) + ", len=" + str(len(self.ladder)))
         # print("y=" + str(y) + ", len=" + str(len(self.ladder[x])))
-        while y >= len(self.ladder[x]):
-            self.ladder[x].append(self.Comp("Bl", 0))
-        self.ladder[x][y] = comp
+        while xy[1] >= len(self.ladder[xy[0]]):        # 指定した列があるまで繰り返し
+            self.ladder[x].append(self.Comp("Bl", 0))  # 空白命令追加
+        self.ladder[xy[0]][xy[1]] = comp               # 指定した行番号列番号に命令を書き込み
+
+    def org(self):
+        rnum = []
+        for i in range(len(self.ladder)):
+            rnum.append(len(self.ladder[i]))
+        rn = rnum.max()
+        i = 0
+        while True:
+            f = 1
+            for j in range(rn):
+                if self.ladder[i][j] == None:                   # なにもない場合
+                    if j == rn-1:                               # 右端の場合
+                        self.ladder[i][j] = self.Comp("En", 0)  # 改行命令追加
+                    else:                                       # 右端でない場合
+                        self.ladder[i][j] = self.Comp("Bl", 0)  # 空白命令追加
+                if self.ladder[i][j].typ not in ["Bl", "En"]:   # 空白または改行以外の命令の場合
+                    f = 0                                       # フラグリセット
+            if f == 1:                 # 行になにもない場合
+                self.ladder.remove[i]  # 行削除
+                i -= 1                 # 1つ前の行へ
+            if i >= len(self.ladder):  # 最後の行の場合
+                break                  # 終了
+            i += 1                     # 次の行へ
 
     def add1(self, typ, brc, tag="", set=0):
         self.row.append(self.Comp(typ, brc))  # 行に追加
@@ -263,15 +286,15 @@ def test3():
     y0r = Ladder.Comp("R", 0)
     y0r.tag = "y0"
 
-    ld.add(0, 0, x0a)
-    ld.add(0, 1, x1b)
-    ld.add(0, 2, m0r)
-    ld.add(1, 0, m0a)
-    ld.add(1, 1, bl0)
-    ld.add(1, 2, en0)
-    ld.add(2, 0, m0e)
-    ld.add(2, 1, ln0)
-    ld.add(2, 2, y0r)
+    ld.add([0, 0], x0a)
+    ld.add([0, 1], x1b)
+    ld.add([0, 2], m0r)
+    ld.add([1, 0], m0a)
+    ld.add([1, 1], bl0)
+    ld.add([1, 2], en0)
+    ld.add([2, 0], m0e)
+    ld.add([2, 1], ln0)
+    ld.add([2, 2], y0r)
 
     for t in range(10):
         print("t=" + str(t))
