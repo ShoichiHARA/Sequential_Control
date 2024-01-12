@@ -20,7 +20,7 @@ class MainWin(tk.Frame):
         self.row = 7  # 列数
         self.csr = [0, 0]  # 画面上カーソル座標
         self.keep = []
-        self.lad = ld.Ladder()
+        self.lad = ld.Ladder(self.row)
         self.com_frm = None  # 命令入力フレーム
         self.com_ent = None  # 命令入力欄
         self.com_str = ""  # 命令入力文字列
@@ -189,7 +189,15 @@ class MainWin(tk.Frame):
         self.com_str = self.com_ent.get()  # 入力文字列取得
         self.com_frm.destroy()  # 入力フレーム削除
         self.com_frm = None     # 入力フレーム無効
-        self.com_dsp()
+        err = self.lad.add_txt(self.csr, self.com_ent.get)
+        if err == 1:
+            pass
+        elif err == 2:
+            pass
+        elif err == 3:
+            pass
+        else:
+            self.com_dsp()
 
     # 命令入力取消
     def com_cn(self):
@@ -199,6 +207,11 @@ class MainWin(tk.Frame):
 
     # 命令表示
     def com_dsp(self):
+        for i in range(len(self.lad.ladder)):  # 行数繰り返し
+            for j in range(self.row):          # 列数繰り返し
+                pass
+
+    def com_dsp1(self):
         print("x=" + str(self.csr[0]) + ", y=" + str(self.csr[1]))
         print(self.com_str)
         comp = ld.Ladder.Comp("", 0)  # 命令インスタンスの生成
@@ -248,6 +261,11 @@ class MainWin(tk.Frame):
                 self.cvs.create_text(
                     self.csr[0]*100+100, self.csr[1]*80+30,
                     tags="txt"+str(self.com_num), text=comp.tag, font=("", 12, "bold")
+                )
+            if comp.typ in ["R", "T", "C"]:
+                self.cvs.create_text(
+                    self.csr[0]*100+70, self.csr[1]*80+60, tags="txt"+str(self.com_num),
+                    text=comp.tag, font=("", 12, "bold"), anchor=tk.W
                 )
             self.cvs.lower("com"+str(self.com_num))
             self.csr_move("Right")
