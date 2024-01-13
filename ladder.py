@@ -23,8 +23,13 @@ class Ladder:
         def dec(self, st):
             com = st.split()
             if com[0] == "br":
-                self.brc = 1
-                return 0
+                if com[1] in ["0", "1"]:
+                    self.brc = int(com[1])
+                    return 0
+                else:
+                    return 4  # 設定値が無効
+            elif com[0] == "ln":
+                self.typ = "Ln"
             elif com[0] == "ld":
                 self.typ = "M"
             elif com[0] == "ldi":
@@ -94,25 +99,20 @@ class Ladder:
                     self.opt = 0               # 出力OFF
 
     def add_txt(self, xy, txt):
-        comp = self.Comp("", 0)
-        err = comp.dec(txt)
-        if err == 0:
-            self.add_comp(xy, comp)
-            return 0
-        else:
-            return err
-
-    def add_comp(self, xy, comp: Comp):
-        while xy[0] >= len(self.ladder):               # 指定した行があるまで繰り返し
-            self.ladder.append([])                     # 行追加
+        while xy[1] >= len(self.ladder):                    # 指定した行があるまで繰り返し
+            self.ladder.append([])                          # 行追加
             for i in range(self.rnum-1):                    # 最終列手前まで繰り返し
                 self.ladder[-1].append(self.Comp("Bl", 0))  # 空白命令追加
             self.ladder[-1].append(self.Comp("En", 0))      # 改行命令追加
-        # print("x=" + str(x) + ", len=" + str(len(self.ladder)))
-        # print("y=" + str(y) + ", len=" + str(len(self.ladder[x])))
-        # while xy[1] >= len(self.ladder[xy[0]]):            # 指定した列があるまで繰り返し
-        #     self.ladder[xy[0]].append(self.Comp("Bl", 0))  # 空白命令追加
-        self.ladder[xy[0]][xy[1]] = comp                   # 指定した行番号列番号に命令を書き込み
+        if txt == "ins c":  # 行挿入の場合
+            pass
+        elif txt == "ins r":  # 列挿入の場合
+            pass
+        else:                                             # その他命令の場合
+            err = self.ladder[xy[1]][xy[0]].dec(txt)      # 文字列から要素を判定
+            if err != 0:                                  # エラーの場合
+                return err                                # 戻り値エラー種類
+        return 0
 
     def org(self):
         rn = 0
@@ -282,32 +282,18 @@ def test2():
 
 
 def test3():
-    ld = Ladder()
-    x0a = Ladder.Comp("M", 1)
-    x0a.tag = "x0"
-    x1b = Ladder.Comp("B", 1)
-    x1b.tag = "x1"
-    m0r = Ladder.Comp("R", 0)
-    m0r.tag = "m0"
-    m0a = Ladder.Comp("M", 1)
-    m0a.tag = "m0"
-    bl0 = Ladder.Comp("Bl", 0)
-    en0 = Ladder.Comp("En", 0)
-    m0e = Ladder.Comp("M", 0)
-    m0e.tag = "m0"
-    ln0 = Ladder.Comp("Ln", 0)
-    y0r = Ladder.Comp("R", 0)
-    y0r.tag = "y0"
+    ld = Ladder(3)
 
-    ld.add_comp([0, 0], x0a)
-    ld.add_comp([0, 1], x1b)
-    ld.add_comp([0, 2], m0r)
-    ld.add_comp([1, 0], m0a)
-    ld.add_comp([1, 1], bl0)
-    ld.add_comp([1, 2], en0)
-    ld.add_comp([2, 0], m0e)
-    ld.add_comp([2, 1], ln0)
-    ld.add_comp([2, 2], y0r)
+    ld.add_txt([0, 0], "ld x0")
+    ld.add_txt([0, 0], "br 1")
+    ld.add_txt([1, 0], "ldi x1")
+    ld.add_txt([1, 0], "br 1")
+    ld.add_txt([2, 0], "out m0")
+    ld.add_txt([0, 1], "ld m0")
+    ld.add_txt([0, 1], "br 1")
+    ld.add_txt([0, 2], "ld m0")
+    ld.add_txt([1, 2], "ln")
+    ld.add_txt([2, 2], "out y0")
 
     for t in range(10):
         print("t=" + str(t))

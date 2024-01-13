@@ -189,15 +189,31 @@ class MainWin(tk.Frame):
         self.com_str = self.com_ent.get()  # 入力文字列取得
         self.com_frm.destroy()  # 入力フレーム削除
         self.com_frm = None     # 入力フレーム無効
-        err = self.lad.add_txt(self.csr, self.com_ent.get)
+
+        err = 0  # エラー判定プログラム作成予定
+
+        com_str = self.com_str.split()
         if err == 1:
-            pass
+            return
         elif err == 2:
-            pass
+            return
         elif err == 3:
-            pass
-        else:
+            return
+        else:                                             # エラーでない場合
+            if com_str[0] in ["out", "set", "rst"]:       # 出力命令の場合
+                for i in range(self.csr[0], self.row-1):  # 最終列手前まで繰り返し
+                    self.lad.add_txt(self.csr, "ln")      # 導線命令登録
+                    self.csr_move("Right")                # カーソル右へ
+                self.lad.add_txt(self.csr, self.com_str)  # 命令登録
+                self.csr_move("Right")                    # カーソル右へ
+            elif com_str[0] == "br":                      # 分岐命令の場合
+                self.lad.add_txt(self.csr, self.com_str)  # 命令登録
+            else:                                         # その他命令の場合
+                self.lad.add_txt(self.csr, self.com_str)  # 命令登録
+                self.csr_move("Right")                    # カーソル右へ
             self.com_dsp()
+            self.com_str = ""
+            self.com_num += 1
 
     # 命令入力取消
     def com_cn(self):
@@ -207,9 +223,43 @@ class MainWin(tk.Frame):
 
     # 命令表示
     def com_dsp(self):
-        for i in range(len(self.lad.ladder)):  # 行数繰り返し
-            for j in range(self.row):          # 列数繰り返し
-                pass
+        for i in range(self.row):                  # 列数繰り返し
+            for j in range(len(self.lad.ladder)):  # 行数繰り返し
+                if self.lad.ladder[j][i].typ == "Ln":
+                    self.cvs.create_image(
+                        i*100+100, j*80+60,
+                        tags="com"+str(self.com_num), image=self.line
+                    )
+                if self.lad.ladder[j][i].typ == "M":
+                    self.cvs.create_image(
+                        i*100+100, j*80+60,
+                        tags="com"+str(self.com_num), image=self.make
+                    )
+                elif self.lad.ladder[j][i].typ == "B":
+                    self.cvs.create_image(
+                        i*100+100, j*80+60,
+                        tags="com"+str(self.com_num), image=self.brek
+                    )
+                elif self.lad.ladder[j][i].typ == "P":
+                    self.cvs.create_image(
+                        i*100+100, j*80+60,
+                        tags="com"+str(self.com_num), image=self.plse
+                    )
+                elif self.lad.ladder[j][i].typ == "F":
+                    self.cvs.create_image(
+                        i*100+100, j*80+60,
+                        tags="com"+str(self.com_num), image=self.fall
+                    )
+                elif self.lad.ladder[j][i].typ in ["R", "T", "C"]:
+                    self.cvs.create_image(
+                        i*100+100, j*80+60,
+                        tags="com"+str(self.com_num), image=self.base
+                    )
+                if self.lad.ladder[j][i].brc == 1:
+                    self.cvs.create_line(
+                        i*100+50, j*80+60, i*100+50, j*80+140,
+                        tags="brc"+str(self.com_num), fill="black", width=3
+                    )
 
     def com_dsp1(self):
         print("x=" + str(self.csr[0]) + ", y=" + str(self.csr[1]))
