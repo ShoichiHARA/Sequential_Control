@@ -223,43 +223,42 @@ class MainWin(tk.Frame):
 
     # 命令表示
     def com_dsp(self):
+        self.cvs.delete("all")  # キャンバス全削除
         for i in range(self.row):                  # 列数繰り返し
             for j in range(len(self.lad.ladder)):  # 行数繰り返し
                 if self.lad.ladder[j][i].typ == "Ln":
-                    self.cvs.create_image(
-                        i*100+100, j*80+60,
-                        tags="com"+str(self.com_num), image=self.line
-                    )
+                    self.cvs.create_image(i*100+100, j*80+60, image=self.line)
                 if self.lad.ladder[j][i].typ == "M":
-                    self.cvs.create_image(
-                        i*100+100, j*80+60,
-                        tags="com"+str(self.com_num), image=self.make
-                    )
+                    self.cvs.create_image(i*100+100, j*80+60, image=self.make)
                 elif self.lad.ladder[j][i].typ == "B":
-                    self.cvs.create_image(
-                        i*100+100, j*80+60,
-                        tags="com"+str(self.com_num), image=self.brek
-                    )
+                    self.cvs.create_image(i*100+100, j*80+60, image=self.brek)
                 elif self.lad.ladder[j][i].typ == "P":
-                    self.cvs.create_image(
-                        i*100+100, j*80+60,
-                        tags="com"+str(self.com_num), image=self.plse
-                    )
+                    self.cvs.create_image(i*100+100, j*80+60, image=self.plse)
                 elif self.lad.ladder[j][i].typ == "F":
-                    self.cvs.create_image(
-                        i*100+100, j*80+60,
-                        tags="com"+str(self.com_num), image=self.fall
-                    )
+                    self.cvs.create_image(i*100+100, j*80+60, image=self.fall)
                 elif self.lad.ladder[j][i].typ in ["R", "T", "C"]:
-                    self.cvs.create_image(
-                        i*100+100, j*80+60,
-                        tags="com"+str(self.com_num), image=self.base
-                    )
+                    self.cvs.create_image(i*100+100, j*80+60, image=self.base)
                 if self.lad.ladder[j][i].brc == 1:
                     self.cvs.create_line(
                         i*100+50, j*80+60, i*100+50, j*80+140,
-                        tags="brc"+str(self.com_num), fill="black", width=3
+                        fill="black", width=3
                     )
+                if self.lad.ladder[j][i].typ in self.lad.in_list:
+                    self.cvs.create_text(
+                        i*100+100, j*80+30,
+                        text=self.lad.ladder[j][i].tag, font=("", 12, "bold")
+                    )
+                elif self.lad.ladder[j][i].typ in ["R", "T", "C"]:
+                    self.cvs.create_text(
+                        i*100+70, j*80+60, text=self.lad.ladder[j][i].tag,
+                        font=("", 12, "bold"), anchor=tk.W
+                    )
+        self.cvs.create_line(50, 20, 50, 580, fill="black", width=3)  # 左側母線
+        self.cvs.create_line(750, 20, 750, 580, fill="black", width=3)  # 右側母線
+        self.cvs.create_rectangle(
+            0, 0, 100, 80, tags="csr", outline="blue", width=3
+        )
+        self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
 
     def com_dsp1(self):
         print("x=" + str(self.csr[0]) + ", y=" + str(self.csr[1]))
