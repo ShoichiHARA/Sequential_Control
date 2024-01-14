@@ -42,6 +42,7 @@ class MainWin(tk.Frame):
         # サブウインドウの定義
         self.in_win = None
         self.pb_win = None
+        self.io_win = None
         self.app = None
 
     # ウィジェット
@@ -58,6 +59,8 @@ class MainWin(tk.Frame):
         self.simu.add_command(label=lg.sp)                       # シミュレーション停止
         self.bar.add_cascade(label=lg.vw, menu=self.view)        # 表示メニュー追加
         self.view.add_command(label=lg.pb, command=self.pb_win)  # 実習盤
+        self.view.add_separator()                                # 境界線
+        self.view.add_command(label=lg.io, command=self.io_win)  # 割付表
         self.bar.add_cascade(label=lg.hp, menu=self.help)        # ヘルプメニュー追加
 
         # キャンバスの設定
@@ -100,6 +103,11 @@ class MainWin(tk.Frame):
     def pb_win(self):
         self.pb_win = tk.Toplevel(self.master)
         self.app = PBWin(self.pb_win)
+
+    # 割付表ウインドウ表示
+    def io_win(self):
+        self.io_win = tk.Toplevel(self.master)
+        self.app = IOWin(self.io_win)
 
     # イベント
     def event(self):
@@ -276,107 +284,6 @@ class MainWin(tk.Frame):
         )
         self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
 
-    def com_dsp1(self):
-        print("x=" + str(self.csr[0]) + ", y=" + str(self.csr[1]))
-        print(self.com_str)
-        comp = ld.Ladder.Comp("", 0)  # 命令インスタンスの生成
-        err = comp.dec(self.com_str)  # 文字列から命令を判断
-        if err == 1:  # 命令タイプがない
-            return
-        elif err == 2:  # 設定値がない
-            return
-        elif err == 3:  # 出力の種類が不明
-            return
-        else:
-            print("typ=" + comp.typ)
-            print("tag=" + comp.tag)
-            print("set=" + str(comp.set))
-            if comp.typ == "M":
-                self.cvs.create_image(
-                    self.csr[0]*100+100, self.csr[1]*80+60,
-                    tags="com"+str(self.com_num), image=self.make
-                )
-            elif comp.typ == "B":
-                self.cvs.create_image(
-                    self.csr[0]*100+100, self.csr[1]*80+60,
-                    tags="com"+str(self.com_num), image=self.brek
-                )
-            elif comp.typ == "P":
-                self.cvs.create_image(
-                    self.csr[0]*100+100, self.csr[1]*80+60,
-                    tags="com"+str(self.com_num), image=self.plse
-                )
-            elif comp.typ == "F":
-                self.cvs.create_image(
-                    self.csr[0]*100+100, self.csr[1]*80+60,
-                    tags="com"+str(self.com_num), image=self.fall
-                )
-            elif comp.typ == "R":
-                while self.csr[0] < self.row-1:
-                    self.cvs.create_image(
-                        self.csr[0]*100+100, self.csr[1]*80+60,
-                        tags="com"+str(self.com_num), image=self.line
-                    )
-                    self.csr_move("Right")
-                self.cvs.create_image(
-                    self.csr[0]*100+100, self.csr[1]*80+60,
-                    tags="com"+str(self.com_num), image=self.base
-                )
-            if comp.typ in ld.Ladder.in_list:
-                self.cvs.create_text(
-                    self.csr[0]*100+100, self.csr[1]*80+30,
-                    tags="txt"+str(self.com_num), text=comp.tag, font=("", 12, "bold")
-                )
-            if comp.typ in ["R", "T", "C"]:
-                self.cvs.create_text(
-                    self.csr[0]*100+70, self.csr[1]*80+60, tags="txt"+str(self.com_num),
-                    text=comp.tag, font=("", 12, "bold"), anchor=tk.W
-                )
-            self.cvs.lower("com"+str(self.com_num))
-            self.csr_move("Right")
-        self.com_str = ""
-        self.com_num += 1
-
-    # 命令入力クラス
-    class ComInput:
-        def __init__(self):
-            self.get = ""
-            self.val = 0
-            self.csr = []
-            self.frm = None
-            self.in_e = None
-
-        def com_input(self, frm, csr):
-            self.csr = csr
-            self.get = ""
-            self.frm = tk.Frame(  # 入力フレーム追加
-                frm, width=300, height=120,
-                relief=tk.RIDGE, bd=2
-            )
-            ti_l = tk.Label(self.frm, text=lg.ic)  # テキスト追加
-            self.in_e = tk.Entry(self.frm, width=34)  # 入力欄追加
-            ok_b = tk.Button(self.frm, text=lg.ok, width=8, command=self.ok_ck)  # 決定ボタン追加
-            cn_b = tk.Button(self.frm, text=lg.cn, width=8, command=self.cn_ck)  # 取消ボタン追加
-            ti_l.place(x=10, y=10)
-            self.in_e.place(x=10, y=40)
-            ok_b.place(x=130, y=75)
-            cn_b.place(x=210, y=75)
-            self.frm.place(x=250, y=240)
-            self.in_e.focus_set()  # 入力欄有効
-            self.val = 1
-
-        def ok_ck(self):
-            print("ok")
-            # print(self.csr)
-            print(self.in_e.get())
-            self.frm.destroy()  # 入力フレーム削除
-            self.val = 0
-
-        def cn_ck(self):
-            print("cancel")
-            self.frm.destroy()  # 入力フレーム削除
-            self.val = 0
-
 
 # 命令入力ウインドウ
 class InWin(tk.Frame):
@@ -414,6 +321,7 @@ class PBWin(tk.Frame):
         self.cvs = None
         self.keep = []
         self.sw_on = []  # スイッチ情報
+        self.out_on = []
         self.pall_x = 400  # 製品x座標
         self.pall_d = 0    # マウス移動用変数
         self.x = 350  # 位置調整用x座標
@@ -706,6 +614,62 @@ class PBWin(tk.Frame):
                 else:
                     return
                 self.sw_on.append(tag)
+
+
+# 割付表ウインドウ
+class IOWin(tk.Frame):
+    def __init__(self: tk.Tk, master):
+        super().__init__(master)
+        self.pack()
+
+        # 定義
+        self.frm = tk.Frame(self.master)
+        self.io_list = []
+
+        # ウインドウの設定
+        self.master.title(lg.io)
+        self.master.geometry("400x600")
+        self.widgets()
+        self.event()
+
+    # ウィジェット
+    def widgets(self: tk.Tk):
+        # フレームの設定
+        self.frm.pack(fill=tk.BOTH, expand=True)
+
+        # 表形状の入力欄
+        for i in range(10):
+            row = [
+                tk.Entry(self.frm, font=("", 14), width=8),                    # プログラム側入力変数
+                tk.Entry(self.frm, font=("", 14), width=8),  # 機器側入力変数
+                tk.Entry(self.frm, font=("", 14), width=8),                    # プログラム側出力変数
+                tk.Entry(self.frm, font=("", 14), width=8)   # 機器側出力変数
+            ]
+            self.io_list.append(row)
+            self.io_list[i][0].place(x=15, y=i*25+45)
+            self.io_list[i][1].place(x=100, y=i*25+45)
+            self.io_list[i][2].place(x=215, y=i*25+45)
+            self.io_list[i][3].place(x=300, y=i*25+45)
+
+        # 機器側入力
+        i_st = ["LS1", "LS2", "PB1", "PB2", "PB3", "PB4", "PB5", "SS0", "SS1"]
+        o_st = ["RY1", "RY2", "PL1", "PL2", "PL3", "PL4"]
+        for i in range(10):
+            if i < len(i_st):
+                self.io_list[i][1].insert(0, i_st[i])
+            if i < len(o_st):
+                self.io_list[i][3].insert(0, o_st[i])
+            self.io_list[i][1].configure(state="readonly")
+            self.io_list[i][3].configure(state="readonly")
+
+        # テスト入力
+        self.io_list[2][0].insert(0, "x0")
+        self.io_list[3][0].insert(0, "x1")
+        self.io_list[2][2].insert(0, "y0")
+
+    # イベント
+    def event(self):
+        pass
 
 
 # アプリケーション

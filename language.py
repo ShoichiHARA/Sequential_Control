@@ -25,7 +25,8 @@ dic = [
     ["Auto", "自動"],
     ["Continuous", "連続運転"],
     ["OFF", "切"],
-    ["ON", "入"]
+    ["ON", "入"],
+    ["I/O Allocation", "入出力割付表"]
 ]
 
 for i in range(len(lang)):
@@ -54,3 +55,4 @@ for i in range(len(lang)):
         co = dic[21][i]
         of = dic[22][i]
         on = dic[23][i]
+        io = dic[24][i]

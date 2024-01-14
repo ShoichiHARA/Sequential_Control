@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/14&#10;画面表示関数の修正">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/14&#10;プログラム整理関数の修正&#10;実行関数の動作を確認">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/language.py" beforeDir="false" afterPath="$PROJECT_DIR$/language.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,7 +436,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705212533799</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="1/14&#10;プログラム整理関数の修正&#10;実行関数の動作を確認">
+      <option name="closed" value="true" />
+      <created>1705216003241</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1705216003241</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -457,7 +465,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="12/28&#10;押しボタンスイッチ追加" />
     <MESSAGE value="12/30&#10;切替スイッチ追加" />
     <MESSAGE value="12/31&#10;押しボタンスイッチ追加" />
     <MESSAGE value="1/1&#10;製品追加&#10;マウスによる製品の位置調整可能" />
@@ -482,6 +489,7 @@
     <MESSAGE value="1/12&#10;文字列でプログラムに追加&#10;プログラム編集するたびに表示書き換え" />
     <MESSAGE value="1/13&#10;分岐を表示&#10;命令の登録を改良&#10;コマンドのエラー判定関数を作成予定" />
     <MESSAGE value="1/14&#10;画面表示関数の修正" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/14&#10;画面表示関数の修正" />
+    <MESSAGE value="1/14&#10;プログラム整理関数の修正&#10;実行関数の動作を確認" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/14&#10;プログラム整理関数の修正&#10;実行関数の動作を確認" />
   </component>
 </project>
