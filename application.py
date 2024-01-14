@@ -93,27 +93,33 @@ class MainWin(tk.Frame):
 
     # シミュレーション開始
     def sm_run(self):
-        self.run = 1
-        self.lad.org()
-        while self.run == 1:
-            break
-
-        for t in range(10):
-            print("t=" + str(t))
-            if t == 1:
-                self.lad.change("x0")
-            elif t == 2:
-                self.lad.change("x0")
-            elif t == 5:
-                self.lad.change("x1")
-            elif t == 6:
-                self.lad.change("x1")
+        if self.run == 0:                         # 呼び出された初回の場合
+            self.run = 1                          # 実行フラグON
+            self.lad.org()
+        if self.run == 1:
+            print("run")
+            for i in range(len(self.io_list)):
+                if self.io_list[i][1] in self.pb_app.sw_on:
+                    self.lad.change(self.io_list[i][0], 1)
+                else:
+                    self.lad.change(self.io_list[i][0], 0)
             self.lad.run()
-            self.lad.check()
+            self.pb_app.out_on = []
+            for i in range(len(self.io_list)):
+                for j in range(len(self.lad.ladder)):
+                    if self.io_list[i][2] == self.lad.ladder[j][-1].tag:
+                        if self.lad.ladder[j][-1].opt == 1:
+                            self.pb_app.out_on.append(self.io_list[j][3])
+            if self.pb_app is not None:
+                self.pb_app.out_func()
+            self.master.after(1000, self.sm_run)
+        else:
+            self.run = 0
+            return
 
     # シミュレーション終了
     def sm_stop(self):
-        self.run = 0
+        self.run = 9
 
     # 命令入力ウインドウ表示
     def in_win(self):
@@ -637,6 +643,33 @@ class PBWin(tk.Frame):
                 else:
                     return
                 self.sw_on.append(tag)
+
+    # 出力動作
+    def out_func(self):
+        if "PL1" in self.out_on:
+            self.cvs.lift("pl1n", "pl1f")
+        else:
+            self.cvs.lift("pl1f", "pl1n")
+        if "PL2" in self.out_on:
+            self.cvs.lift("pl2n", "pl2f")
+        else:
+            self.cvs.lift("pl2f", "pl2n")
+        if "PL3" in self.out_on:
+            self.cvs.lift("pl3n", "pl3f")
+        else:
+            self.cvs.lift("pl3f", "pl3n")
+        if "PL4" in self.out_on:
+            self.cvs.lift("pl4n", "pl4f")
+        else:
+            self.cvs.lift("pl4f", "pl4n")
+        if "RY1" in self.out_on:
+            pass
+        else:
+            pass
+        if "RY2" in self.out_on:
+            pass
+        else:
+            pass
 
 
 # 割付表ウインドウ
