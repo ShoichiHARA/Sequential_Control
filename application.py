@@ -25,6 +25,7 @@ class MainWin(tk.Frame):
         self.com_ent = None  # 命令入力欄
         self.com_str = ""  # 命令入力文字列
         self.com_num = 0  # 命令数
+        self.io_list = []
         self.line = tk.PhotoImage(file="image/Line.png")
         self.make = tk.PhotoImage(file="image/Make.png")
         self.brek = tk.PhotoImage(file="image/Break.png")
@@ -40,10 +41,21 @@ class MainWin(tk.Frame):
         self.event()  # イベント
 
         # サブウインドウの定義
-        self.in_win = None
-        self.pb_win = None
-        self.io_win = None
-        self.app = None
+        self.in_mas = None
+        self.pb_mas = None
+        self.io_mas = None
+        # self.io_mas = tk.Toplevel(self.master)
+        self.in_app = None
+        self.pb_app = None
+        self.io_app = None
+        # self.io_app = IOWin(self.io_win)
+
+        # self.io_win()
+        # self.io_mas.master.destroy()
+
+        # リストの表作り
+        for i in range(10):
+            self.io_list.append(["", "", "", ""])
 
     # ウィジェット
     def widgets(self: tk.Tk):
@@ -96,18 +108,18 @@ class MainWin(tk.Frame):
 
     # 命令入力ウインドウ表示
     def in_win(self):
-        self.in_win = tk.Toplevel(self.master)
-        self.app = InWin(self.in_win)
+        self.in_mas = tk.Toplevel(self.master)
+        self.in_app = InWin(self.in_mas)
 
     # 実習盤ウインドウ表示
     def pb_win(self):
-        self.pb_win = tk.Toplevel(self.master)
-        self.app = PBWin(self.pb_win)
+        self.pb_mas = tk.Toplevel(self.master)
+        self.pb_app = PBWin(self.pb_mas)
 
     # 割付表ウインドウ表示
     def io_win(self):
-        self.io_win = tk.Toplevel(self.master)
-        self.app = IOWin(self.io_win)
+        self.io_mas = tk.Toplevel(self.master)
+        self.io_app = IOWin(self.io_mas, self.io_list)
 
     # イベント
     def event(self):
@@ -119,6 +131,8 @@ class MainWin(tk.Frame):
                             self.csr[0] = (e.x - 50) // 100
                             self.csr[1] = (e.y - 20) // 80
                             self.csr_move()
+            elif e.num == 3:
+                print(self.io_list)
 
         def m_release(e):
             if e.num == 1:
@@ -193,13 +207,13 @@ class MainWin(tk.Frame):
             relief=tk.RIDGE, bd=2
         )
         ti_l = tk.Label(self.com_frm, text=lg.ic)  # テキスト追加
-        self.com_ent = tk.Entry(self.com_frm, width=34)  # 入力欄追加
+        self.com_ent = tk.Entry(self.com_frm, font=("", 14), width=27)  # 入力欄追加
         ok_b = tk.Button(self.com_frm, text=lg.ok, width=8, command=self.com_ok)  # 決定ボタン追加
         cn_b = tk.Button(self.com_frm, text=lg.cn, width=8, command=self.com_cn)  # 取消ボタン追加
         ti_l.place(x=10, y=10)
         self.com_ent.place(x=10, y=40)
-        ok_b.place(x=130, y=75)
-        cn_b.place(x=210, y=75)
+        ok_b.place(x=135, y=80)
+        cn_b.place(x=215, y=80)
         self.com_frm.place(x=250, y=240)
         self.com_ent.focus_set()  # 入力欄有効
 
@@ -618,13 +632,15 @@ class PBWin(tk.Frame):
 
 # 割付表ウインドウ
 class IOWin(tk.Frame):
-    def __init__(self: tk.Tk, master):
+    def __init__(self: tk.Tk, master, lst):
         super().__init__(master)
         self.pack()
 
         # 定義
         self.frm = tk.Frame(self.master)
+        self.io_st = lst
         self.io_list = []
+        self.keep = []
 
         # ウインドウの設定
         self.master.title(lg.io)
@@ -638,38 +654,84 @@ class IOWin(tk.Frame):
         self.frm.pack(fill=tk.BOTH, expand=True)
 
         # 表形状の入力欄
-        for i in range(10):
-            row = [
-                tk.Entry(self.frm, font=("", 14), width=8),                    # プログラム側入力変数
-                tk.Entry(self.frm, font=("", 14), width=8),  # 機器側入力変数
-                tk.Entry(self.frm, font=("", 14), width=8),                    # プログラム側出力変数
-                tk.Entry(self.frm, font=("", 14), width=8)   # 機器側出力変数
-            ]
+        x = [15, 100, 215, 300]
+        print(len(self.io_st))
+        for i in range(len(self.io_st)):
+            row = []
+            for j in range(4):
+                row.append(tk.Entry(self.frm, font=("", 14), width=8))
+                row[-1].insert(0, self.io_st[i][j])
+                if j in [1, 3]:
+                    row[-1].configure(state="readonly")
+                row[-1].place(x=x[j], y=i*25+45)
             self.io_list.append(row)
-            self.io_list[i][0].place(x=15, y=i*25+45)
-            self.io_list[i][1].place(x=100, y=i*25+45)
-            self.io_list[i][2].place(x=215, y=i*25+45)
-            self.io_list[i][3].place(x=300, y=i*25+45)
 
-        # 機器側入力
-        i_st = ["LS1", "LS2", "PB1", "PB2", "PB3", "PB4", "PB5", "SS0", "SS1"]
-        o_st = ["RY1", "RY2", "PL1", "PL2", "PL3", "PL4"]
-        for i in range(10):
-            if i < len(i_st):
-                self.io_list[i][1].insert(0, i_st[i])
-            if i < len(o_st):
-                self.io_list[i][3].insert(0, o_st[i])
-            self.io_list[i][1].configure(state="readonly")
-            self.io_list[i][3].configure(state="readonly")
+        # 完了ボタン
+        ok_b = tk.Button(self.frm, text=lg.ok, width=8, command=self.com_ok)
+        cn_b = tk.Button(self.frm, text=lg.cn, width=8, command=self.com_cn)
+        ok_b.place(x=235, y=560)
+        cn_b.place(x=315, y=560)
 
         # テスト入力
+        self.io_list[2][0].delete(0, 8)
         self.io_list[2][0].insert(0, "x0")
+        self.io_list[3][0].delete(0, 8)
         self.io_list[3][0].insert(0, "x1")
+        self.io_list[2][2].delete(0, 8)
         self.io_list[2][2].insert(0, "y0")
+        self.dev_type("pb")
 
     # イベント
     def event(self):
-        pass
+        def k_press(e):
+            if e.keysym in self.keep:
+                return
+            print(e.keysym)
+            self.keep.append(e.keysym)
+            if e.keysym == "k":
+                self.dev_type("pb")
+
+        def k_release(e):
+            if e.keysym in self.keep:
+                self.keep.remove(e.keysym)
+
+        self.master.bind("<KeyPress>", k_press)
+        self.master.bind("<KeyRelease>", k_release)
+
+    # 割付決定
+    def com_ok(self):
+        for i in range(len(self.io_st)):
+            for j in range(4):
+                self.io_st[i][j] = self.io_list[i][j].get()
+        self.master.destroy()
+
+    # 割付取消
+    def com_cn(self):
+        self.master.destroy()
+
+    # 機器側書き込み
+    def dev_type(self, typ):
+        pb_i = ["LS1", "LS2", "PB1", "PB2", "PB3", "PB4", "PB5", "SS0", "SS1", ""]
+        pb_o = ["RY1", "RY2", "PL1", "PL2", "PL3", "PL4", "", "", "", ""]
+        tl_i = ["", "", "", "", "", "", "", "", "", ""]
+        tl_o = ["", "", "", "", "", "", "", "", "", ""]
+        for i in range(len(self.io_st)):                   # 行数繰り返し
+            self.io_list[i][1].configure(state="normal")   # 機器側入力書き込みモード
+            self.io_list[i][3].configure(state="normal")   # 機器側出力書き込みモード
+            self.io_list[i][1].delete(0, 8)                # 入力してあるもの削除
+            self.io_list[i][3].delete(0, 8)                # 入力してあるもの削除
+            if typ == "pb":                                # 実習盤の場合
+                if i < len(pb_i):                          # 配列の要素内の場合
+                    self.io_list[i][1].insert(0, pb_i[i])  # 機器側入力書き込み
+                if i < len(pb_o):                          # 配列の要素内の場合
+                    self.io_list[i][3].insert(0, pb_o[i])  # 機器側出力書き込み
+            elif typ == "tl":                              # 信号機の場合
+                if i < len(tl_i):
+                    self.io_list[i][1].insert(0, tl_i[i])
+                if i < len(tl_o):
+                    self.io_list[i][3].insert(0, tl_o[i])
+            self.io_list[i][1].configure(state="readonly")  # 機器側入力書き込み禁止
+            self.io_list[i][3].configure(state="readonly")  # 機器側出力書き込み禁止
 
 
 # アプリケーション
