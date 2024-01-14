@@ -22,7 +22,7 @@ class Ladder:
 
         def dec(self, st):
             com = st.split()
-            if com[0] == "br":
+            if com[0] == "brc":
                 if com[1] in ["0", "1"]:
                     self.brc = int(com[1])
                     return 0

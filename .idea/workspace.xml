@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/13&#10;分岐を表示&#10;命令の登録を改良&#10;コマンドのエラー判定関数を作成予定">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/14&#10;画面表示関数の修正">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -419,7 +420,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705155827597</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="1/14&#10;画面表示関数の修正">
+      <option name="closed" value="true" />
+      <created>1705163343882</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1705163343882</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -440,7 +449,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="12/28&#10;押しボタンスイッチ作成" />
     <MESSAGE value="12/28&#10;押しボタンスイッチ追加" />
     <MESSAGE value="12/30&#10;切替スイッチ追加" />
     <MESSAGE value="12/31&#10;押しボタンスイッチ追加" />
@@ -465,6 +473,7 @@
     <MESSAGE value="1/11&#10;命令を行列番号から追加&#10;実行前に整理する必要あり" />
     <MESSAGE value="1/12&#10;文字列でプログラムに追加&#10;プログラム編集するたびに表示書き換え" />
     <MESSAGE value="1/13&#10;分岐を表示&#10;命令の登録を改良&#10;コマンドのエラー判定関数を作成予定" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/13&#10;分岐を表示&#10;命令の登録を改良&#10;コマンドのエラー判定関数を作成予定" />
+    <MESSAGE value="1/14&#10;画面表示関数の修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/14&#10;画面表示関数の修正" />
   </component>
 </project>

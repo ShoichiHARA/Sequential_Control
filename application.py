@@ -206,7 +206,7 @@ class MainWin(tk.Frame):
                     self.csr_move("Right")                # カーソル右へ
                 self.lad.add_txt(self.csr, self.com_str)  # 命令登録
                 self.csr_move("Right")                    # カーソル右へ
-            elif com_str[0] == "br":                      # 分岐命令の場合
+            elif com_str[0] == "brc":                     # 分岐命令の場合
                 self.lad.add_txt(self.csr, self.com_str)  # 命令登録
             else:                                         # その他命令の場合
                 self.lad.add_txt(self.csr, self.com_str)  # 命令登録
@@ -227,20 +227,24 @@ class MainWin(tk.Frame):
         for i in range(self.row):                  # 列数繰り返し
             for j in range(len(self.lad.ladder)):  # 行数繰り返し
                 if self.lad.ladder[j][i].typ == "Ln":
-                    self.cvs.create_image(i*100+100, j*80+60, image=self.line)
-                if self.lad.ladder[j][i].typ == "M":
-                    self.cvs.create_image(i*100+100, j*80+60, image=self.make)
+                    com_i = self.line
+                elif self.lad.ladder[j][i].typ == "M":
+                    com_i = self.make
                 elif self.lad.ladder[j][i].typ == "B":
-                    self.cvs.create_image(i*100+100, j*80+60, image=self.brek)
+                    com_i = self.brek
                 elif self.lad.ladder[j][i].typ == "P":
-                    self.cvs.create_image(i*100+100, j*80+60, image=self.plse)
+                    com_i = self.plse
                 elif self.lad.ladder[j][i].typ == "F":
-                    self.cvs.create_image(i*100+100, j*80+60, image=self.fall)
+                    com_i = self.fall
                 elif self.lad.ladder[j][i].typ in ["R", "T", "C"]:
-                    self.cvs.create_image(i*100+100, j*80+60, image=self.base)
+                    com_i = self.base
+                else:
+                    com_i = None
+                com_d = self.cvs.create_image(i*100+100, j*80+60, image=com_i)
+                self.cvs.lower(com_d)
                 if self.lad.ladder[j][i].brc == 1:
                     self.cvs.create_line(
-                        i*100+50, j*80+60, i*100+50, j*80+140,
+                        i*100+50, j*80+59, i*100+50, j*80+142,
                         fill="black", width=3
                     )
                 if self.lad.ladder[j][i].typ in self.lad.in_list:
