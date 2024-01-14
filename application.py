@@ -77,7 +77,19 @@ class MainWin(tk.Frame):
 
     # シミュレーション
     def sm_run(self):
-        pass
+        self.lad.org()
+        for t in range(10):
+            print("t=" + str(t))
+            if t == 1:
+                self.lad.change("x0")
+            elif t == 2:
+                self.lad.change("x0")
+            elif t == 5:
+                self.lad.change("x1")
+            elif t == 6:
+                self.lad.change("x1")
+            self.lad.run()
+            self.lad.check()
 
     # 命令入力ウインドウ表示
     def in_win(self):

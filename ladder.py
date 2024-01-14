@@ -115,27 +115,17 @@ class Ladder:
         return 0
 
     def org(self):
-        rn = 0
-        for i in range(len(self.ladder)):
-            if rn > len(self.ladder[i]):
-                rn = len(self.ladder[i])
         i = 0
-        while True:
-            f = 1
-            for j in range(rn):
-                if self.ladder[i][j] is None:                   # なにもない場合
-                    if j == rn-1:                               # 右端の場合
-                        self.ladder[i][j] = self.Comp("En", 0)  # 改行命令追加
-                    else:                                       # 右端でない場合
-                        self.ladder[i][j] = self.Comp("Bl", 0)  # 空白命令追加
+        while i < len(self.ladder):  # 最終行まで繰り返し
+            f = 1  # 空白命令のフラグ
+            self.ladder[i][0].brc = 1  # 先頭の分岐
+            for j in range(self.rnum):  # 列数繰り返し
                 if self.ladder[i][j].typ not in ["Bl", "En"]:   # 空白または改行以外の命令の場合
                     f = 0                                       # フラグリセット
             if f == 1:                   # 行になにもない場合
                 self.ladder[i].remove()  # 行削除
-                i -= 1                   # 1つ前の行へ
-            if i >= len(self.ladder):    # 最後の行の場合
-                break                    # 終了
             i += 1                     # 次の行へ
+        self.ladder[-1][0].brc = 0  # 最終号の先頭は分岐なし
 
     def add_row(self, typ, brc, tag="", set=0):
         self.row.append(self.Comp(typ, brc))  # 行に追加
@@ -285,15 +275,15 @@ def test3():
     ld = Ladder(3)
 
     ld.add_txt([0, 0], "ld x0")
-    ld.add_txt([0, 0], "br 1")
     ld.add_txt([1, 0], "ldi x1")
-    ld.add_txt([1, 0], "br 1")
+    ld.add_txt([1, 0], "brc 1")
     ld.add_txt([2, 0], "out m0")
     ld.add_txt([0, 1], "ld m0")
-    ld.add_txt([0, 1], "br 1")
     ld.add_txt([0, 2], "ld m0")
     ld.add_txt([1, 2], "ln")
     ld.add_txt([2, 2], "out y0")
+
+    ld.org()
 
     for t in range(10):
         print("t=" + str(t))
@@ -307,3 +297,19 @@ def test3():
             ld.change("x1")
         ld.run()
         ld.check()
+
+
+def test4(ld: Ladder):
+    for t in range(10):
+        print("t=" + str(t))
+        if t == 1:
+            ld.change("x0")
+        if t == 2:
+            ld.change("x0")
+        if t == 5:
+            ld.change("x1")
+        if t == 6:
+            ld.change("x1")
+        ld.run()
+        ld.check()
+
