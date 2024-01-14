@@ -26,6 +26,7 @@ class MainWin(tk.Frame):
         self.com_str = ""  # 命令入力文字列
         self.com_num = 0  # 命令数
         self.io_list = []
+        self.run = 0
         self.line = tk.PhotoImage(file="image/Line.png")
         self.make = tk.PhotoImage(file="image/Make.png")
         self.brek = tk.PhotoImage(file="image/Break.png")
@@ -60,20 +61,20 @@ class MainWin(tk.Frame):
     # ウィジェット
     def widgets(self: tk.Tk):
         # メニューバー
-        self.master.configure(menu=self.bar)                     # メニューバー追加
-        self.bar.add_cascade(label=lg.fl, menu=self.file)        # ファイルメニュー追加
-        self.file.add_command(label=lg.st)                       # 設定
-        self.file.add_separator()                                # 境界線
-        self.file.add_command(label=lg.ex, command=self.exit)    # 終了
-        self.bar.add_cascade(label=lg.sm, menu=self.simu)        # シミュレーションメニュー追加
-        self.simu.add_command(label=lg.rn, command=self.sm_run)  # シミュレーション実行
-        self.simu.add_separator()                                # 境界線
-        self.simu.add_command(label=lg.sp)                       # シミュレーション停止
-        self.bar.add_cascade(label=lg.vw, menu=self.view)        # 表示メニュー追加
-        self.view.add_command(label=lg.pb, command=self.pb_win)  # 実習盤
-        self.view.add_separator()                                # 境界線
-        self.view.add_command(label=lg.io, command=self.io_win)  # 割付表
-        self.bar.add_cascade(label=lg.hp, menu=self.help)        # ヘルプメニュー追加
+        self.master.configure(menu=self.bar)                      # メニューバー追加
+        self.bar.add_cascade(label=lg.fl, menu=self.file)         # ファイルメニュー追加
+        self.file.add_command(label=lg.st)                        # 設定
+        self.file.add_separator()                                 # 境界線
+        self.file.add_command(label=lg.ex, command=self.exit)     # 終了
+        self.bar.add_cascade(label=lg.sm, menu=self.simu)         # シミュレーションメニュー追加
+        self.simu.add_command(label=lg.rn, command=self.sm_run)   # シミュレーション実行
+        self.simu.add_separator()                                 # 境界線
+        self.simu.add_command(label=lg.sp, command=self.sm_stop)  # シミュレーション停止
+        self.bar.add_cascade(label=lg.vw, menu=self.view)         # 表示メニュー追加
+        self.view.add_command(label=lg.pb, command=self.pb_win)   # 実習盤
+        self.view.add_separator()                                 # 境界線
+        self.view.add_command(label=lg.io, command=self.io_win)   # 割付表
+        self.bar.add_cascade(label=lg.hp, menu=self.help)         # ヘルプメニュー追加
 
         # キャンバスの設定
         self.cvs.pack(fill=tk.BOTH, expand=True)                        # キャンバス配置
@@ -90,9 +91,13 @@ class MainWin(tk.Frame):
     def exit(self):
         self.master.destroy()
 
-    # シミュレーション
+    # シミュレーション開始
     def sm_run(self):
+        self.run = 1
         self.lad.org()
+        while self.run == 1:
+            break
+
         for t in range(10):
             print("t=" + str(t))
             if t == 1:
@@ -105,6 +110,10 @@ class MainWin(tk.Frame):
                 self.lad.change("x1")
             self.lad.run()
             self.lad.check()
+
+    # シミュレーション終了
+    def sm_stop(self):
+        self.run = 0
 
     # 命令入力ウインドウ表示
     def in_win(self):
@@ -477,21 +486,21 @@ class PBWin(tk.Frame):
                             self.cvs.lower("prd3", "pall")
                 if 310 < e.y < 390:  # 切替スイッチ
                     if 50 < e.x < 130:  # 切替スイッチ0
-                        self.sw_func("ss0", 0)
+                        self.sw_func("SS0", 0)
                     elif 160 < e.x < 240:  # 切替スイッチ1
-                        self.sw_func("ss1", 0)
+                        self.sw_func("SS1", 0)
                 elif 460 < e.y < 520:  # 押しボタンスイッチ
                     if 320 < e.x < 380:
-                        self.sw_func("pb1", 2)
+                        self.sw_func("PB1", 2)
                     elif 400 < e.x < 460:
-                        self.sw_func("pb2", 2)
+                        self.sw_func("PB2", 2)
                     elif 480 < e.x < 540:
-                        self.sw_func("pb3", 2)
+                        self.sw_func("PB3", 2)
                     elif 560 < e.x < 620:
-                        self.sw_func("pb4", 2)
+                        self.sw_func("PB4", 2)
                 if 450 < e.y < 530:  # 押しボタンスイッチ5
                     if 660 < e.x < 740:
-                        self.sw_func("pb5", 2)
+                        self.sw_func("PB5", 2)
 
                 print("x=" + str(e.x) + ", y=" + str(e.y))
                 # 要素の設定変更 https://daeudaeu.com/tkinter_canvas_method/
@@ -502,16 +511,16 @@ class PBWin(tk.Frame):
             if e.num == 1:
                 if "prod" in self.keep:
                     self.keep.remove("prod")
-                if "pb1" in self.sw_on:
-                    self.sw_func("pb1", 1)
-                elif "pb2" in self.sw_on:
-                    self.sw_func("pb2", 1)
-                elif "pb3" in self.sw_on:
-                    self.sw_func("pb3", 1)
-                elif "pb4" in self.sw_on:
-                    self.sw_func("pb4", 1)
-                elif "pb5" in self.sw_on:
-                    self.sw_func("pb5", 1)
+                if "PB1" in self.sw_on:
+                    self.sw_func("PB1", 1)
+                elif "PB2" in self.sw_on:
+                    self.sw_func("PB2", 1)
+                elif "PB3" in self.sw_on:
+                    self.sw_func("PB3", 1)
+                elif "PB4" in self.sw_on:
+                    self.sw_func("PB4", 1)
+                elif "PB5" in self.sw_on:
+                    self.sw_func("PB5", 1)
             if e.num == 3:
                 pass
 
@@ -535,19 +544,19 @@ class PBWin(tk.Frame):
                 self.cvs.lift("pl3n", "pl3f")
                 self.cvs.lift("pl4n", "pl4f")
             if e.keysym == "z":
-                self.sw_func("ss0", 0)
+                self.sw_func("SS0", 0)
             if e.keysym == "x":
-                self.sw_func("ss1", 0)
+                self.sw_func("SS1", 0)
             if e.keysym == "v":
-                self.sw_func("pb1", 2)
+                self.sw_func("PB1", 2)
             if e.keysym == "b":
-                self.sw_func("pb2", 2)
+                self.sw_func("PB2", 2)
             if e.keysym == "n":
-                self.sw_func("pb3", 2)
+                self.sw_func("PB3", 2)
             if e.keysym == "m":
-                self.sw_func("pb4", 2)
+                self.sw_func("PB4", 2)
             if e.keysym == "space":
-                self.sw_func("pb5", 2)
+                self.sw_func("PB5", 2)
             if e.keysym == "Right":
                 self.x += 2
             if e.keysym == "Left":
@@ -568,15 +577,15 @@ class PBWin(tk.Frame):
                 self.cvs.lift("pl3f", "pl3n")
                 self.cvs.lift("pl4f", "pl4n")
             if e.keysym == "v":
-                self.sw_func("pb1", 1)
+                self.sw_func("PB1", 1)
             if e.keysym == "b":
-                self.sw_func("pb2", 1)
+                self.sw_func("PB2", 1)
             if e.keysym == "n":
-                self.sw_func("pb3", 1)
+                self.sw_func("PB3", 1)
             if e.keysym == "m":
-                self.sw_func("pb4", 1)
+                self.sw_func("PB4", 1)
             if e.keysym == "space":
-                self.sw_func("pb5", 1)
+                self.sw_func("PB5", 1)
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
@@ -588,42 +597,42 @@ class PBWin(tk.Frame):
     def sw_func(self, tag, p):
         if p == 0:
             if tag in self.sw_on:  # ONからOFFへ
-                if tag == "ss0":
+                if tag == "SS0":
                     self.cvs.lift("ss0l", "ss0r")
-                elif tag == "ss1":
+                elif tag == "SS1":
                     self.cvs.lift("ss1l", "ss1r")
                 self.sw_on.remove(tag)
             else:                  # OFFからONへ
-                if tag == "ss0":
+                if tag == "SS0":
                     self.cvs.lift("ss0r", "ss0l")
-                elif tag == "ss1":
+                elif tag == "SS1":
                     self.cvs.lift("ss1r", "ss1l")
                 self.sw_on.append(tag)
         else:
             if p == 1:    # ONからOFFへ
-                if tag == "pb1":
+                if tag == "PB1":
                     self.cvs.lift("pb1f", "pb1n")
-                elif tag == "pb2":
+                elif tag == "PB2":
                     self.cvs.lift("pb2f", "pb2n")
-                elif tag == "pb3":
+                elif tag == "PB3":
                     self.cvs.lift("pb3f", "pb3n")
-                elif tag == "pb4":
+                elif tag == "PB4":
                     self.cvs.lift("pb4f", "pb4n")
-                elif tag == "pb5":
+                elif tag == "PB5":
                     self.cvs.lift("pb5f", "pb5n")
                 else:
                     return
                 self.sw_on.remove(tag)
             elif p == 2:  # OFFからONへ
-                if tag == "pb1":
+                if tag == "PB1":
                     self.cvs.lift("pb1n", "pb1f")
-                elif tag == "pb2":
+                elif tag == "PB2":
                     self.cvs.lift("pb2n", "pb2f")
-                elif tag == "pb3":
+                elif tag == "PB3":
                     self.cvs.lift("pb3n", "pb3f")
-                elif tag == "pb4":
+                elif tag == "PB4":
                     self.cvs.lift("pb4n", "pb4f")
-                elif tag == "pb5":
+                elif tag == "PB5":
                     self.cvs.lift("pb5n", "pb5f")
                 else:
                     return

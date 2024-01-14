@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/14&#10;割付表ウインドウ作成中">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/14&#10;命令入力欄の調整&#10;割付表ウインドウの完成&#10;メインウインドウに反映可能">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
     </list>
@@ -451,7 +451,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705229965962</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="1/14&#10;命令入力欄の調整&#10;割付表ウインドウの完成&#10;メインウインドウに反映可能">
+      <option name="closed" value="true" />
+      <created>1705236867589</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1705236867589</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -472,7 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="12/31&#10;押しボタンスイッチ追加" />
     <MESSAGE value="1/1&#10;製品追加&#10;マウスによる製品の位置調整可能" />
     <MESSAGE value="1/1&#10;マウスによる製品の位置調整改良&#10;製品の選択追加" />
     <MESSAGE value="1/3&#10;ラダープログラム改良&#10;タイマ命令完成" />
@@ -497,6 +504,7 @@
     <MESSAGE value="1/14&#10;画面表示関数の修正" />
     <MESSAGE value="1/14&#10;プログラム整理関数の修正&#10;実行関数の動作を確認" />
     <MESSAGE value="1/14&#10;割付表ウインドウ作成中" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/14&#10;割付表ウインドウ作成中" />
+    <MESSAGE value="1/14&#10;命令入力欄の調整&#10;割付表ウインドウの完成&#10;メインウインドウに反映可能" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/14&#10;命令入力欄の調整&#10;割付表ウインドウの完成&#10;メインウインドウに反映可能" />
   </component>
 </project>
