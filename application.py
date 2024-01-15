@@ -97,29 +97,30 @@ class MainWin(tk.Frame):
             self.run = 1    # 実行フラグON
             self.lad.org()  # プログラム整理
         if self.run == 1:   # 実行中の場合
-            print("run")
+            # print("run")
             sw_on = []      # 入力
             if self.pb_app is not None:                          # 実習盤が表示されている場合
                 for i in range(len(self.io_list)):               # 割付表の行数繰り返し
                     if self.io_list[i][1] in self.pb_app.sw_on:  # スイッチONリストにある場合
                         sw_on.append(self.io_list[i][0])         # 外部入力ONリストに追加
                         
-            self.lad.change("x", 0):        # スイッチの入力初期化
+            self.lad.change("x", 0)         # スイッチの入力初期化
             for i in range(len(sw_on)):     # スイッチONリスト数繰り返し
-                self.lad.change(sw_on, 1):  # スイッチON
+                self.lad.change(sw_on[i], 1)   # スイッチON
             
             self.lad.run()  # ラダープログラム実行
             
             if self.pb_app is not None:  # 実習盤が表示されていない場合
-                self.pb_app.out_on = []  # 出力リストリセット
+                out_on = []  # 出力リストリセット
                 for i in range(len(self.io_list)):  # 割付表の行数繰り返し
                     for j in range(len(self.lad.ladder)):  # ラダー図行数繰り返し
                         if self.io_list[i][2] == self.lad.ladder[j][-1].tag:  # ラダー図の変数が割付表にある場合
                             if self.lad.ladder[j][-1].opt == 1:  # ラダー図の変数がON出力の場合
-                                self.pb_app.out_on.append(self.io_list[j][3])  # 出力リストに追加
-                self.pb_app.out_func()  # 実習盤出力
+                                out_on.append(self.io_list[i][3])  # 出力リストに追加
+                                # print(out_on)
+                self.pb_app.out_func(out_on)  # 実習盤出力
                 
-            self.master.after(1000, self.sm_run)  # 1000ms後に実行
+            self.master.after(100, self.sm_run)  # 1000ms後に実行
         else:
             self.run = 0
             return
@@ -154,7 +155,8 @@ class MainWin(tk.Frame):
                             self.csr[1] = (e.y - 20) // 80
                             self.csr_move()
             elif e.num == 3:
-                print(self.io_list)
+                print(self.pb_mas)
+                print(self.pb_app)
 
         def m_release(e):
             if e.num == 1:
@@ -652,28 +654,28 @@ class PBWin(tk.Frame):
                 self.sw_on.append(tag)
 
     # 出力動作
-    def out_func(self):
-        if "PL1" in self.out_on:
+    def out_func(self, on):
+        if "PL1" in on:
             self.cvs.lift("pl1n", "pl1f")
         else:
             self.cvs.lift("pl1f", "pl1n")
-        if "PL2" in self.out_on:
+        if "PL2" in on:
             self.cvs.lift("pl2n", "pl2f")
         else:
             self.cvs.lift("pl2f", "pl2n")
-        if "PL3" in self.out_on:
+        if "PL3" in on:
             self.cvs.lift("pl3n", "pl3f")
         else:
             self.cvs.lift("pl3f", "pl3n")
-        if "PL4" in self.out_on:
+        if "PL4" in on:
             self.cvs.lift("pl4n", "pl4f")
         else:
             self.cvs.lift("pl4f", "pl4n")
-        if "RY1" in self.out_on:
+        if "RY1" in on:
             pass
         else:
             pass
-        if "RY2" in self.out_on:
+        if "RY2" in on:
             pass
         else:
             pass
