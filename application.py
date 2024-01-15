@@ -108,18 +108,18 @@ class MainWin(tk.Frame):
             for i in range(len(sw_on)):     # スイッチONリスト数繰り返し
                 self.lad.change(sw_on, 1):  # スイッチON
             
-            self.lad.run()
+            self.lad.run()  # ラダープログラム実行
             
-            if self.pb_app is not None:
-                self.pb_app.out_on = []
-                for i in range(len(self.io_list)):
-                    for j in range(len(self.lad.ladder)):
-                        if self.io_list[i][2] == self.lad.ladder[j][-1].tag:
-                            if self.lad.ladder[j][-1].opt == 1:
-                                self.pb_app.out_on.append(self.io_list[j][3])
-                self.pb_app.out_func()
+            if self.pb_app is not None:  # 実習盤が表示されていない場合
+                self.pb_app.out_on = []  # 出力リストリセット
+                for i in range(len(self.io_list)):  # 割付表の行数繰り返し
+                    for j in range(len(self.lad.ladder)):  # ラダー図行数繰り返し
+                        if self.io_list[i][2] == self.lad.ladder[j][-1].tag:  # ラダー図の変数が割付表にある場合
+                            if self.lad.ladder[j][-1].opt == 1:  # ラダー図の変数がON出力の場合
+                                self.pb_app.out_on.append(self.io_list[j][3])  # 出力リストに追加
+                self.pb_app.out_func()  # 実習盤出力
                 
-            self.master.after(1000, self.sm_run)
+            self.master.after(1000, self.sm_run)  # 1000ms後に実行
         else:
             self.run = 0
             return
