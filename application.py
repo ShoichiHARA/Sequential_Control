@@ -93,25 +93,32 @@ class MainWin(tk.Frame):
 
     # シミュレーション開始
     def sm_run(self):
-        if self.run == 0:                         # 呼び出された初回の場合
-            self.run = 1                          # 実行フラグON
-            self.lad.org()
-        if self.run == 1:
+        if self.run == 0:   # 呼び出された初回の場合
+            self.run = 1    # 実行フラグON
+            self.lad.org()  # プログラム整理
+        if self.run == 1:   # 実行中の場合
             print("run")
-            for i in range(len(self.io_list)):
-                if self.io_list[i][1] in self.pb_app.sw_on:
-                    self.lad.change(self.io_list[i][0], 1)
-                else:
-                    self.lad.change(self.io_list[i][0], 0)
+            sw_on = []      # 入力
+            if self.pb_app is not None:                          # 実習盤が表示されている場合
+                for i in range(len(self.io_list)):               # 割付表の行数繰り返し
+                    if self.io_list[i][1] in self.pb_app.sw_on:  # スイッチONリストにある場合
+                        sw_on.append(self.io_list[i][0])         # 外部入力ONリストに追加
+                        
+            self.lad.change("x", 0):        # スイッチの入力初期化
+            for i in range(len(sw_on)):     # スイッチONリスト数繰り返し
+                self.lad.change(sw_on, 1):  # スイッチON
+            
             self.lad.run()
-            self.pb_app.out_on = []
-            for i in range(len(self.io_list)):
-                for j in range(len(self.lad.ladder)):
-                    if self.io_list[i][2] == self.lad.ladder[j][-1].tag:
-                        if self.lad.ladder[j][-1].opt == 1:
-                            self.pb_app.out_on.append(self.io_list[j][3])
+            
             if self.pb_app is not None:
+                self.pb_app.out_on = []
+                for i in range(len(self.io_list)):
+                    for j in range(len(self.lad.ladder)):
+                        if self.io_list[i][2] == self.lad.ladder[j][-1].tag:
+                            if self.lad.ladder[j][-1].opt == 1:
+                                self.pb_app.out_on.append(self.io_list[j][3])
                 self.pb_app.out_func()
+                
             self.master.after(1000, self.sm_run)
         else:
             self.run = 0
