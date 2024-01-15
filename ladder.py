@@ -140,8 +140,9 @@ class Ladder:
     def change(self, tag, ext=None):
         for i in range(len(self.ladder)):  # 行数繰り返し
             for j in range(len(self.ladder[i])):  # 列数繰り返し
-                if tag == self.ladder[i][j].tag:  # 引数のタグを見つけた場合
-                    if None == ext:                                             # 設定値が指定されていない場合
+                # if tag == self.ladder[i][j].tag:  # 引数のタグを見つけた場合
+                if self.ladder[i][j].tag.startswitch(tag):  # 要素のタグが引数のタグで始まっている場合
+                    if ext is None:                                             # 設定値が指定されていない場合
                         self.ladder[i][j].ext = abs(self.ladder[i][j].ext - 1)  # 反転
                     else:                                                       # 設定値が指定されている場合
                         self.ladder[i][j].ext = ext                             # 変更
