@@ -109,8 +109,12 @@ class MainWin(tk.Frame):
                 self.lad.change(sw_on[i], 1)   # スイッチON
             
             self.lad.run()  # ラダープログラム実行
-            
-            if self.pb_app is not None:  # 実習盤が表示されていない場合
+
+            if self.pb_mas is None:               # 実習盤インスタンスがない場合
+                pass
+            elif not self.pb_mas.winfo_exists():  # 実習盤が表示されていない場合
+                pass
+            else:                                 # その他、実習盤に反映
                 out_on = []  # 出力リストリセット
                 for i in range(len(self.io_list)):  # 割付表の行数繰り返し
                     for j in range(len(self.lad.ladder)):  # ラダー図行数繰り返し
@@ -131,18 +135,30 @@ class MainWin(tk.Frame):
 
     # 命令入力ウインドウ表示
     def in_win(self):
-        self.in_mas = tk.Toplevel(self.master)
-        self.in_app = InWin(self.in_mas)
+        if self.in_mas is None:
+            self.in_mas = tk.Toplevel(self.master)
+            self.in_app = InWin(self.in_mas)
+        elif not self.in_mas.winfo_exists():
+            self.in_mas = tk.Toplevel(self.master)
+            self.in_app = InWin(self.in_mas)
 
     # 実習盤ウインドウ表示
     def pb_win(self):
-        self.pb_mas = tk.Toplevel(self.master)
-        self.pb_app = PBWin(self.pb_mas)
+        if self.pb_mas is None:
+            self.pb_mas = tk.Toplevel(self.master)
+            self.pb_app = PBWin(self.pb_mas)
+        elif not self.pb_mas.winfo_exists():
+            self.pb_mas = tk.Toplevel(self.master)
+            self.pb_app = PBWin(self.pb_mas)
 
     # 割付表ウインドウ表示
     def io_win(self):
-        self.io_mas = tk.Toplevel(self.master)
-        self.io_app = IOWin(self.io_mas, self.io_list)
+        if self.io_mas is None:
+            self.io_mas = tk.Toplevel(self.master)
+            self.io_app = IOWin(self.io_mas, self.io_list)
+        elif not self.io_mas.winfo_exists():
+            self.io_mas = tk.Toplevel(self.master)
+            self.io_app = IOWin(self.io_mas, self.io_list)
 
     # イベント
     def event(self):
