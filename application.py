@@ -27,6 +27,7 @@ class MainWin(tk.Frame):
         self.com_num = 0  # 命令数
         self.io_list = []
         self.run = 0
+        self.run_tag = []
         self.line = tk.PhotoImage(file="image/Line.png")
         self.make = tk.PhotoImage(file="image/Make.png")
         self.brek = tk.PhotoImage(file="image/Break.png")
@@ -97,6 +98,9 @@ class MainWin(tk.Frame):
             self.run = 1    # 実行フラグON
             self.lad.org()  # プログラム整理
         if self.run == 1:   # 実行中の場合
+            for i in range(len(self.run_tag)):  # 出力の記号の数繰り返し
+                self.cvs.delete(self.run_tag[i])  # 出力の記号削除
+            self.run_tag = []
             # print("run")
             sw_on = []      # 入力
             if self.pb_app is not None:                          # 実習盤が表示されている場合
@@ -123,6 +127,15 @@ class MainWin(tk.Frame):
                                 out_on.append(self.io_list[i][3])  # 出力リストに追加
                                 # print(out_on)
                 self.pb_app.out_func(out_on)  # 実習盤出力
+
+            for i in range(len(self.lad.ladder)):
+                for j in range(self.row):
+                    if self.lad.ladder[i][j].opt == 1:
+                        self.cvs.create_rectangle(
+                            j*100+90, i*80+55, j*100+110, i*80+65,
+                            tags="on"+str(i)+str(j), fill="blue"
+                        )
+                        self.run_tag.append("on"+str(i)+str(j))
                 
             self.master.after(100, self.sm_run)  # 1000ms後に実行
         else:
