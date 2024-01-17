@@ -30,6 +30,8 @@ class Ladder:
                     return 4  # 設定値が無効
             elif com[0] == "ln":
                 self.typ = "Ln"
+            elif com[0] == "bl":
+                self.typ = "Bl"
             elif com[0] == "ld":
                 self.typ = "M"
             elif com[0] == "ldi":
@@ -124,6 +126,7 @@ class Ladder:
                     f = 0                                       # フラグリセット
             if f == 1:                   # 行になにもない場合
                 self.ladder[i].remove()  # 行削除
+                continue                 # 行先頭へ
             i += 1                     # 次の行へ
         self.ladder[-1][0].brc = 0  # 最終号の先頭は分岐なし
 
