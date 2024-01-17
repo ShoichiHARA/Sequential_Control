@@ -108,7 +108,7 @@ class MainWin(tk.Frame):
                     if self.io_list[i][1] in self.pb_app.sw_on:  # スイッチONリストにある場合
                         sw_on.append(self.io_list[i][0])         # 外部入力ONリストに追加
                         
-            self.lad.change("x", 0)         # スイッチの入力初期化
+            self.lad.change("x", 0, 1)         # スイッチの入力初期化
             for i in range(len(sw_on)):     # スイッチONリスト数繰り返し
                 self.lad.change(sw_on[i], 1)   # スイッチON
             
@@ -144,6 +144,9 @@ class MainWin(tk.Frame):
 
     # シミュレーション終了
     def sm_stop(self):
+        for i in range(len(self.run_tag)):
+            self.cvs.delete(self.run_tag[i])
+        self.run_tag = []
         self.run = 9
 
     # 命令入力ウインドウ表示
@@ -213,8 +216,9 @@ class MainWin(tk.Frame):
                     self.com_cn()  # 命令入力取消
                 else:
                     self.exit()  # プログラム終了
-            if e.keysym == "Up":
-                pass
+            if e.keysym == "space":
+                if self.run == 1:
+                    self.sm_run()
             if e.keysym in ["Up", "Down", "Left", "Right"]:
                 if self.com_frm is None:
                     self.csr_move(e.keysym)

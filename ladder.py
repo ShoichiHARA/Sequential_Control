@@ -137,15 +137,21 @@ class Ladder:
             self.ladder.append(self.row)      # 行を全体に追加
             self.row = []                     # 行を初期化
 
-    def change(self, tag, ext=None):
+    def change(self, tag, ext=None, fa=0):
         for i in range(len(self.ladder)):  # 行数繰り返し
             for j in range(len(self.ladder[i])):  # 列数繰り返し
-                # if tag == self.ladder[i][j].tag:  # 引数のタグを見つけた場合
-                if self.ladder[i][j].tag.startswith(tag):  # 要素のタグが引数のタグで始まっている場合
-                    if ext is None:                                             # 設定値が指定されていない場合
-                        self.ladder[i][j].ext = abs(self.ladder[i][j].ext - 1)  # 反転
-                    else:                                                       # 設定値が指定されている場合
-                        self.ladder[i][j].ext = ext                             # 変更
+                if fa == 0:                                                         # 完全一致で検索
+                    if tag == self.ladder[i][j].tag:                                # 引数のタグを見つけた場合
+                        if ext is None:
+                            self.ladder[i][j].ext = abs(self.ladder[i][j].ext - 1)  # 反転
+                        else:                                                       # 設定値が指定されている場合
+                            self.ladder[i][j].ext = ext                             # 変更
+                elif fa == 1:                                                       # 前方一致で検索
+                    if self.ladder[i][j].tag.startswith(tag):                       # 引数のタグで始まっている場合
+                        if ext is None:                                             # 設定値が指定されていない場合
+                            self.ladder[i][j].ext = abs(self.ladder[i][j].ext - 1)  # 反転
+                        else:                                                       # 設定値が指定されている場合
+                            self.ladder[i][j].ext = ext                             # 変更
 
     def clr_out(self):
         for i in range(len(self.ladder)):         # 行数繰り返し
