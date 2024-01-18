@@ -97,6 +97,7 @@ class MainWin(tk.Frame):
         if self.run == 0:   # 呼び出された初回の場合
             self.run = 1    # 実行フラグON
             self.lad.org()  # プログラム整理
+            self.com_dsp()  # プログラム表示
         if self.run == 1:   # 実行中の場合
             for i in range(len(self.run_tag)):  # 出力の記号の数繰り返し
                 self.cvs.delete(self.run_tag[i])  # 出力の記号削除

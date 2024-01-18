@@ -125,7 +125,7 @@ class Ladder:
                 if self.ladder[i][j].typ not in ["Bl", "En"]:   # 空白または改行以外の命令の場合
                     f = 0                                       # フラグリセット
             if f == 1:                   # 行になにもない場合
-                self.ladder[i].remove()  # 行削除
+                del self.ladder[i]       # 行削除
                 continue                 # 行先頭へ
             i += 1                     # 次の行へ
         self.ladder[-1][0].brc = 0  # 最終号の先頭は分岐なし
