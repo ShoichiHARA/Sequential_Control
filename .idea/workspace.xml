@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/18&#10;異なるスイッチでもONになるバグ解消&#10;実行終了時に動作表示を削除">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/18&#10;プログラム整理関数の修正">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/language.py" beforeDir="false" afterPath="$PROJECT_DIR$/language.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -498,7 +500,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705505134556</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="1/18&#10;プログラム整理関数の修正">
+      <option name="closed" value="true" />
+      <created>1705581081450</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1705581081450</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -519,7 +529,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/6&#10;パイロットランプ追加" />
     <MESSAGE value="1/6&#10;スイッチ動作を関数化&#10;マウスでスイッチの動作を可能" />
     <MESSAGE value="1/6&#10;ラダー図記号の作成" />
     <MESSAGE value="1/6&#10;カーソルの作成" />
@@ -544,6 +553,7 @@
     <MESSAGE value="1/16&#10;細かな修正と動作確認&#10;実行中に閉じると、描画するものがないエラー発生" />
     <MESSAGE value="1/17&#10;実行中の動作をプログラム上に表示&#10;異なるスイッチでもONになるバグ発生" />
     <MESSAGE value="1/18&#10;異なるスイッチでもONになるバグ解消&#10;実行終了時に動作表示を削除" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/18&#10;異なるスイッチでもONになるバグ解消&#10;実行終了時に動作表示を削除" />
+    <MESSAGE value="1/18&#10;プログラム整理関数の修正" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/18&#10;プログラム整理関数の修正" />
   </component>
 </project>

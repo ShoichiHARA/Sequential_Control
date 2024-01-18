@@ -64,6 +64,10 @@ class MainWin(tk.Frame):
         # メニューバー
         self.master.configure(menu=self.bar)                      # メニューバー追加
         self.bar.add_cascade(label=lg.fl, menu=self.file)         # ファイルメニュー追加
+        self.file.add_command(label=lg.op, command=self.open)     # 開く
+        self.file.add_separator()                                 # 境界線
+        self.file.add_command(label=lg.sv, command=self.save)     # 上書き保存
+        self.file.add_separator()                                 # 境界線
         self.file.add_command(label=lg.st)                        # 設定
         self.file.add_separator()                                 # 境界線
         self.file.add_command(label=lg.ex, command=self.exit)     # 終了
@@ -87,6 +91,29 @@ class MainWin(tk.Frame):
             0, 0, 100, 80, tags="csr", outline="blue", width=3
         )
         self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
+
+    # 開く
+    def open(self):
+        f = open("test.sqe", "r", newline="")
+        self.lad.ladder = f.read()
+        f.close()
+        self.com_dsp()
+
+    # 上書き保存
+    def save(self):
+        f = open("test.txt", "w", newline="")
+        for i in range(self.lad.ladder):
+            for j in range(self.row):
+                com = [
+                    str(j), str(i),
+                    self.lad.ladder[i][j].typ,
+                    str(self.lad.ladder[i][j].brc),
+                    self.lad.ladder[i][j].tag,
+                    str(self.lad.ladder[i][j].set),
+                ]
+                f.writelines(com)
+
+        f.close()
 
     # 終了
     def exit(self):
