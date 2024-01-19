@@ -68,6 +68,7 @@ class MainWin(tk.Frame):
         self.file.add_separator()                                 # 境界線
         self.file.add_command(label=lg.sv, command=self.save)     # 上書き保存
         self.file.add_separator()                                 # 境界線
+        self.file.add_command(label=lg.sa)                        # 名前を付けて保存
         self.file.add_command(label=lg.st)                        # 設定
         self.file.add_separator()                                 # 境界線
         self.file.add_command(label=lg.ex, command=self.exit)     # 終了
@@ -95,7 +96,7 @@ class MainWin(tk.Frame):
     # 開く
     def open(self):
         f = open("test.sqe", "r", newline="")
-        self.lad.ladder = f.read()
+        print(f.read())
         f.close()
         self.com_dsp()
 
@@ -286,13 +287,14 @@ class MainWin(tk.Frame):
         self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
 
     # 命令入力
-    def com_input(self):
+    def com_input(self, a=""):
         self.com_frm = tk.Frame(  # 入力フレーム追加
             self.cvs, width=300, height=120,
             relief=tk.RIDGE, bd=2
         )
         ti_l = tk.Label(self.com_frm, text=lg.ic)  # テキスト追加
         self.com_ent = tk.Entry(self.com_frm, font=("", 14), width=27)  # 入力欄追加
+        self.com_ent.insert(a)                                          # 押したキー入力
         ok_b = tk.Button(self.com_frm, text=lg.ok, width=8, command=self.com_ok)  # 決定ボタン追加
         cn_b = tk.Button(self.com_frm, text=lg.cn, width=8, command=self.com_cn)  # 取消ボタン追加
         ti_l.place(x=10, y=10)
@@ -341,7 +343,7 @@ class MainWin(tk.Frame):
         self.com_frm = None
 
     # 命令表示
-    def com_dsp(self):
+    def com_dsp(self, y=0):
         self.cvs.delete("all")  # キャンバス全削除
         for i in range(self.row):                  # 列数繰り返し
             for j in range(len(self.lad.ladder)):  # 行数繰り返し
@@ -359,7 +361,7 @@ class MainWin(tk.Frame):
                     com_i = self.base
                 else:
                     com_i = None
-                com_d = self.cvs.create_image(i*100+100, j*80+60, image=com_i)
+                com_d = self.cvs.create_image(i*100+100, j*80+60+y, image=com_i)
                 self.cvs.lower(com_d)
                 if self.lad.ladder[j][i].brc == 1:
                     self.cvs.create_line(
