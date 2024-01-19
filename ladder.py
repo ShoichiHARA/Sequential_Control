@@ -100,35 +100,52 @@ class Ladder:
                 else:                          # 前回出力OFFかつセット命令OFFの場合
                     self.opt = 0               # 出力OFF
 
-    def add_txt(self, xy, txt):
+    def jud_txt(self, txt):
+        pass
+
+    def add_pls(self, xy):
         while xy[1] >= len(self.ladder):                    # 指定した行があるまで繰り返し
             self.ladder.append([])                          # 行追加
             for i in range(self.rnum-1):                    # 最終列手前まで繰り返し
                 self.ladder[-1].append(self.Comp("Bl", 0))  # 空白命令追加
             self.ladder[-1].append(self.Comp("En", 0))      # 改行命令追加
+
+    def add_txt(self, xy, txt):
+        self.add_pls(xy)  # 命令挿入空間作成
         if txt == "ins c":  # 行挿入の場合
             pass
         elif txt == "ins r":  # 列挿入の場合
             pass
-        else:                                             # その他命令の場合
-            err = self.ladder[xy[1]][xy[0]].dec(txt)      # 文字列から要素を判定
-            if err != 0:                                  # エラーの場合
-                return err                                # 戻り値エラー種類
+        else:                                         # その他命令の場合
+            err = self.ladder[xy[1]][xy[0]].dec(txt)  # 文字列から要素を判定
+            if err != 0:                              # エラーの場合
+                return err                            # 戻り値エラー種類
         return 0
+
+    def add_com(self, xy, brc=None, typ=None, tag=None, set=None):
+        self.add_pls(xy)                         # 命令挿入空間作成
+        if brc is not None:                      # 分岐が設定されている場合
+            self.ladder[xy[1]][xy[0]].brc = brc  # 分岐設定
+        if typ is not None:                      # 種類が設定されている場合
+            self.ladder[xy[1]][xy[0]].typ = typ  # 種類設定
+        if tag is not None:                      # 名前が設定されている場合
+            self.ladder[xy[1]][xy[0]].tag = tag  # 名前設定
+        if set is not None:                      # 設定値が設定されている場合
+            self.ladder[xy[1]][xy[0]].set = set  # 設定値設定
 
     def org(self):
         i = 0
-        while i < len(self.ladder):  # 最終行まで繰り返し
-            f = 1  # 空白命令のフラグ
+        while i < len(self.ladder):    # 最終行まで繰り返し
+            f = 1                      # 空白命令のフラグ
             self.ladder[i][0].brc = 1  # 先頭の分岐
-            for j in range(self.rnum):  # 列数繰り返し
-                if self.ladder[i][j].typ not in ["Bl", "En"]:   # 空白または改行以外の命令の場合
-                    f = 0                                       # フラグリセット
-            if f == 1:                   # 行になにもない場合
-                del self.ladder[i]       # 行削除
-                continue                 # 行先頭へ
+            for j in range(self.rnum):                         # 列数繰り返し
+                if self.ladder[i][j].typ not in ["Bl", "En"]:  # 空白または改行以外の命令の場合
+                    f = 0                                      # フラグリセット
+            if f == 1:                 # 行になにもない場合
+                del self.ladder[i]     # 行削除
+                continue               # 行先頭へ
             i += 1                     # 次の行へ
-        self.ladder[-1][0].brc = 0  # 最終号の先頭は分岐なし
+        self.ladder[-1][0].brc = 0     # 最終号の先頭は分岐なし
 
     def add_row(self, typ, brc, tag="", set=0):
         self.row.append(self.Comp(typ, brc))  # 行に追加
