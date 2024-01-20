@@ -97,24 +97,37 @@ class MainWin(tk.Frame):
     # 開く
     def open(self):
         f = open("test.sqe", "r", newline="")
-        s = ""  # 1行の文字列
-        while s != "end":
+        while True:
             s = repr(f.readline())[1:-1]
-            if s != "end":
-                c = s.split()
-                for i in range(self.row):
-                    xy = [int(c[6*i]), int(c[6*i+1])]
-                    brc = int(c[6*i+3])
-                    typ = c[6*i+2]
-                    tag = c[6*i+4]
-                    set = int(c[6*5+5])
-                    self.lad.add_com(xy, brc, typ, tag, set)
-                print(s)
+            print(s)
+            if s == "end\\n":
+                break
+            c = s.split()
+            for i in range(self.row):
+                xy = [int(c[6*i]), int(c[6*i+1])]
+                brc = int(c[6*i+3])
+                typ = c[6*i+2]
+                tag = c[6*i+4]
+                set = int(c[6*5+5])
+                self.lad.add_com(xy, brc, typ, tag, set)
+        i = 0
+        while True:
+            s = repr(f.readline())[1:-1]
+            print(s)
+            if s == "end":
+                break
+            c = s.split()
+            for j in range(4):
+                print("c[j] = " + c[j])
+                if c[j] == "none":
+                    self.io_list[i][j] = ""
+                else:
+                    self.io_list[i][j] = c[j]
+            i += 1
+        print(self.io_list)
 
-        # print(c)
         f.close()
         self.com_dsp(0)
-        print(self.lad.ladder[2][6].tag)
 
     # 上書き保存
     def save(self):
@@ -127,6 +140,14 @@ class MainWin(tk.Frame):
                 f.write(str(self.lad.ladder[i][j].brc) + " ")
                 f.write(self.lad.ladder[i][j].tag + " ")
                 f.write(str(self.lad.ladder[i][j].set) + " ")
+            f.write("\n")
+        f.writelines("end\n")
+        for i in range(len(self.io_list)):
+            for j in range(4):
+                if self.io_list[i][j] == "":
+                    f.write("none ")
+                else:
+                    f.write(self.io_list[i][j] + " ")
             f.write("\n")
         f.writelines("end")
 
@@ -368,7 +389,6 @@ class MainWin(tk.Frame):
             for j in range(self.row):                  # 列数繰り返し
                 if self.lad.ladder[i][j].typ == "Ln":
                     com_i = self.line
-                    print("Line")
                 elif self.lad.ladder[i][j].typ == "M":
                     com_i = self.make
                 elif self.lad.ladder[i][j].typ == "B":
@@ -790,7 +810,7 @@ class IOWin(tk.Frame):
 
         # 表形状の入力欄
         x = [15, 100, 215, 300]
-        print(len(self.io_st))
+        print(self.io_st)
         for i in range(len(self.io_st)):
             row = []
             for j in range(4):
@@ -808,13 +828,13 @@ class IOWin(tk.Frame):
         cn_b.place(x=315, y=560)
 
         # テスト入力
-        self.io_list[2][0].delete(0, 8)
-        self.io_list[2][0].insert(0, "x0")
-        self.io_list[3][0].delete(0, 8)
-        self.io_list[3][0].insert(0, "x1")
-        self.io_list[2][2].delete(0, 8)
-        self.io_list[2][2].insert(0, "y0")
-        self.dev_type("pb")
+        # self.io_list[2][0].delete(0, 8)
+        # self.io_list[2][0].insert(0, "x0")
+        # self.io_list[3][0].delete(0, 8)
+        # self.io_list[3][0].insert(0, "x1")
+        # self.io_list[2][2].delete(0, 8)
+        # self.io_list[2][2].insert(0, "y0")
+        # self.dev_type("pb")
 
     # イベント
     def event(self):

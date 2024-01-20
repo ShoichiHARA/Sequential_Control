@@ -2,3 +2,14 @@
 0 1 M 0 m0 0 1 1 Bl 0 none 0 2 1 Bl 0 none 0 3 1 Bl 0 none 0 4 1 Bl 0 none 0 5 1 Bl 0 none 0 6 1 En 0 none 0 
 0 2 M 0 m0 0 1 2 Ln 0 none 0 2 2 Ln 0 none 0 3 2 Ln 0 none 0 4 2 Ln 0 none 0 5 2 Ln 0 none 0 6 2 R 0 y0 0 
 end
+none LS1 none RY1 
+none LS2 none RY2 
+x0 PB1 y0 PL1 
+x1 PB2 none PL2 
+none PB3 none PL3 
+none PB4 none PL4 
+none PB5 none none 
+none SS0 none none 
+none SS1 none none 
+none none none none 
+end

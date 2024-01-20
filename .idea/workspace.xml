@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/19&#10;ファイル出力未完成">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.sqe" beforeDir="false" afterPath="$PROJECT_DIR$/test.sqe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -518,7 +516,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705590252911</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定">
+      <option name="closed" value="true" />
+      <created>1705749762225</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1705749762225</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -539,7 +545,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/6&#10;ラダー図記号の作成" />
     <MESSAGE value="1/6&#10;カーソルの作成" />
     <MESSAGE value="1/7&#10;カーソル移動を関数化" />
     <MESSAGE value="1/7&#10;命令入力ウインドウの作成&#10;命令種類の選択肢完成" />
@@ -564,6 +569,7 @@
     <MESSAGE value="1/18&#10;異なるスイッチでもONになるバグ解消&#10;実行終了時に動作表示を削除" />
     <MESSAGE value="1/18&#10;プログラム整理関数の修正" />
     <MESSAGE value="1/19&#10;ファイル出力未完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/19&#10;ファイル出力未完成" />
+    <MESSAGE value="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定" />
   </component>
 </project>
