@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.sqe" beforeDir="false" afterPath="$PROJECT_DIR$/test.sqe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -524,7 +523,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705749762225</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成">
+      <option name="closed" value="true" />
+      <created>1705762493378</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1705762493378</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -545,7 +552,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/6&#10;カーソルの作成" />
     <MESSAGE value="1/7&#10;カーソル移動を関数化" />
     <MESSAGE value="1/7&#10;命令入力ウインドウの作成&#10;命令種類の選択肢完成" />
     <MESSAGE value="1/8&#10;命令入力ウインドウを簡略化&#10;コマンドのみで入力を目指す" />
@@ -570,6 +576,7 @@
     <MESSAGE value="1/18&#10;プログラム整理関数の修正" />
     <MESSAGE value="1/19&#10;ファイル出力未完成" />
     <MESSAGE value="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定" />
+    <MESSAGE value="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成" />
   </component>
 </project>

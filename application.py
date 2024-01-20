@@ -19,6 +19,8 @@ class MainWin(tk.Frame):
         self.cvs = tk.Canvas(self.master, bg="white")  # キャンバス
         self.row = 7  # 列数
         self.csr = [0, 0]  # 画面上カーソル座標
+        self.scr = [50, 50]  # スクロールバー座標(上座標, 長さ)
+        self.scr_d = 0     # スクロールバー移動用変数
         self.keep = []
         self.lad = ld.Ladder(self.row)
         self.com_frm = None  # 命令入力フレーム
@@ -93,6 +95,12 @@ class MainWin(tk.Frame):
             0, 0, 100, 80, tags="csr", outline="blue", width=3
         )
         self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
+
+        # スクロールバー
+        self.cvs.create_rectangle(
+            0, 0, 10, 100, tags="scr", fill="gray", width=0
+        )
+        self.cvs.coords("scr", 780, self.scr[0], 800, self.scr[0]+self.scr[1])
 
     # 開く
     def open(self):
@@ -251,14 +259,19 @@ class MainWin(tk.Frame):
                         if 20 < e.y < 580:
                             self.csr[0] = (e.x - 50) // 100
                             self.csr[1] = (e.y - 20) // 80
-                            self.csr_move()
+                            self.csr_move()  # カーソル移動
+                    if 780 < e.x < 800:
+                        if self.scr[0] < e.y < self.scr[0]+self.scr[1]:
+                            self.keep.append("scr")
+                            self.scr_d = self.scr[0] - e.y
             elif e.num == 3:
                 print(self.pb_mas)
                 print(self.pb_app)
 
         def m_release(e):
             if e.num == 1:
-                pass
+                if "scr" in self.keep:
+                    self.keep.remove("scr")
 
         def mm_press(e):
             if e.num == 1:  # マウス左ダブルクリック
@@ -266,6 +279,12 @@ class MainWin(tk.Frame):
                     if 50 < e.x < 750:
                         if 20 < e.y < 580:
                             self.com_input()  # 命令入力
+
+        def m_move(e):
+            if "scr" in self.keep:
+                if 0 < e.y+self.scr_d < 500:
+                    self.scr[0] = e.y + self.scr_d
+                    self.scr_move()
 
         def k_press(e):
             if e.keysym in self.keep:
@@ -299,6 +318,7 @@ class MainWin(tk.Frame):
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
         self.master.bind("<Double-ButtonPress>", mm_press)
+        self.master.bind("<Motion>", m_move)
         self.master.bind("<KeyPress>", k_press)
         self.master.bind("<KeyRelease>", k_release)
 
@@ -325,6 +345,10 @@ class MainWin(tk.Frame):
             if self.csr[1] > 0:
                 self.csr[1] -= 1
         self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
+
+    # スクロールバー移動
+    def scr_move(self):
+        self.cvs.coords("scr", 780, self.scr[0], 800, self.scr[0]+self.scr[1])
 
     # 命令入力
     def com_input(self, a=""):
