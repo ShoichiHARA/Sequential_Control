@@ -69,6 +69,7 @@ class MainWin(tk.Frame):
         self.file.add_command(label=lg.sv, command=self.save)     # 上書き保存
         self.file.add_separator()                                 # 境界線
         self.file.add_command(label=lg.sa)                        # 名前を付けて保存
+        self.file.add_separator()                                 # 境界線
         self.file.add_command(label=lg.st)                        # 設定
         self.file.add_separator()                                 # 境界線
         self.file.add_command(label=lg.ex, command=self.exit)     # 終了
@@ -96,23 +97,38 @@ class MainWin(tk.Frame):
     # 開く
     def open(self):
         f = open("test.sqe", "r", newline="")
-        print(f.read())
+        s = ""  # 1行の文字列
+        while s != "end":
+            s = repr(f.readline())[1:-1]
+            if s != "end":
+                c = s.split()
+                for i in range(self.row):
+                    xy = [int(c[6*i]), int(c[6*i+1])]
+                    brc = int(c[6*i+3])
+                    typ = c[6*i+2]
+                    tag = c[6*i+4]
+                    set = int(c[6*5+5])
+                    self.lad.add_com(xy, brc, typ, tag, set)
+                print(s)
+
+        # print(c)
         f.close()
-        self.com_dsp()
+        self.com_dsp(0)
+        print(self.lad.ladder[2][6].tag)
 
     # 上書き保存
     def save(self):
-        f = open("test.txt", "w", newline="")
-        for i in range(self.lad.ladder):
+        f = open("test.sqe", "w", newline="")
+        for i in range(len(self.lad.ladder)):
             for j in range(self.row):
-                com = [
-                    str(j), str(i),
-                    self.lad.ladder[i][j].typ,
-                    str(self.lad.ladder[i][j].brc),
-                    self.lad.ladder[i][j].tag,
-                    str(self.lad.ladder[i][j].set),
-                ]
-                f.writelines(com)
+                f.write(str(j) + " ")
+                f.write(str(i) + " ")
+                f.write(self.lad.ladder[i][j].typ + " ")
+                f.write(str(self.lad.ladder[i][j].brc) + " ")
+                f.write(self.lad.ladder[i][j].tag + " ")
+                f.write(str(self.lad.ladder[i][j].set) + " ")
+            f.write("\n")
+        f.writelines("end")
 
         f.close()
 
@@ -235,6 +251,9 @@ class MainWin(tk.Frame):
                 return
             self.keep.append(e.keysym)
             # print(e.keysym)
+            if e.keysym in ["b", "e", "l", "o", "r", "s", ]:
+                if self.com_frm is None:
+                    self.com_input(e.keysym)
             if e.keysym == "Return":
                 if self.com_frm is not None:
                     self.com_ok()  # 命令入力決定
@@ -294,7 +313,7 @@ class MainWin(tk.Frame):
         )
         ti_l = tk.Label(self.com_frm, text=lg.ic)  # テキスト追加
         self.com_ent = tk.Entry(self.com_frm, font=("", 14), width=27)  # 入力欄追加
-        self.com_ent.insert(a)                                          # 押したキー入力
+        self.com_ent.insert(0, a)                                       # 押したキー入力
         ok_b = tk.Button(self.com_frm, text=lg.ok, width=8, command=self.com_ok)  # 決定ボタン追加
         cn_b = tk.Button(self.com_frm, text=lg.cn, width=8, command=self.com_cn)  # 取消ボタン追加
         ti_l.place(x=10, y=10)
@@ -345,37 +364,39 @@ class MainWin(tk.Frame):
     # 命令表示
     def com_dsp(self, y=0):
         self.cvs.delete("all")  # キャンバス全削除
-        for i in range(self.row):                  # 列数繰り返し
-            for j in range(len(self.lad.ladder)):  # 行数繰り返し
-                if self.lad.ladder[j][i].typ == "Ln":
+        for i in range(len(self.lad.ladder)):          # 行数繰り返し
+            for j in range(self.row):                  # 列数繰り返し
+                if self.lad.ladder[i][j].typ == "Ln":
                     com_i = self.line
-                elif self.lad.ladder[j][i].typ == "M":
+                    print("Line")
+                elif self.lad.ladder[i][j].typ == "M":
                     com_i = self.make
-                elif self.lad.ladder[j][i].typ == "B":
+                elif self.lad.ladder[i][j].typ == "B":
                     com_i = self.brek
-                elif self.lad.ladder[j][i].typ == "P":
+                elif self.lad.ladder[i][j].typ == "P":
                     com_i = self.plse
-                elif self.lad.ladder[j][i].typ == "F":
+                elif self.lad.ladder[i][j].typ == "F":
                     com_i = self.fall
-                elif self.lad.ladder[j][i].typ in ["R", "T", "C"]:
+                elif self.lad.ladder[i][j].typ in ["R", "T", "C"]:
                     com_i = self.base
                 else:
                     com_i = None
-                com_d = self.cvs.create_image(i*100+100, j*80+60+y, image=com_i)
+                com_d = self.cvs.create_image(j*100+100, i*80+60+y, image=com_i)
                 self.cvs.lower(com_d)
-                if self.lad.ladder[j][i].brc == 1:
+                if self.lad.ladder[i][j].brc == 1:
                     self.cvs.create_line(
-                        i*100+50, j*80+59, i*100+50, j*80+142,
+                        j*100+50, i*80+59, j*100+50, i*80+142,
                         fill="black", width=3
                     )
-                if self.lad.ladder[j][i].typ in self.lad.in_list:
+                if self.lad.ladder[i][j].typ in self.lad.in_list:
+                    if self.lad.ladder[i][j].typ != "Ln":
+                        self.cvs.create_text(
+                            j*100+100, i*80+30,
+                            text=self.lad.ladder[i][j].tag, font=("", 12, "bold")
+                        )
+                elif self.lad.ladder[i][j].typ in ["R", "T", "C"]:
                     self.cvs.create_text(
-                        i*100+100, j*80+30,
-                        text=self.lad.ladder[j][i].tag, font=("", 12, "bold")
-                    )
-                elif self.lad.ladder[j][i].typ in ["R", "T", "C"]:
-                    self.cvs.create_text(
-                        i*100+70, j*80+60, text=self.lad.ladder[j][i].tag,
+                        j*100+70, i*80+60, text=self.lad.ladder[i][j].tag,
                         font=("", 12, "bold"), anchor=tk.W
                     )
         self.cvs.create_line(50, 20, 50, 580, fill="black", width=3)  # 左側母線

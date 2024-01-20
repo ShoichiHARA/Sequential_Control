@@ -1,0 +1,4 @@
+0 0 M 0 x0 0 1 0 B 1 x1 0 2 0 Ln 0 none 0 3 0 Ln 0 none 0 4 0 Ln 0 none 0 5 0 Ln 0 none 0 6 0 R 0 m0 0 
+0 1 M 0 m0 0 1 1 Bl 0 none 0 2 1 Bl 0 none 0 3 1 Bl 0 none 0 4 1 Bl 0 none 0 5 1 Bl 0 none 0 6 1 En 0 none 0 
+0 2 M 0 m0 0 1 2 Ln 0 none 0 2 2 Ln 0 none 0 3 2 Ln 0 none 0 4 2 Ln 0 none 0 5 2 Ln 0 none 0 6 2 R 0 y0 0 
+end

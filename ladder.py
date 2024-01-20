@@ -11,14 +11,14 @@ class Ladder:
 
     class Comp:
         def __init__(self, typ, brc):
-            self.typ = typ   # 命令タイプ
-            self.brc = brc   # 分岐
-            self.tag = ""    # 名前
-            self.set = 0     # 設定値
-            self.ext = 0     # 外部入力
-            self.opt = 0     # 出力
-            self.c = 0       # カウント現在値
-            self.lst = 0     # 前回値
+            self.typ = typ     # 命令タイプ
+            self.brc = brc     # 分岐
+            self.tag = "none"  # 名前
+            self.set = 0       # 設定値
+            self.ext = 0       # 外部入力
+            self.opt = 0       # 出力
+            self.c = 0         # カウント現在値
+            self.lst = 0       # 前回値
 
         def dec(self, st):
             com = st.split()
@@ -32,6 +32,8 @@ class Ladder:
                 self.typ = "Ln"
             elif com[0] == "bl":
                 self.typ = "Bl"
+            elif com[0] == "ent":
+                self.typ = "En"
             elif com[0] == "ld":
                 self.typ = "M"
             elif com[0] == "ldi":
