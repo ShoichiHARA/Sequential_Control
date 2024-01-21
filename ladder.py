@@ -4,10 +4,11 @@ class Ladder:
     out_list = ["R", "T", "C", "St"]  # 出力命令リスト(リセット命令以外)
     end_list = ["R", "T", "C", "St", "Rs", "En"]  # 改行命令リスト
 
-    def __init__(self, rnum=7):
+    def __init__(self, rnum=5):
         self.rnum = rnum
         self.row = []     # 1行のラダープログラム
         self.ladder = []  # 全体のラダープログラム
+        self.add_pls([0, 0])
 
     class Comp:
         def __init__(self, typ, brc):

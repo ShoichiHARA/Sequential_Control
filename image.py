@@ -166,47 +166,47 @@ def image(out):
     prod.putalpha(put)
 
     # 導線
-    line = Image.new(mode="RGB", size=(100, 80), color="white")
+    line = Image.new(mode="RGB", size=(80, 60), color="white")
     line_d = ImageDraw.Draw(line)
-    line_d.line(xy=[0, 40, 100, 40], fill="black", width=3)
+    line_d.line(xy=[0, 30, 80, 30], fill="black", width=2)
 
     # a接点
-    make = Image.new(mode="RGB", size=(100, 80), color="white")
+    make = Image.new(mode="RGB", size=(80, 60), color="white")
     make_d = ImageDraw.Draw(make)
-    make_d.line(xy=[40, 25, 40, 55], fill="black", width=3)
-    make_d.line(xy=[60, 25, 60, 55], fill="black", width=3)
-    make_d.line(xy=[0, 40, 40, 40], fill="black", width=3)
-    make_d.line(xy=[60, 40, 100, 40], fill="black", width=3)
+    make_d.line(xy=[30, 20, 30, 40], fill="black", width=2)
+    make_d.line(xy=[50, 20, 50, 40], fill="black", width=2)
+    make_d.line(xy=[0, 30, 30, 30], fill="black", width=2)
+    make_d.line(xy=[50, 30, 80, 30], fill="black", width=2)
 
     # b接点
     brek = make.copy()
     brek_d = ImageDraw.Draw(brek)
-    brek_d.line(xy=[70, 25, 30, 55], fill="black", width=3)
+    brek_d.line(xy=[50, 20, 30, 40], fill="black", width=2)
 
     # 立ち上がりパルス
     plse = make.copy()
     plse_d = ImageDraw.Draw(plse)
-    plse_d.line(xy=[50, 25, 50, 55], fill="black", width=3)
-    plse_d.line(xy=[45, 40, 50, 25, 55, 40], fill="black", width=3)
+    plse_d.line(xy=[40, 20, 40, 40], fill="black", width=2)
+    plse_d.line(xy=[35, 30, 40, 20, 45, 30], fill="black", width=2)
 
     # 立ち下がりパルス
     fall = make.copy()
     fall_d = ImageDraw.Draw(fall)
-    fall_d.line(xy=[50, 25, 50, 55], fill="black", width=3)
-    fall_d.line(xy=[45, 40, 50, 55, 55, 40], fill="black", width=3)
+    fall_d.line(xy=[40, 20, 40, 40], fill="black", width=2)
+    fall_d.line(xy=[35, 30, 40, 40, 45, 30], fill="black", width=2)
 
     # 基本出力
-    base = Image.new(mode="RGB", size=(100, 80), color="white")
+    base = Image.new(mode="RGB", size=(80, 60), color="white")
     base_d = ImageDraw.Draw(base)
-    base_d.arc(xy=[10, 10, 90, 70], start=152, end=208, fill="black", width=3)
-    base_d.arc(xy=[10, 10, 90, 70], start=332, end=28, fill="black", width=3)
-    base_d.line(xy=[0, 40, 10, 40], fill="black", width=3)
-    base_d.line(xy=[90, 40, 100, 40], fill="black", width=3)
+    base_d.arc(xy=[5, 5, 75, 55], start=152, end=208, fill="black", width=2)
+    base_d.arc(xy=[5, 5, 75, 55], start=332, end=28, fill="black", width=2)
+    base_d.line(xy=[0, 30, 5, 30], fill="black", width=2)
+    base_d.line(xy=[75, 30, 80, 30], fill="black", width=2)
 
     # 応用出力
     # aply = Image.new(mode="RGB", size=(100, 80), color="white")
 
-    line.show()
+    base.show()
 
     if out == 1:
         ssr.save("image/SS_Right.png")

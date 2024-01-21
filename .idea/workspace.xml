@@ -4,9 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/21&#10;スクロールバー作成&#10;スクロールバーで表示範囲の変更、&#10;プログラムの大きさで長さの変更を目指す">
+      <change afterPath="$PROJECT_DIR$/image1/Base_Out.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/Break.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/Falling.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/Line.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/Make.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB1_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB1_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB2_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB2_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB3_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB3_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB4_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB4_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB5_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PB5_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PL1_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PL1_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PL2_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PL2_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PL3_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PL3_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PL4_OFF.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/PL4_ON.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/Pallet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/Product.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/Pulse.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/SS_Left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/SS_Right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/ss_L.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/image1/ss_R.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image.py" beforeDir="false" afterPath="$PROJECT_DIR$/image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/Base_Out.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/Base_Out.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/Break.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/Break.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/Falling.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/Falling.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/Line.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/Line.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/Make.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/Make.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/image/Pulse.png" beforeDir="false" afterPath="$PROJECT_DIR$/image/Pulse.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.sqe" beforeDir="false" afterPath="$PROJECT_DIR$/test.sqe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,10 +106,15 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/shoic/PycharmProjects/Sequential_Control/application.py",
+    "last_opened_file_path": "C:/Users/shoic/PycharmProjects/Sequential_Control",
     "settings.editor.selected.configurable": "advanced.settings"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\shoic\PycharmProjects\Sequential_Control" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="application1" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Sequential_Control" />
@@ -138,14 +182,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00001" summary="12/23&#10;シーケンス制御実習教材開発開始">
-      <option name="closed" value="true" />
-      <created>1703316443151</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1703316443151</updated>
     </task>
     <task id="LOCAL-00002" summary="12/23&#10;デスクトップアプリ試作">
       <option name="closed" value="true" />
@@ -531,7 +567,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705762493378</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="1/21&#10;スクロールバー作成&#10;スクロールバーで表示範囲の変更、&#10;プログラムの大きさで長さの変更を目指す">
+      <option name="closed" value="true" />
+      <created>1705766449549</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1705766449549</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -552,7 +596,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/7&#10;カーソル移動を関数化" />
     <MESSAGE value="1/7&#10;命令入力ウインドウの作成&#10;命令種類の選択肢完成" />
     <MESSAGE value="1/8&#10;命令入力ウインドウを簡略化&#10;コマンドのみで入力を目指す" />
     <MESSAGE value="1/8&#10;命令入力ウインドウをクラス化&#10;EnterやEscapeでも動作可能" />
@@ -577,6 +620,7 @@
     <MESSAGE value="1/19&#10;ファイル出力未完成" />
     <MESSAGE value="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定" />
     <MESSAGE value="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成" />
-    <option name="LAST_COMMIT_MESSAGE" value="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成" />
+    <MESSAGE value="1/21&#10;スクロールバー作成&#10;スクロールバーで表示範囲の変更、&#10;プログラムの大きさで長さの変更を目指す" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/21&#10;スクロールバー作成&#10;スクロールバーで表示範囲の変更、&#10;プログラムの大きさで長さの変更を目指す" />
   </component>
 </project>

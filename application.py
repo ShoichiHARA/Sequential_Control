@@ -17,7 +17,7 @@ class MainWin(tk.Frame):
         self.view = tk.Menu(self.bar, tearoff=0)  # 表示メニュー
         self.help = tk.Menu(self.bar, tearoff=0)  # ヘルプメニュー
         self.cvs = tk.Canvas(self.master, bg="white")  # キャンバス
-        self.row = 7  # 列数
+        self.row = 9  # 列数
         self.csr = [0, 0]  # 画面上カーソル座標
         self.scr = [50, 50]  # スクロールバー座標(上座標, 長さ)
         self.scr_d = 0     # スクロールバー移動用変数
@@ -87,14 +87,14 @@ class MainWin(tk.Frame):
 
         # キャンバスの設定
         self.cvs.pack(fill=tk.BOTH, expand=True)                        # キャンバス配置
-        self.cvs.create_line(50, 20, 50, 580, fill="black", width=3)    # 左側母線
-        self.cvs.create_line(750, 20, 750, 580, fill="black", width=3)  # 右側母線
+        self.cvs.create_line(40, 20, 40, 580, fill="black", width=2)    # 左側母線
+        self.cvs.create_line(760, 20, 760, 580, fill="black", width=2)  # 右側母線
 
         # カーソル
         self.cvs.create_rectangle(
-            0, 0, 100, 80, tags="csr", outline="blue", width=3
+            0, 0, 80, 60, tags="csr", outline="blue", width=3
         )
-        self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
+        self.cvs.moveto("csr", 38, 20)
 
         # スクロールバー
         self.cvs.create_rectangle(
@@ -107,7 +107,7 @@ class MainWin(tk.Frame):
         f = open("test.sqe", "r", newline="")
         while True:
             s = repr(f.readline())[1:-1]
-            print(s)
+            # print(s)
             if s == "end\\n":
                 break
             c = s.split()
@@ -121,19 +121,18 @@ class MainWin(tk.Frame):
         i = 0
         while True:
             s = repr(f.readline())[1:-1]
-            print(s)
+            # print(s)
             if s == "end":
                 break
             c = s.split()
             for j in range(4):
-                print("c[j] = " + c[j])
+                # print("c[j] = " + c[j])
                 if c[j] == "none":
                     self.io_list[i][j] = ""
                 else:
                     self.io_list[i][j] = c[j]
             i += 1
-        print(self.io_list)
-
+        # print(self.io_list)
         f.close()
         self.com_dsp(0)
 
@@ -206,12 +205,12 @@ class MainWin(tk.Frame):
                 for j in range(self.row):
                     if self.lad.ladder[i][j].opt == 1:
                         self.cvs.create_rectangle(
-                            j*100+90, i*80+55, j*100+110, i*80+65,
-                            tags="on"+str(i)+str(j), fill="blue"
+                            j*80+71, i*60+40, j*80+90, i*60+61,
+                            tags="on"+str(i)+str(j), fill="blue", width=0
                         )
                         self.run_tag.append("on"+str(i)+str(j))
                 
-            self.master.after(100, self.sm_run)  # 1000ms後に実行
+            self.master.after(10, self.sm_run)  # 1000ms後に実行
         else:
             self.run = 0
             return
@@ -255,10 +254,10 @@ class MainWin(tk.Frame):
         def m_press(e):
             if e.num == 1:
                 if self.com_frm is None:
-                    if 50 < e.x < 750:
-                        if 20 < e.y < 580:
-                            self.csr[0] = (e.x - 50) // 100
-                            self.csr[1] = (e.y - 20) // 80
+                    if 40 < e.x < 760:
+                        if 20 < e.y < 560:
+                            self.csr[0] = (e.x - 38) // 80
+                            self.csr[1] = (e.y - 20) // 60
                             self.csr_move()  # カーソル移動
                     if 780 < e.x < 800:
                         if self.scr[0] < e.y < self.scr[0]+self.scr[1]:
@@ -307,6 +306,16 @@ class MainWin(tk.Frame):
             if e.keysym == "space":
                 if self.run == 1:
                     self.sm_run()
+            if e.keysym == "BackSpace":
+                if self.com_frm is not None:
+                    pass
+                else:
+                    self.csr_move("Left")
+                    if self.csr[1] < self.row-1:
+                        self.lad.add_txt(self.csr, "bl")
+                    else:
+                        self.lad.add_txt(self.csr, "ent")
+                    self.com_dsp(0)
             if e.keysym in ["Up", "Down", "Left", "Right"]:
                 if self.com_frm is None:
                     self.csr_move(e.keysym)
@@ -325,10 +334,10 @@ class MainWin(tk.Frame):
     # カーソル移動
     def csr_move(self, d=""):
         if d == "Right":
-            if self.csr[0] < 6:
+            if self.csr[0] < self.row-1:
                 self.csr[0] += 1
             else:
-                if self.csr[1] < 6:
+                if self.csr[1] < 8:
                     self.csr[0] = 0
                     self.csr[1] += 1
         elif d == "Left":
@@ -336,18 +345,19 @@ class MainWin(tk.Frame):
                 self.csr[0] -= 1
             else:
                 if self.csr[1] > 0:
-                    self.csr[0] = 6
+                    self.csr[0] = self.row - 1
                     self.csr[1] -= 1
         elif d == "Down":
-            if self.csr[1] < 6:
+            if self.csr[1] < 8:
                 self.csr[1] += 1
         elif d == "Up":
             if self.csr[1] > 0:
                 self.csr[1] -= 1
-        self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
+        self.cvs.moveto("csr", self.csr[0]*80+38, self.csr[1]*60+20)
 
     # スクロールバー移動
     def scr_move(self):
+
         self.cvs.coords("scr", 780, self.scr[0], 800, self.scr[0]+self.scr[1])
 
     # 命令入力
@@ -425,30 +435,30 @@ class MainWin(tk.Frame):
                     com_i = self.base
                 else:
                     com_i = None
-                com_d = self.cvs.create_image(j*100+100, i*80+60+y, image=com_i)
+                com_d = self.cvs.create_image(j*80+80, i*60+50+y, image=com_i)
                 self.cvs.lower(com_d)
                 if self.lad.ladder[i][j].brc == 1:
                     self.cvs.create_line(
-                        j*100+50, i*80+59, j*100+50, i*80+142,
-                        fill="black", width=3
+                        j*80+40, i*50+50, j*80+40, i*60+112,
+                        fill="black", width=2
                     )
                 if self.lad.ladder[i][j].typ in self.lad.in_list:
                     if self.lad.ladder[i][j].typ != "Ln":
                         self.cvs.create_text(
-                            j*100+100, i*80+30,
+                            j*80+80, i*60+30,
                             text=self.lad.ladder[i][j].tag, font=("", 12, "bold")
                         )
                 elif self.lad.ladder[i][j].typ in ["R", "T", "C"]:
                     self.cvs.create_text(
-                        j*100+70, i*80+60, text=self.lad.ladder[i][j].tag,
+                        j*80+55, i*60+50, text=self.lad.ladder[i][j].tag,
                         font=("", 12, "bold"), anchor=tk.W
                     )
-        self.cvs.create_line(50, 20, 50, 580, fill="black", width=3)  # 左側母線
-        self.cvs.create_line(750, 20, 750, 580, fill="black", width=3)  # 右側母線
+        self.cvs.create_line(40, 20, 40, 580, fill="black", width=2)  # 左側母線
+        self.cvs.create_line(760, 20, 760, 580, fill="black", width=2)  # 右側母線
         self.cvs.create_rectangle(
-            0, 0, 100, 80, tags="csr", outline="blue", width=3
+            0, 0, 80, 60, tags="csr", outline="blue", width=3
         )
-        self.cvs.moveto("csr", self.csr[0]*100+50, self.csr[1]*80+20)
+        self.cvs.moveto("csr", self.csr[0]*80+38, self.csr[1]*60+20)
 
 
 # 命令入力ウインドウ
@@ -645,7 +655,7 @@ class PBWin(tk.Frame):
                     if 660 < e.x < 740:
                         self.sw_func("PB5", 2)
 
-                print("x=" + str(e.x) + ", y=" + str(e.y))
+                # print("x=" + str(e.x) + ", y=" + str(e.y))
                 # 要素の設定変更 https://daeudaeu.com/tkinter_canvas_method/
             if e.num == 3:
                 pass
