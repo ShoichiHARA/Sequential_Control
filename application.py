@@ -19,7 +19,7 @@ class MainWin(tk.Frame):
         self.cvs = tk.Canvas(self.master, bg="white")  # キャンバス
         self.row = 9  # 列数
         self.csr = [0, 0]  # 画面上カーソル座標
-        self.scr = [50, 50]  # スクロールバー座標(上座標, 長さ)
+        self.scr = [0, 0, 0]  # スクロールバー座標(上座標, 長さ, 画面上座標)
         self.scr_d = 0     # スクロールバー移動用変数
         self.keep = []
         self.lad = ld.Ladder(self.row)
@@ -87,20 +87,24 @@ class MainWin(tk.Frame):
 
         # キャンバスの設定
         self.cvs.pack(fill=tk.BOTH, expand=True)                        # キャンバス配置
-        self.cvs.create_line(40, 20, 40, 580, fill="black", width=2)    # 左側母線
-        self.cvs.create_line(760, 20, 760, 580, fill="black", width=2)  # 右側母線
+        # self.cvs.create_line(40, 20, 40, 580, fill="black", width=2)    # 左側母線
+        # self.cvs.create_line(760, 20, 760, 580, fill="black", width=2)  # 右側母線
+
+        self.csr_move()  # カーソル設定
+        self.scr_move()  # スクロールバー設定
+        self.com_dsp()   # 画面に表示
 
         # カーソル
-        self.cvs.create_rectangle(
-            0, 0, 80, 60, tags="csr", outline="blue", width=3
-        )
-        self.cvs.moveto("csr", 38, 20)
+        # self.cvs.create_rectangle(
+        #     0, 0, 80, 60, tags="csr", outline="blue", width=3
+        # )
+        # self.csr_move()
 
         # スクロールバー
-        self.cvs.create_rectangle(
-            0, 0, 10, 100, tags="scr", fill="gray", width=0
-        )
-        self.cvs.coords("scr", 780, self.scr[0], 800, self.scr[0]+self.scr[1])
+        # self.cvs.create_rectangle(
+        #     0, 0, 10, 100, tags="scr", fill="gray", width=0
+        # )
+        # self.scr_move()
 
     # 開く
     def open(self):
@@ -134,7 +138,7 @@ class MainWin(tk.Frame):
             i += 1
         # print(self.io_list)
         f.close()
-        self.com_dsp(0)
+        self.com_dsp()
 
     # 上書き保存
     def save(self):
@@ -259,10 +263,12 @@ class MainWin(tk.Frame):
                             self.csr[0] = (e.x - 38) // 80
                             self.csr[1] = (e.y - 20) // 60
                             self.csr_move()  # カーソル移動
+                            self.scr_move()  # スクロールバー移動
+                            self.com_dsp()   # 移動反映
                     if 780 < e.x < 800:
                         if self.scr[0] < e.y < self.scr[0]+self.scr[1]:
                             self.keep.append("scr")
-                            self.scr_d = self.scr[0] - e.y
+                            self.scr_d = e.y - self.scr[0]
             elif e.num == 3:
                 print(self.pb_mas)
                 print(self.pb_app)
@@ -281,9 +287,12 @@ class MainWin(tk.Frame):
 
         def m_move(e):
             if "scr" in self.keep:
-                if 0 < e.y+self.scr_d < 500:
-                    self.scr[0] = e.y + self.scr_d
-                    self.scr_move()
+                scr_y = e.y - self.scr_d
+                if scr_y >= 0:
+                    if scr_y+self.scr[1] <= 600:
+                        self.scr[0] = scr_y
+                        self.scr_move()
+                        self.com_dsp()
 
         def k_press(e):
             if e.keysym in self.keep:
@@ -307,18 +316,25 @@ class MainWin(tk.Frame):
                 if self.run == 1:
                     self.sm_run()
             if e.keysym == "BackSpace":
-                if self.com_frm is not None:
-                    pass
-                else:
+                if self.com_frm is None:
                     self.csr_move("Left")
                     if self.csr[1] < self.row-1:
                         self.lad.add_txt(self.csr, "bl")
                     else:
                         self.lad.add_txt(self.csr, "ent")
                     self.com_dsp(0)
+            if e.keysym == "Delete":
+                if self.csr[1] < self.row - 1:
+                    self.lad.add_txt(self.csr, "bl")
+                else:
+                    self.lad.add_txt(self.csr, "ent")
+                self.com_dsp(0)
+
             if e.keysym in ["Up", "Down", "Left", "Right"]:
                 if self.com_frm is None:
+                    # self.lad.add_pls(self.csr)
                     self.csr_move(e.keysym)
+                    self.com_dsp()
 
         def k_release(e):
             if e.keysym in self.keep:
@@ -340,6 +356,7 @@ class MainWin(tk.Frame):
                 if self.csr[1] < 8:
                     self.csr[0] = 0
                     self.csr[1] += 1
+                    self.scr_move("Down")
         elif d == "Left":
             if self.csr[0] > 0:
                 self.csr[0] -= 1
@@ -347,18 +364,49 @@ class MainWin(tk.Frame):
                 if self.csr[1] > 0:
                     self.csr[0] = self.row - 1
                     self.csr[1] -= 1
+                    self.scr_move("Up")
         elif d == "Down":
-            if self.csr[1] < 8:
-                self.csr[1] += 1
+            self.csr[1] += 1
+            self.scr_move("Down")
         elif d == "Up":
             if self.csr[1] > 0:
                 self.csr[1] -= 1
-        self.cvs.moveto("csr", self.csr[0]*80+38, self.csr[1]*60+20)
+                self.scr_move("Up")
+
+        # csr_y = self.csr[1]*60+20-self.scr[2]
+        # if csr_y < 20:
+        #     self.scr[1] = 5400 // max(len(self.lad.ladder), self.csr[1] + 1)  # スクロールバー長さ
+        #     col = max(len(self.lad.ladder), self.csr[1]+1)
+        #     self.scr[0] -= (600 - self.scr[1]) // (col - 9)  # スクロールバー上へ
+        # elif csr_y > 520:
+        #     self.scr[1] = 5400 // max(len(self.lad.ladder), self.csr[1] + 1)  # スクロールバー長さ
+        #     col = max(len(self.lad.ladder), self.csr[1]+1)
+        #     self.scr[0] += (600 - self.scr[1]) // (col - 9)  # スクロールバー下へ
+        # self.cvs.moveto("csr", self.csr[0]*80+38, csr_y)
 
     # スクロールバー移動
-    def scr_move(self):
-
-        self.cvs.coords("scr", 780, self.scr[0], 800, self.scr[0]+self.scr[1])
+    def scr_move(self, d=""):
+        col = max(len(self.lad.ladder), self.csr[1]+1)  # プログラム列数
+        self.scr[1] = 5400 // col  # スクロールバー長さ変更
+        if self.scr[1] >= 600:
+            self.scr[0] = 0
+            self.scr[1] = 600
+            self.scr[2] = 0
+        else:
+            if d == "Down":
+                self.scr[2] += 60
+                num = (600 - self.scr[1]) * self.scr[2]  # バー位置求める式分子
+                den = (col - 9) * 60                     # バー位置求める式分母
+                self.scr[0] = num // den                 # スクロールバー位置
+            elif d == "Up":
+                self.scr[2] -= 60
+                num = (600 - self.scr[1]) * self.scr[2]  # バー位置求める式分子
+                den = (col - 9) * 60                     # バー位置求める式分母
+                self.scr[0] = num // den                 # スクロールバー位置
+            else:
+                num = self.scr[0] * (col - 9) * 60  # 移動量求める分子
+                den = 600 - self.scr[1]             # 移動量求める分母
+                self.scr[2] = num // den            # スクロール移動量
 
     # 命令入力
     def com_input(self, a=""):
@@ -435,7 +483,9 @@ class MainWin(tk.Frame):
                     com_i = self.base
                 else:
                     com_i = None
-                com_d = self.cvs.create_image(j*80+80, i*60+50+y, image=com_i)
+                com_d = self.cvs.create_image(
+                    j*80+80, i*60+50-self.scr[2], image=com_i
+                )
                 self.cvs.lower(com_d)
                 if self.lad.ladder[i][j].brc == 1:
                     self.cvs.create_line(
@@ -455,10 +505,20 @@ class MainWin(tk.Frame):
                     )
         self.cvs.create_line(40, 20, 40, 580, fill="black", width=2)  # 左側母線
         self.cvs.create_line(760, 20, 760, 580, fill="black", width=2)  # 右側母線
+
+        # カーソル
         self.cvs.create_rectangle(
             0, 0, 80, 60, tags="csr", outline="blue", width=3
         )
-        self.cvs.moveto("csr", self.csr[0]*80+38, self.csr[1]*60+20)
+        self.cvs.moveto("csr", self.csr[0]*80+38, self.csr[1]*60+20-self.scr[2])
+        # self.csr_move()
+
+        # スクロールバー
+        self.cvs.create_rectangle(
+            0, 0, 10, 100, tags="scr", fill="gray", width=0
+        )
+        self.cvs.coords("scr", 780, self.scr[0], 800, self.scr[0]+self.scr[1])
+        # self.scr_move()
 
 
 # 命令入力ウインドウ
@@ -844,7 +904,6 @@ class IOWin(tk.Frame):
 
         # 表形状の入力欄
         x = [15, 100, 215, 300]
-        print(self.io_st)
         for i in range(len(self.io_st)):
             row = []
             for j in range(4):
@@ -875,7 +934,7 @@ class IOWin(tk.Frame):
         def k_press(e):
             if e.keysym in self.keep:
                 return
-            print(e.keysym)
+            # print(e.keysym)
             self.keep.append(e.keysym)
             if e.keysym == "k":
                 self.dev_type("pb")

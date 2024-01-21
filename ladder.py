@@ -86,22 +86,22 @@ class Ladder:
             return self.opt
 
         def out(self):
-            if self.typ == "T":                # タイマ出力命令の場合
-                if self.opt == 1:              # 入力がONの場合
-                    if self.lst == 0:          # 前回の出力がOFFの場合
-                        self.c += 1            # カウントアップ
-                        if self.c < self.set:  # 設定値に届いていない場合
-                            self.opt = 0       # 出力OFF
-                else:                          # 入力がOFFの場合
-                    self.c = 0                 # カウントリセット
-                self.lst = self.opt            # 前回値更新
-            if self.typ == "C":                # カウンタ出力命令の場合
-                pass                           #
-            if self.typ == "St":               # セット命令の場合
-                if self.ext+self.opt > 0:      # 前回出力ONまたはセット命令ONの場合
-                    self.opt = 1               # 出力ON
-                else:                          # 前回出力OFFかつセット命令OFFの場合
-                    self.opt = 0               # 出力OFF
+            if self.typ == "T":                   # タイマ出力命令の場合
+                if self.opt == 1:                 # 入力がONの場合
+                    if self.lst == 0:             # 前回の出力がOFFの場合
+                        self.c += 1               # カウントアップ
+                        if self.c < self.set*10:  # 設定値に届いていない場合
+                            self.opt = 0          # 出力OFF
+                else:                             # 入力がOFFの場合
+                    self.c = 0                    # カウントリセット
+                self.lst = self.opt               # 前回値更新
+            if self.typ == "C":                   # カウンタ出力命令の場合
+                pass                              #
+            if self.typ == "St":                  # セット命令の場合
+                if self.ext+self.opt > 0:         # 前回出力ONまたはセット命令ONの場合
+                    self.opt = 1                  # 出力ON
+                else:                             # 前回出力OFFかつセット命令OFFの場合
+                    self.opt = 0                  # 出力OFF
 
     def jud_txt(self, txt):
         pass
