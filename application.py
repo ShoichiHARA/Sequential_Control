@@ -86,25 +86,10 @@ class MainWin(tk.Frame):
         self.bar.add_cascade(label=lg.hp, menu=self.help)         # ヘルプメニュー追加
 
         # キャンバスの設定
-        self.cvs.pack(fill=tk.BOTH, expand=True)                        # キャンバス配置
-        # self.cvs.create_line(40, 20, 40, 580, fill="black", width=2)    # 左側母線
-        # self.cvs.create_line(760, 20, 760, 580, fill="black", width=2)  # 右側母線
-
-        self.csr_move()  # カーソル設定
-        self.scr_move()  # スクロールバー設定
-        self.com_dsp()   # 画面に表示
-
-        # カーソル
-        # self.cvs.create_rectangle(
-        #     0, 0, 80, 60, tags="csr", outline="blue", width=3
-        # )
-        # self.csr_move()
-
-        # スクロールバー
-        # self.cvs.create_rectangle(
-        #     0, 0, 10, 100, tags="scr", fill="gray", width=0
-        # )
-        # self.scr_move()
+        self.cvs.pack(fill=tk.BOTH, expand=True)  # キャンバス配置
+        self.csr_move()                           # カーソル設定
+        self.scr_move()                           # スクロールバー設定
+        self.com_dsp()                            # 画面に表示
 
     # 開く
     def open(self):
@@ -120,7 +105,7 @@ class MainWin(tk.Frame):
                 brc = int(c[6*i+3])
                 typ = c[6*i+2]
                 tag = c[6*i+4]
-                set = int(c[6*5+5])
+                set = int(c[6*i+5])
                 self.lad.add_com(xy, brc, typ, tag, set)
         i = 0
         while True:
