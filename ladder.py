@@ -116,9 +116,19 @@ class Ladder:
     def add_txt(self, xy, txt):
         self.add_pls(xy)  # 命令挿入空間作成
         if txt == "ins c":  # 行挿入の場合
-            pass
+            self.ladder.insert(xy[1], [])
+            for i in range(self.rnum):
+                if xy[0] == 0:
+                    brc = 0
+                else:
+                    brc = self.ladder[xy[1]][xy[0]-1].brc
+                if i < self.rnum-1:
+                    self.ladder[xy[1]].appned(self.Comp("Bl", brc))
+                else:
+                    self.ladder[xy[1]].append(self.Comp("En", brc))
         elif txt == "ins r":  # 列挿入の場合
-            pass
+            self.ladder[xy[1]].insert(xy[0], self.Comp("Bl", 0))
+            del self.ladder[xy[1]][-2]
         else:                                         # その他命令の場合
             err = self.ladder[xy[1]][xy[0]].dec(txt)  # 文字列から要素を判定
             if err != 0:                              # エラーの場合
