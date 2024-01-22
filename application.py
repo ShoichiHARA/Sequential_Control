@@ -489,26 +489,27 @@ class MainWin(tk.Frame):
                 self.cvs.lower(com_d)
                 if self.lad.ladder[i][j].brc == 1:
                     self.cvs.create_line(
-                        j*80+40, i*60+50, j*80+40, i*60+112,
+                        j*80+40, i*60+50-self.scr[2],
+                        j*80+40, i*60+112-self.scr[2],
                         fill="black", width=2
                     )
                 if self.lad.ladder[i][j].typ in self.lad.in_list:
                     if self.lad.ladder[i][j].typ != "Ln":
                         self.cvs.create_text(
-                            j*80+80, i*60+30,
+                            j*80+80, i*60+30-self.scr[2],
                             text=self.lad.ladder[i][j].tag, font=("", 12, "bold")
                         )
                 elif self.lad.ladder[i][j].typ in ["R", "T", "C"]:
                     self.cvs.create_text(
-                        j*80+55, i*60+50, text=self.lad.ladder[i][j].tag,
-                        font=("", 12, "bold"), anchor=tk.W
+                        j*80+55, i*60+50-self.scr[2], 
+                        text=self.lad.ladder[i][j].tag, font=("", 12, "bold"), anchor=tk.W
                     )
         self.cvs.create_line(40, 20, 40, 580, fill="black", width=2)  # 左側母線
         self.cvs.create_line(760, 20, 760, 580, fill="black", width=2)  # 右側母線
 
         # カーソル
         self.cvs.create_rectangle(
-            0, 0, 80, 60, tags="csr", outline="blue", width=3
+            0, 0, 80, 60, tags="csr", outline="silver", width=3
         )
         self.cvs.moveto("csr", self.csr[0]*80+38, self.csr[1]*60+20-self.scr[2])
         # self.csr_move()
