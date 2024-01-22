@@ -489,7 +489,7 @@ class MainWin(tk.Frame):
                 self.cvs.lower(com_d)
                 if self.lad.ladder[i][j].brc == 1:
                     self.cvs.create_line(
-                        j*80+40, i*50+50, j*80+40, i*60+112,
+                        j*80+40, i*60+50, j*80+40, i*60+112,
                         fill="black", width=2
                     )
                 if self.lad.ladder[i][j].typ in self.lad.in_list:
