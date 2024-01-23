@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/21&#10;図を小さく&#10;バックスペースで削除">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/22&#10;スクロールバーが正常に動作しない&#10;exeファイル化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +47,9 @@
         <option name="url" value="https://github.com/ShoichiHARA/Sequential_Control.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -144,14 +146,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00003" summary="12/24&#10;マウスイベント追加">
-      <option name="closed" value="true" />
-      <created>1703392875470</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1703392875470</updated>
     </task>
     <task id="LOCAL-00004" summary="12/24&#10;マウスイベント改良&#10;キーイベント追加">
       <option name="closed" value="true" />
@@ -537,7 +531,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705835822468</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="1/22&#10;スクロールバーが正常に動作しない&#10;exeファイル化">
+      <option name="closed" value="true" />
+      <created>1705858318422</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1705858318422</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -558,7 +560,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/8&#10;命令入力ウインドウを簡略化&#10;コマンドのみで入力を目指す" />
     <MESSAGE value="1/8&#10;命令入力ウインドウをクラス化&#10;EnterやEscapeでも動作可能" />
     <MESSAGE value="1/8&#10;文字列から命令を判定" />
     <MESSAGE value="1/8&#10;細かな加筆修正" />
@@ -583,6 +584,7 @@
     <MESSAGE value="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成" />
     <MESSAGE value="1/21&#10;スクロールバー作成&#10;スクロールバーで表示範囲の変更、&#10;プログラムの大きさで長さの変更を目指す" />
     <MESSAGE value="1/21&#10;図を小さく&#10;バックスペースで削除" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/21&#10;図を小さく&#10;バックスペースで削除" />
+    <MESSAGE value="1/22&#10;スクロールバーが正常に動作しない&#10;exeファイル化" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/22&#10;スクロールバーが正常に動作しない&#10;exeファイル化" />
   </component>
 </project>

@@ -494,14 +494,14 @@ class MainWin(tk.Frame):
 
         # カーソル
         self.cvs.create_rectangle(
-            0, 0, 80, 60, tags="csr", outline="silver", width=3
+            0, 0, 80, 60, tags="csr", outline="blue", width=3
         )
         self.cvs.moveto("csr", self.csr[0]*80+38, self.csr[1]*60+20-self.scr[2])
         # self.csr_move()
 
         # スクロールバー
         self.cvs.create_rectangle(
-            0, 0, 10, 100, tags="scr", fill="gray", width=0
+            0, 0, 10, 100, tags="scr", fill="silver", width=0
         )
         self.cvs.coords("scr", 780, self.scr[0], 800, self.scr[0]+self.scr[1])
         # self.scr_move()
