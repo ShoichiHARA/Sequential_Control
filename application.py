@@ -314,6 +314,9 @@ class MainWin(tk.Frame):
                 else:
                     self.lad.add_txt(self.csr, "ent")
                 self.com_dsp(0)
+            if e.keysym == "z":
+                if e.keysym in ["Control_L", "Control_R"]:
+                    print("back")
 
             if e.keysym in ["Up", "Down", "Left", "Right"]:
                 if self.com_frm is None:
@@ -920,7 +923,7 @@ class IOWin(tk.Frame):
         def k_press(e):
             if e.keysym in self.keep:
                 return
-            # print(e.keysym)
+            print(e.keysym)
             self.keep.append(e.keysym)
             if e.keysym == "k":
                 self.dev_type("pb")
