@@ -315,10 +315,43 @@ class MainWin(tk.Frame):
                     self.lad.add_txt(self.csr, "ent")
                 self.com_dsp(0)
             if e.keysym == "z":
-                if e.keysym in ["Control_L", "Control_R"]:
-                    print("back")
+                if self.com_frm is None:
+                    if "Control_L" in self.keep:
+                        print("back")
+                    if "Control_R" in self.keep:
+                        print("back")
+            if e.keysym == "Up":
+                if self.com_frm is None:
+                    self.csr_move("Up")
+                    if "Control_L" in self.keep:
+                        self.lad.add_pls([self.csr[0], self.csr[1]])
+                        if self.lad.ladder[self.csr[1]][self.csr[0]].brc == 1:  # 分岐ある場合
+                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 0   # 分岐消去
+                        else:                                                   # 分岐ない場合
+                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1   # 分岐追加
+                    if "Control_R" in self.keep:
+                        if self.lad.ladder[self.csr[1]][self.csr[0]].brc == 1:
+                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 0
+                        else:
+                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1
+                    self.com_dsp()
+            if e.keysym == "Down":
+                if self.com_frm is None:
+                    if "Control_L" in self.keep:
+                        self.lad.add_pls([self.csr[0], self.csr[1]])
+                        if self.lad.ladder[self.csr[1]][self.csr[0]].brc == 1:  # 分岐ある場合
+                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 0   # 分岐消去
+                        else:                                                   # 分岐ない場合
+                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1   # 分岐追加
+                    if "Control_R" in self.keep:
+                        if self.lad.ladder[self.csr[1]][self.csr[0]].brc == 1:
+                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 0
+                        else:
+                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1
+                    self.csr_move("Down")
+                    self.com_dsp()
 
-            if e.keysym in ["Up", "Down", "Left", "Right"]:
+            if e.keysym in ["Left", "Right"]:
                 if self.com_frm is None:
                     # self.lad.add_pls(self.csr)
                     self.csr_move(e.keysym)
