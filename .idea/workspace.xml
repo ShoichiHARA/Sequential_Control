@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/24&#10;キーイベント追加">
-      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Sequential_Control.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Sequential_Control.iml" afterDir="false" />
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/25&#10;分岐入力方法追加&#10;exe化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/test.sqe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test.sqe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,14 +171,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00006" summary="12/24&#10;メニューバーの追加">
-      <option name="closed" value="true" />
-      <created>1703421666828</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1703421666828</updated>
     </task>
     <task id="LOCAL-00007" summary="12/24&#10;ファイルの追加&#10;サブウインドウの追加">
       <option name="closed" value="true" />
@@ -569,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706108340602</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="1/25&#10;分岐入力方法追加&#10;exe化">
+      <option name="closed" value="true" />
+      <created>1706194171856</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1706194171856</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -590,7 +585,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/8&#10;細かな加筆修正" />
     <MESSAGE value="1/9&#10;コマンド通りに画面上に表示&#10;命令タグを表示予定" />
     <MESSAGE value="1/9&#10;入力したらカーソルを右へ&#10;出力命令は自動で右端へ" />
     <MESSAGE value="1/10&#10;命令タグを表示" />
@@ -615,6 +609,7 @@
     <MESSAGE value="1/22&#10;スクロールバーが正常に動作しない&#10;exeファイル化" />
     <MESSAGE value="1/23&#10;カーソルの色の修正" />
     <MESSAGE value="1/24&#10;キーイベント追加" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/24&#10;キーイベント追加" />
+    <MESSAGE value="1/25&#10;分岐入力方法追加&#10;exe化" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/25&#10;分岐入力方法追加&#10;exe化" />
   </component>
 </project>

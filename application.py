@@ -761,13 +761,7 @@ class PBWin(tk.Frame):
 
         def m_move(e):
             if "prod" in self.keep:
-                if 150 < e.x+self.pall_d < 650:
-                    self.pall_x = e.x + self.pall_d
-                    self.cvs.moveto("pall", x=self.pall_x-80, y=60)
-                    self.cvs.moveto("prd1", x=self.pall_x-15, y=60)
-                    self.cvs.moveto("prd2", x=self.pall_x-15, y=90)
-                    self.cvs.moveto("prd3", x=self.pall_x-15, y=120)
-                    self.cvs.moveto("prd4", x=self.pall_x-15, y=150)
+                self.pall_func(x=e.x + self.pall_d)
 
         def k_press(e):
             if e.keysym in self.keep:
@@ -873,6 +867,42 @@ class PBWin(tk.Frame):
                     return
                 self.sw_on.append(tag)
 
+    # パレット動作
+    def pall_func(self, x=None, d=None):
+        pall_x = self.pall_x  # ローカル変数に代入
+        if x is not None:     # 座尿から移動させる場合
+            pall_x = x        # 座標を代入
+        elif d is not None:   # 変位から移動させる場合
+            pall_x += d         # 変位から座標を計算
+        if 150 < pall_x < 650:  # 端でない場合
+            self.pall_x = pall_x  # グローバル変数に代入
+            ls_list = ["LS1", "LS2", "LS3", "LS4", "LS5"]
+            for i in range(5):
+                if ls_list[i] in self.sw_on:
+                    self.sw_on.remove(ls_list[i])  # スイッチOFF
+        elif pall_x >= 650:  # 右端の場合
+            self.pall_x = 650
+            if "LS1" not in self.sw_on:
+                self.sw_on.append("LS1")
+        elif pall_x <= 150:  # 左端の場合
+            self.pall_x = 150
+            if "LS2" not in self.sw_on:
+                self.sw_on.append("LS2")
+            if "LS3" not in self.sw_on:
+                if "prd1" not in self.keep:
+                    self.sw_on.append("LS3")
+            if "LS4" not in self.sw_on:
+                if "prd2" not in self.keep:
+                    self.sw_on.append("LS4")
+            if "LS5" not in self.sw_on:
+                if "prd3" not in self.keep:
+                    self.sw_on.append("LS5")
+        self.cvs.moveto("pall", x=self.pall_x-80, y=60)
+        self.cvs.moveto("prd1", x=self.pall_x-15, y=60)
+        self.cvs.moveto("prd2", x=self.pall_x-15, y=90)
+        self.cvs.moveto("prd3", x=self.pall_x-15, y=120)
+        self.cvs.moveto("prd4", x=self.pall_x-15, y=150)
+
     # 出力動作
     def out_func(self, on):
         if "PL1" in on:
@@ -892,11 +922,11 @@ class PBWin(tk.Frame):
         else:
             self.cvs.lift("pl4f", "pl4n")
         if "RY1" in on:
-            pass
+            self.pall_func(d=-1)
         else:
             pass
         if "RY2" in on:
-            pass
+            self.pall_func(d=1)
         else:
             pass
 
