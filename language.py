@@ -1,4 +1,4 @@
-language = "ENG"
+language = "JPN"
 
 lang = ["ENG", "JPN"]
 dic = [

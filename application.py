@@ -123,6 +123,7 @@ class MainWin(tk.Frame):
             i += 1
         # print(self.io_list)
         f.close()
+        self.scr_move()
         self.com_dsp()
 
     # 上書き保存
@@ -246,7 +247,7 @@ class MainWin(tk.Frame):
                     if 40 < e.x < 760:
                         if 20 < e.y < 560:
                             self.csr[0] = (e.x - 38) // 80
-                            self.csr[1] = (e.y - 20) // 60
+                            self.csr[1] = (e.y - 20 + self.scr[2]) // 60
                             self.csr_move()  # カーソル移動
                             self.scr_move()  # スクロールバー移動
                             self.com_dsp()   # 移動反映
@@ -374,10 +375,9 @@ class MainWin(tk.Frame):
             if self.csr[0] < self.row-1:
                 self.csr[0] += 1
             else:
-                if self.csr[1] < 8:
-                    self.csr[0] = 0
-                    self.csr[1] += 1
-                    self.scr_move("Down")
+                self.csr[0] = 0
+                self.csr[1] += 1
+                self.scr_move(1, "Down")
         elif d == "Left":
             if self.csr[0] > 0:
                 self.csr[0] -= 1
@@ -385,14 +385,14 @@ class MainWin(tk.Frame):
                 if self.csr[1] > 0:
                     self.csr[0] = self.row - 1
                     self.csr[1] -= 1
-                    self.scr_move("Up")
+                    self.scr_move(1, "Up")
         elif d == "Down":
             self.csr[1] += 1
-            self.scr_move("Down")
+            self.scr_move(1, "Down")
         elif d == "Up":
             if self.csr[1] > 0:
                 self.csr[1] -= 1
-                self.scr_move("Up")
+                self.scr_move(1, "Up")
 
         # csr_y = self.csr[1]*60+20-self.scr[2]
         # if csr_y < 20:
@@ -406,7 +406,7 @@ class MainWin(tk.Frame):
         # self.cvs.moveto("csr", self.csr[0]*80+38, csr_y)
 
     # スクロールバー移動
-    def scr_move(self, d=""):
+    def scr_move(self, key=0, d=""):
         col = max(len(self.lad.ladder), self.csr[1]+1)  # プログラム列数
         self.scr[1] = 5400 // col  # スクロールバー長さ変更
         if self.scr[1] >= 600:
@@ -414,16 +414,28 @@ class MainWin(tk.Frame):
             self.scr[1] = 600
             self.scr[2] = 0
         else:
-            if d == "Down":
-                self.scr[2] += 60
-                num = (600 - self.scr[1]) * self.scr[2]  # バー位置求める式分子
-                den = (col - 9) * 60                     # バー位置求める式分母
-                self.scr[0] = num // den                 # スクロールバー位置
-            elif d == "Up":
-                self.scr[2] -= 60
-                num = (600 - self.scr[1]) * self.scr[2]  # バー位置求める式分子
-                den = (col - 9) * 60                     # バー位置求める式分母
-                self.scr[0] = num // den                 # スクロールバー位置
+            if key == 1:                                     # キー入力の場合
+                csr_y = self.csr[1] * 60 + 20 - self.scr[2]  # 画面上カーソル座標
+                if csr_y < 20:                               # カーソルが画面上側に外れた場合
+                    self.scr[2] = self.csr[1] * 60           # 画面スクロール
+                    num = (600 - self.scr[1]) * self.scr[2]  # バー位置求める式分子
+                    den = (col - 9) * 60                     # バー位置求める式分母
+                    self.scr[0] = num // den                 # スクロールバー位置
+                elif csr_y > 500:                            # カーソルが画面下側に外れた場合
+                    self.scr[2] = self.csr[1] * 60 - 500     # 画面スクロール
+                    num = (600 - self.scr[1]) * self.scr[2]  # バー位置求める式分子
+                    den = (col - 9) * 60                     # バー位置求める式分母
+                    self.scr[0] = num // den                 # スクロールバー位置
+            # if d == "Down":
+            #     self.scr[2] += 60
+            #     num = (600 - self.scr[1]) * self.scr[2]  # バー位置求める式分子
+            #     den = (col - 9) * 60                     # バー位置求める式分母
+            #     self.scr[0] = num // den                 # スクロールバー位置
+            # elif d == "Up":
+            #     self.scr[2] -= 60
+            #     num = (600 - self.scr[1]) * self.scr[2]  # バー位置求める式分子
+            #     den = (col - 9) * 60                     # バー位置求める式分母
+            #     self.scr[0] = num // den                 # スクロールバー位置
             else:
                 num = self.scr[0] * (col - 9) * 60  # 移動量求める分子
                 den = 600 - self.scr[1]             # 移動量求める分母

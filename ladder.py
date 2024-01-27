@@ -204,8 +204,8 @@ class Ladder:
         b = 1   # 信号
         k = []  # 位置情報記録
 
-        for loop in range(100):
-            if loop == 99:
+        for loop in range(1000):
+            if loop == 999:
                 print("MUGEN")
 
             # print(str(i) + ", " + str(j))
