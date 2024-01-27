@@ -377,7 +377,7 @@ class MainWin(tk.Frame):
             else:
                 self.csr[0] = 0
                 self.csr[1] += 1
-                self.scr_move(1, "Down")
+            self.scr_move(1, "Down")
         elif d == "Left":
             if self.csr[0] > 0:
                 self.csr[0] -= 1
@@ -385,7 +385,7 @@ class MainWin(tk.Frame):
                 if self.csr[1] > 0:
                     self.csr[0] = self.row - 1
                     self.csr[1] -= 1
-                    self.scr_move(1, "Up")
+            self.scr_move(1, "Up")
         elif d == "Down":
             self.csr[1] += 1
             self.scr_move(1, "Down")
