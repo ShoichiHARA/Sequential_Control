@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/26&#10;コンベヤ完成&#10;exe化">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/27&#10;カーソルおよびスクロールバー狙い通り動作&#10;一部挙動が変だが、操作に支障なし">
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/language.py" beforeDir="false" afterPath="$PROJECT_DIR$/language.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.sqe" beforeDir="false" afterPath="$PROJECT_DIR$/test.sqe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,14 +170,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00008" summary="12/25&#10;押しボタンの作成">
-      <option name="closed" value="true" />
-      <created>1703513146103</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1703513146103</updated>
     </task>
     <task id="LOCAL-00009" summary="12/27&#10;位置調整用の変数を作成">
       <option name="closed" value="true" />
@@ -567,7 +555,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706197906142</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="1/27&#10;カーソルおよびスクロールバー狙い通り動作&#10;一部挙動が変だが、操作に支障なし">
+      <option name="closed" value="true" />
+      <created>1706365993467</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1706365993467</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -588,7 +584,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/9&#10;入力したらカーソルを右へ&#10;出力命令は自動で右端へ" />
     <MESSAGE value="1/10&#10;命令タグを表示" />
     <MESSAGE value="1/11&#10;命令を行列番号から追加&#10;実行前に整理する必要あり" />
     <MESSAGE value="1/12&#10;文字列でプログラムに追加&#10;プログラム編集するたびに表示書き換え" />
@@ -613,6 +608,7 @@
     <MESSAGE value="1/24&#10;キーイベント追加" />
     <MESSAGE value="1/25&#10;分岐入力方法追加&#10;exe化" />
     <MESSAGE value="1/26&#10;コンベヤ完成&#10;exe化" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/26&#10;コンベヤ完成&#10;exe化" />
+    <MESSAGE value="1/27&#10;カーソルおよびスクロールバー狙い通り動作&#10;一部挙動が変だが、操作に支障なし" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/27&#10;カーソルおよびスクロールバー狙い通り動作&#10;一部挙動が変だが、操作に支障なし" />
   </component>
 </project>

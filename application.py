@@ -195,7 +195,7 @@ class MainWin(tk.Frame):
                 for j in range(self.row):
                     if self.lad.ladder[i][j].opt == 1:
                         self.cvs.create_rectangle(
-                            j*80+71, i*60+40, j*80+90, i*60+61,
+                            j*80+71, i*60+40-self.scr[2], j*80+90, i*60+61-self.scr[2],
                             tags="on"+str(i)+str(j), fill="blue", width=0
                         )
                         self.run_tag.append("on"+str(i)+str(j))
