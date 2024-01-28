@@ -696,6 +696,13 @@ class PBWin(tk.Frame):
         self.cvs.create_image(700, 490, tags="pb5n", image=self.pb5n)
         self.cvs.create_image(700, 490, tags="pb5f", image=self.pb5f)
 
+        # リミットスイッチ
+        self.cvs.create_rectangle(680, 150, 700, 180, tags="LS1", fill="black", width=0)
+        self.cvs.create_rectangle(100, 150, 120, 180, tags="LS2", fill="black", width=0)
+        self.cvs.create_rectangle(100, 120, 120, 150, tags="LS3", fill="black", width=0)
+        self.cvs.create_rectangle(100, 90, 120, 120, tags="LS4", fill="black", width=0)
+        self.cvs.create_rectangle(100, 60, 120, 90, tags="LS5", fill="black", width=0)
+
         # パイロットランプ1
         self.cvs.create_image(350, 370, tags="pl1n", image=self.pl1n)
         self.cvs.create_image(350, 370, tags="pl1f", image=self.pl1f)
@@ -714,10 +721,10 @@ class PBWin(tk.Frame):
 
         # 製品
         self.cvs.create_image(self.pall_x, 120, tags="pall", image=self.pall)
-        self.cvs.create_image(self.pall_x, 75, tags="prd1", image=self.prd1)
-        self.cvs.create_image(self.pall_x, 105, tags="prd2", image=self.prd2)
-        self.cvs.create_image(self.pall_x, 135, tags="prd3", image=self.prd3)
-        self.cvs.create_image(self.pall_x, 165, tags="prd4", image=self.prd4)
+        self.cvs.create_image(self.pall_x, 165, tags="prd1", image=self.prd1)
+        self.cvs.create_image(self.pall_x, 135, tags="prd2", image=self.prd2)
+        self.cvs.create_image(self.pall_x, 105, tags="prd3", image=self.prd3)
+        self.cvs.create_image(self.pall_x, 75, tags="prd4", image=self.prd4)
 
         self.cvs.create_text(760, 590, tags="pt", text="x="+str(self.x)+", y="+str(self.y))
         self.cvs.create_text(760, 580, tags="ab", text="a="+str(self.a)+", b="+str(self.b))
@@ -732,26 +739,26 @@ class PBWin(tk.Frame):
                         self.pall_d = self.pall_x - e.x
                 if self.pall_x-15 < e.x < self.pall_x+15:  # 製品選択
                     if 60 < e.y < 90:
-                        if "prd1" in self.keep:
-                            self.keep.remove("prd1")
-                            self.cvs.lift("prd1", "pall")   # tk.Canvas.lift(前面に移動させたいタグ)
+                        if "prd4" in self.keep:
+                            self.keep.remove("prd4")
+                            self.cvs.lift("prd4", "pall")   # tk.Canvas.lift(前面に移動させたいタグ)
                         else:
-                            self.keep.append("prd1")
-                            self.cvs.lower("prd1", "pall")  # tk.Canvas.lower(背面に移動させたいタグ)
+                            self.keep.append("prd4")
+                            self.cvs.lower("prd4", "pall")  # tk.Canvas.lower(背面に移動させたいタグ)
                     elif 90 < e.y < 120:
-                        if "prd2" in self.keep:
-                            self.keep.remove("prd2")
-                            self.cvs.lift("prd2", "pall")
-                        else:
-                            self.keep.append("prd2")
-                            self.cvs.lower("prd2", "pall")
-                    elif 120 < e.y < 150:
                         if "prd3" in self.keep:
                             self.keep.remove("prd3")
                             self.cvs.lift("prd3", "pall")
                         else:
                             self.keep.append("prd3")
                             self.cvs.lower("prd3", "pall")
+                    elif 120 < e.y < 150:
+                        if "prd2" in self.keep:
+                            self.keep.remove("prd2")
+                            self.cvs.lift("prd2", "pall")
+                        else:
+                            self.keep.append("prd2")
+                            self.cvs.lower("prd2", "pall")
                 if 310 < e.y < 390:  # 切替スイッチ
                     if 50 < e.x < 130:  # 切替スイッチ0
                         self.sw_func("SS0", 0)
@@ -907,34 +914,40 @@ class PBWin(tk.Frame):
             pall_x = x        # 座標を代入
         elif d is not None:   # 変位から移動させる場合
             pall_x += d         # 変位から座標を計算
-        if 150 < pall_x < 650:  # 端でない場合
+        if 200 < pall_x < 600:  # 端でない場合
             self.pall_x = pall_x  # グローバル変数に代入
             ls_list = ["LS1", "LS2", "LS3", "LS4", "LS5"]
             for i in range(5):
                 if ls_list[i] in self.sw_on:
                     self.sw_on.remove(ls_list[i])  # スイッチOFF
-        elif pall_x >= 650:  # 右端の場合
-            self.pall_x = 650
+                    self.cvs.itemconfig(ls_list[i], fill="black")
+        elif pall_x >= 600:  # 右端の場合
+            self.pall_x = 600
             if "LS1" not in self.sw_on:
                 self.sw_on.append("LS1")
-        elif pall_x <= 150:  # 左端の場合
-            self.pall_x = 150
+                self.cvs.itemconfig("LS1", fill="red")
+        elif pall_x <= 200:  # 左端の場合
+            self.pall_x = 200
             if "LS2" not in self.sw_on:
                 self.sw_on.append("LS2")
+                self.cvs.itemconfig("LS2", fill="red")
             if "LS3" not in self.sw_on:
-                if "prd1" not in self.keep:
-                    self.sw_on.append("LS3")
-            if "LS4" not in self.sw_on:
                 if "prd2" not in self.keep:
-                    self.sw_on.append("LS4")
-            if "LS5" not in self.sw_on:
+                    self.sw_on.append("LS3")
+                    self.cvs.itemconfig("LS3", fill="red")
+            if "LS4" not in self.sw_on:
                 if "prd3" not in self.keep:
+                    self.sw_on.append("LS4")
+                    self.cvs.itemconfig("LS4", fill="red")
+            if "LS5" not in self.sw_on:
+                if "prd4" not in self.keep:
                     self.sw_on.append("LS5")
+                    self.cvs.itemconfig("LS5", fill="red")
         self.cvs.moveto("pall", x=self.pall_x-80, y=60)
-        self.cvs.moveto("prd1", x=self.pall_x-15, y=60)
-        self.cvs.moveto("prd2", x=self.pall_x-15, y=90)
-        self.cvs.moveto("prd3", x=self.pall_x-15, y=120)
-        self.cvs.moveto("prd4", x=self.pall_x-15, y=150)
+        self.cvs.moveto("prd1", x=self.pall_x-15, y=150)
+        self.cvs.moveto("prd2", x=self.pall_x-15, y=120)
+        self.cvs.moveto("prd3", x=self.pall_x-15, y=90)
+        self.cvs.moveto("prd4", x=self.pall_x-15, y=60)
 
     # 出力動作
     def out_func(self, on):
