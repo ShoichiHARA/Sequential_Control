@@ -115,24 +115,9 @@ class Ladder:
 
     def add_txt(self, xy, txt):
         self.add_pls(xy)  # 命令挿入空間作成
-        if txt == "ins c":  # 行挿入の場合
-            self.ladder.insert(xy[1], [])
-            for i in range(self.rnum):
-                if xy[0] == 0:
-                    brc = 0
-                else:
-                    brc = self.ladder[xy[1]][xy[0]-1].brc
-                if i < self.rnum-1:
-                    self.ladder[xy[1]].appned(self.Comp("Bl", brc))
-                else:
-                    self.ladder[xy[1]].append(self.Comp("En", brc))
-        elif txt == "ins r":  # 列挿入の場合
-            self.ladder[xy[1]].insert(xy[0], self.Comp("Bl", 0))
-            del self.ladder[xy[1]][-2]
-        else:                                         # その他命令の場合
-            err = self.ladder[xy[1]][xy[0]].dec(txt)  # 文字列から要素を判定
-            if err != 0:                              # エラーの場合
-                return err                            # 戻り値エラー種類
+        err = self.ladder[xy[1]][xy[0]].dec(txt)  # 文字列から要素を判定
+        if err != 0:                              # エラーの場合
+            return err                            # 戻り値エラー種類
         return 0
 
     def add_com(self, xy, brc=None, typ=None, tag=None, set=None):
@@ -145,6 +130,22 @@ class Ladder:
             self.ladder[xy[1]][xy[0]].tag = tag  # 名前設定
         if set is not None:                      # 設定値が設定されている場合
             self.ladder[xy[1]][xy[0]].set = set  # 設定値設定
+
+    def ins_rc(self, xy, rc):
+        if rc == "c":
+            self.ladder.insert(xy[1], [])
+            for i in range(self.rnum):
+                if xy[1] == 0:
+                    brc = 0
+                else:
+                    brc = self.ladder[xy[1]-1][i].brc
+                if i < self.rnum - 1:
+                    self.ladder[xy[1]].append(self.Comp("Bl", brc))
+                else:
+                    self.ladder[xy[1]].append(self.Comp("En", brc))
+        elif rc == "r":
+            self.ladder[xy[1]].insert(xy[0], self.Comp("Bl", 0))
+            del self.ladder[xy[1]][-2]
 
     def org(self):
         i = 0

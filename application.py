@@ -484,6 +484,8 @@ class MainWin(tk.Frame):
                 self.csr_move("Right")                    # カーソル右へ
             elif com_str[0] == "brc":                     # 分岐命令の場合
                 self.lad.add_txt(self.csr, self.com_str)  # 命令登録
+            elif com_str[0] == "ins":
+                self.lad.ins_rc([self.csr[0], self.csr[1]], com_str[1])
             else:                                         # その他命令の場合
                 self.lad.add_txt(self.csr, self.com_str)  # 命令登録
                 self.csr_move("Right")                    # カーソル右へ

@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/27&#10;シミュレーションマークもスクロール可能" />
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/27&#10;画面外でカーソルを動かした場合、&#10;画面内にスクロール移動">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,14 +172,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00010" summary="12/28&#10;pillowのインストール">
-      <option name="closed" value="true" />
-      <created>1703775452024</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1703775452024</updated>
     </task>
     <task id="LOCAL-00011" summary="12/28&#10;押しボタンスイッチ作成">
       <option name="closed" value="true" />
@@ -561,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706366307218</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="1/27&#10;画面外でカーソルを動かした場合、&#10;画面内にスクロール移動">
+      <option name="closed" value="true" />
+      <created>1706366848213</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1706366848213</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -582,7 +586,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/11&#10;命令を行列番号から追加&#10;実行前に整理する必要あり" />
     <MESSAGE value="1/12&#10;文字列でプログラムに追加&#10;プログラム編集するたびに表示書き換え" />
     <MESSAGE value="1/13&#10;分岐を表示&#10;命令の登録を改良&#10;コマンドのエラー判定関数を作成予定" />
     <MESSAGE value="1/14&#10;画面表示関数の修正" />
@@ -607,6 +610,7 @@
     <MESSAGE value="1/26&#10;コンベヤ完成&#10;exe化" />
     <MESSAGE value="1/27&#10;カーソルおよびスクロールバー狙い通り動作&#10;一部挙動が変だが、操作に支障なし" />
     <MESSAGE value="1/27&#10;シミュレーションマークもスクロール可能" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/27&#10;シミュレーションマークもスクロール可能" />
+    <MESSAGE value="1/27&#10;画面外でカーソルを動かした場合、&#10;画面内にスクロール移動" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/27&#10;画面外でカーソルを動かした場合、&#10;画面内にスクロール移動" />
   </component>
 </project>
