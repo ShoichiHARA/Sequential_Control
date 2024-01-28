@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/28&#10;画面外でカーソルを動かした場合、&#10;画面内にスクロール移動">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/29&#10;左右のShiftとControlを1つにまとめた">
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -171,14 +170,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00012" summary="12/28&#10;押しボタンスイッチ追加">
-      <option name="closed" value="true" />
-      <created>1703861591226</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1703861591226</updated>
     </task>
     <task id="LOCAL-00013" summary="12/30&#10;切替スイッチ追加">
       <option name="closed" value="true" />
@@ -564,7 +555,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706434741579</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="1/29&#10;左右のShiftとControlを1つにまとめた">
+      <option name="closed" value="true" />
+      <created>1706454584814</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1706454584814</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -585,7 +584,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/13&#10;分岐を表示&#10;命令の登録を改良&#10;コマンドのエラー判定関数を作成予定" />
     <MESSAGE value="1/14&#10;画面表示関数の修正" />
     <MESSAGE value="1/14&#10;プログラム整理関数の修正&#10;実行関数の動作を確認" />
     <MESSAGE value="1/14&#10;割付表ウインドウ作成中" />
@@ -610,6 +608,7 @@
     <MESSAGE value="1/27&#10;シミュレーションマークもスクロール可能" />
     <MESSAGE value="1/27&#10;画面外でカーソルを動かした場合、&#10;画面内にスクロール移動" />
     <MESSAGE value="1/28&#10;画面外でカーソルを動かした場合、&#10;画面内にスクロール移動" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/28&#10;画面外でカーソルを動かした場合、&#10;画面内にスクロール移動" />
+    <MESSAGE value="1/29&#10;左右のShiftとControlを1つにまとめた" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/29&#10;左右のShiftとControlを1つにまとめた" />
   </component>
 </project>

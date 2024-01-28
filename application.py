@@ -343,10 +343,25 @@ class MainWin(tk.Frame):
                             self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1   # 分岐追加
                     self.csr_move("Down")
                     self.com_dsp()
-
-            if e.keysym in ["Left", "Right"]:
+            if e.keysym == "Left":
                 if self.com_frm is None:
-                    self.csr_move(e.keysym)
+                    self.csr_move("Left")
+                    if "Control" in self.keep:
+                        self.lad.add_pls([self.csr[0], self.csr[1]])
+                        if self.lad.ladder[self.csr[1]][self.csr[0]].typ == "Ln":
+                            self.lad.ladder[self.csr[1]][self.csr[0]].typ = "Bl"
+                        elif self.lad.ladder[self.csr[1]][self.csr[0]].typ == "Bl":
+                            self.lad.ladder[self.csr[1]][self.csr[0]].typ = "Ln"
+                    self.com_dsp()
+            if e.keysym == "Right":
+                if self.com_frm is None:
+                    if "Control" in self.keep:
+                        self.lad.add_pls([self.csr[0], self.csr[1]])
+                        if self.lad.ladder[self.csr[1]][self.csr[0]].typ == "Ln":
+                            self.lad.ladder[self.csr[1]][self.csr[0]].typ = "Bl"
+                        elif self.lad.ladder[self.csr[1]][self.csr[0]].typ == "Bl":
+                            self.lad.ladder[self.csr[1]][self.csr[0]].typ = "Ln"
+                    self.csr_move("Right")
                     self.com_dsp()
 
         def k_release(e):
