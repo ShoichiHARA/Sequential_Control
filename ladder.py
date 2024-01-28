@@ -143,9 +143,10 @@ class Ladder:
                     self.ladder[xy[1]].append(self.Comp("Bl", brc))
                 else:
                     self.ladder[xy[1]].append(self.Comp("En", brc))
-        elif rc == "r":
-            self.ladder[xy[1]].insert(xy[0], self.Comp("Bl", 0))
-            del self.ladder[xy[1]][-2]
+        elif rc == "r":  # 列挿入は改善が必要
+            for i in range(len(self.ladder)):
+                self.ladder[i].insert(xy[0], self.Comp("Ln", 0))
+                del self.ladder[i][-2]
 
     def org(self):
         i = 0

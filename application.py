@@ -313,6 +313,13 @@ class MainWin(tk.Frame):
                     else:
                         self.lad.add_txt(self.csr, "ent")
                     self.com_dsp(0)
+            if e.keysym == "Insert":
+                if self.com_frm is None:
+                    if "Shift" in self.keep:
+                        self.lad.ins_rc([self.csr[0], self.csr[1]], "c")
+                    elif "Control" in self.keep:
+                        self.lad.ins_rc([self.csr[0], self.csr[1]], "r")
+                    self.com_dsp()
             if e.keysym == "Delete":
                 if self.csr[1] < self.row - 1:
                     self.lad.add_txt(self.csr, "bl")
