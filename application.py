@@ -994,6 +994,7 @@ class IOWin(tk.Frame):
         self.master.geometry("400x600")
         self.widgets()
         self.event()
+        self.dev_type("pb")
 
     # ウィジェット
     def widgets(self: tk.Tk):
