@@ -285,7 +285,11 @@ class MainWin(tk.Frame):
                 return
             self.keep.append(e.keysym)
             # print(e.keysym)
-            if e.keysym in ["b", "e", "l", "o", "r", "s", ]:
+            if e.keysym in ["Shift_L", "Shift_R"]:
+                self.keep.append("Shift")
+            if e.keysym in ["Control_L", "Control_R"]:
+                self.keep.append("Control")
+            if e.keysym in ["b", "e", "i", "l", "o", "r", "s", ]:
                 if self.com_frm is None:
                     self.com_input(e.keysym)
             if e.keysym == "Return":
@@ -317,50 +321,43 @@ class MainWin(tk.Frame):
                 self.com_dsp(0)
             if e.keysym == "z":
                 if self.com_frm is None:
-                    if "Control_L" in self.keep:
-                        print("back")
-                    if "Control_R" in self.keep:
+                    if "Control" in self.keep:
                         print("back")
             if e.keysym == "Up":
                 if self.com_frm is None:
                     self.csr_move("Up")
-                    if "Control_L" in self.keep:
+                    if "Control" in self.keep:
                         self.lad.add_pls([self.csr[0], self.csr[1]])
                         if self.lad.ladder[self.csr[1]][self.csr[0]].brc == 1:  # 分岐ある場合
                             self.lad.ladder[self.csr[1]][self.csr[0]].brc = 0   # 分岐消去
                         else:                                                   # 分岐ない場合
                             self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1   # 分岐追加
-                    if "Control_R" in self.keep:
-                        if self.lad.ladder[self.csr[1]][self.csr[0]].brc == 1:
-                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 0
-                        else:
-                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1
                     self.com_dsp()
             if e.keysym == "Down":
                 if self.com_frm is None:
-                    if "Control_L" in self.keep:
+                    if "Control" in self.keep:
                         self.lad.add_pls([self.csr[0], self.csr[1]])
                         if self.lad.ladder[self.csr[1]][self.csr[0]].brc == 1:  # 分岐ある場合
                             self.lad.ladder[self.csr[1]][self.csr[0]].brc = 0   # 分岐消去
                         else:                                                   # 分岐ない場合
                             self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1   # 分岐追加
-                    if "Control_R" in self.keep:
-                        if self.lad.ladder[self.csr[1]][self.csr[0]].brc == 1:
-                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 0
-                        else:
-                            self.lad.ladder[self.csr[1]][self.csr[0]].brc = 1
                     self.csr_move("Down")
                     self.com_dsp()
 
             if e.keysym in ["Left", "Right"]:
                 if self.com_frm is None:
-                    # self.lad.add_pls(self.csr)
                     self.csr_move(e.keysym)
                     self.com_dsp()
 
         def k_release(e):
             if e.keysym in self.keep:
                 self.keep.remove(e.keysym)
+            if e.keysym in ["Shift_L", "Shift_R"]:
+                if "Shift" in self.keep:
+                    self.keep.remove("Shift")
+            if e.keysym in ["Control_L", "Control_R"]:
+                if "Control" in self.keep:
+                    self.keep.remove("Control")
 
         self.master.bind("<ButtonPress>", m_press)
         self.master.bind("<ButtonRelease>", m_release)
