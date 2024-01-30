@@ -679,29 +679,39 @@ class PBWin(tk.Frame):
         # 押しボタンスイッチ1
         self.cvs.create_image(350, 490, tags="pb1n", image=self.pb1n)
         self.cvs.create_image(350, 490, tags="pb1f", image=self.pb1f)
+        self.cvs.create_text(350, 540, text="PB1 (v)",font=("", 12, "bold"))
 
         # 押しボタンスイッチ2
         self.cvs.create_image(430, 490, tags="pb2n", image=self.pb2n)
         self.cvs.create_image(430, 490, tags="pb2f", image=self.pb2f)
+        self.cvs.create_text(430, 540, text="PB2 (b)",font=("", 12, "bold"))
 
         # 押しボタンスイッチ3
         self.cvs.create_image(510, 490, tags="pb3n", image=self.pb3n)
         self.cvs.create_image(510, 490, tags="pb3f", image=self.pb3f)
+        self.cvs.create_text(510, 540, text="PB3 (n)",font=("", 12, "bold"))
 
         # 押しボタンスイッチ4
         self.cvs.create_image(590, 490, tags="pb4n", image=self.pb4n)
         self.cvs.create_image(590, 490, tags="pb4f", image=self.pb4f)
+        self.cvs.create_text(590, 540, text="PB4 (m)",font=("", 12, "bold"))
 
         # 押しボタンスイッチ5
         self.cvs.create_image(700, 490, tags="pb5n", image=self.pb5n)
         self.cvs.create_image(700, 490, tags="pb5f", image=self.pb5f)
+        self.cvs.create_text(700, 540, text="PB5 (space)",font=("", 12, "bold"))
 
         # リミットスイッチ
         self.cvs.create_rectangle(680, 150, 700, 180, tags="LS1", fill="black", width=0)
+        self.cvs.create_text(725, 165, text="LS1",font=("", 12, "bold"))
         self.cvs.create_rectangle(100, 150, 120, 180, tags="LS2", fill="black", width=0)
+        self.cvs.create_text(75, 165, text="LS2",font=("", 12, "bold"))
         self.cvs.create_rectangle(100, 120, 120, 150, tags="LS3", fill="black", width=0)
+        self.cvs.create_text(75, 135, text="LS3",font=("", 12, "bold"))
         self.cvs.create_rectangle(100, 90, 120, 120, tags="LS4", fill="black", width=0)
+        self.cvs.create_text(75, 105, text="LS4",font=("", 12, "bold"))
         self.cvs.create_rectangle(100, 60, 120, 90, tags="LS5", fill="black", width=0)
+        self.cvs.create_text(75, 75, text="LS5",font=("", 12, "bold"))
 
         # パイロットランプ1
         self.cvs.create_image(350, 370, tags="pl1n", image=self.pl1n)
@@ -1118,5 +1128,5 @@ class IOWin(tk.Frame):
 # アプリケーション
 def application():
     root = tk.Tk()  # Tkinterインスタンスの生成
-    app = MainWin(master=root)  # アプリケーション実行
+    app = PBWin(master=root)  # アプリケーション実行
     app.mainloop()  # ウインドウの描画

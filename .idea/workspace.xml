@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/30&#10;コンベヤの速度変更">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/30&#10;割付表のカーソル移動を追加">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
     </list>
@@ -171,14 +171,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00020" summary="1/6&#10;パイロットランプ追加">
-      <option name="closed" value="true" />
-      <created>1704468769404</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1704468769404</updated>
     </task>
     <task id="LOCAL-00021" summary="1/6&#10;スイッチ動作を関数化&#10;マウスでスイッチの動作を可能">
       <option name="closed" value="true" />
@@ -564,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706622735941</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="1/30&#10;割付表のカーソル移動を追加">
+      <option name="closed" value="true" />
+      <created>1706625221685</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1706625221685</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -585,7 +585,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/17&#10;実行中の動作をプログラム上に表示&#10;異なるスイッチでもONになるバグ発生" />
     <MESSAGE value="1/18&#10;異なるスイッチでもONになるバグ解消&#10;実行終了時に動作表示を削除" />
     <MESSAGE value="1/18&#10;プログラム整理関数の修正" />
     <MESSAGE value="1/19&#10;ファイル出力未完成" />
@@ -610,6 +609,7 @@
     <MESSAGE value="1/29&#10;保存ファイル変更" />
     <MESSAGE value="1/30&#10;立上りパルス、立下りパルス実装&#10;シミュレーション周期を0.02sへ変更" />
     <MESSAGE value="1/30&#10;コンベヤの速度変更" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/30&#10;コンベヤの速度変更" />
+    <MESSAGE value="1/30&#10;割付表のカーソル移動を追加" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/30&#10;割付表のカーソル移動を追加" />
   </component>
 </project>
