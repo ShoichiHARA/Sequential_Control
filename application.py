@@ -200,7 +200,7 @@ class MainWin(tk.Frame):
                         )
                         self.run_tag.append("on"+str(i)+str(j))
                 
-            self.master.after(10, self.sm_run)  # 1000ms後に実行
+            self.master.after(20, self.sm_run)  # 20ms後に実行
         else:
             self.run = 0
             return
@@ -968,11 +968,11 @@ class PBWin(tk.Frame):
         else:
             self.cvs.lift("pl4f", "pl4n")
         if "RY1" in on:
-            self.pall_func(d=-1)
+            self.pall_func(d=-3)
         else:
             pass
         if "RY2" in on:
-            self.pall_func(d=1)
+            self.pall_func(d=3)
         else:
             pass
 

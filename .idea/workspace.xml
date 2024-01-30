@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/29&#10;保存ファイル変更">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/30&#10;立上りパルス、立下りパルス実装&#10;シミュレーション周期を0.02sへ変更">
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,14 +170,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00018" summary="1/4&#10;リセット命令調整">
-      <option name="closed" value="true" />
-      <created>1704350306362</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1704350306362</updated>
     </task>
     <task id="LOCAL-00019" summary="1/5&#10;実習盤配置の変更&#10;パイロットランプ作成">
       <option name="closed" value="true" />
@@ -565,7 +555,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706459348371</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="1/30&#10;立上りパルス、立下りパルス実装&#10;シミュレーション周期を0.02sへ変更">
+      <option name="closed" value="true" />
+      <created>1706622462318</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1706622462318</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -586,7 +584,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/14&#10;実行関数を作成中&#10;出力が反映されない" />
     <MESSAGE value="1/16&#10;細かな修正と動作確認&#10;実行中に閉じると、描画するものがないエラー発生" />
     <MESSAGE value="1/17&#10;実行中の動作をプログラム上に表示&#10;異なるスイッチでもONになるバグ発生" />
     <MESSAGE value="1/18&#10;異なるスイッチでもONになるバグ解消&#10;実行終了時に動作表示を削除" />
@@ -611,6 +608,7 @@
     <MESSAGE value="1/29&#10;パレットの製品位置の修正&#10;リミットスイッチの状態を識別化" />
     <MESSAGE value="1/29&#10;I/O割付表の機器側を最初に入力&#10;exe化" />
     <MESSAGE value="1/29&#10;保存ファイル変更" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/29&#10;保存ファイル変更" />
+    <MESSAGE value="1/30&#10;立上りパルス、立下りパルス実装&#10;シミュレーション周期を0.02sへ変更" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/30&#10;立上りパルス、立下りパルス実装&#10;シミュレーション周期を0.02sへ変更" />
   </component>
 </project>
