@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/30&#10;立上りパルス、立下りパルス実装&#10;シミュレーション周期を0.02sへ変更">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/30&#10;コンベヤの速度変更">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -170,14 +171,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00019" summary="1/5&#10;実習盤配置の変更&#10;パイロットランプ作成">
-      <option name="closed" value="true" />
-      <created>1704466565027</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1704466565027</updated>
     </task>
     <task id="LOCAL-00020" summary="1/6&#10;パイロットランプ追加">
       <option name="closed" value="true" />
@@ -563,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706622462318</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="1/30&#10;コンベヤの速度変更">
+      <option name="closed" value="true" />
+      <created>1706622735941</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1706622735941</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -584,7 +585,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/16&#10;細かな修正と動作確認&#10;実行中に閉じると、描画するものがないエラー発生" />
     <MESSAGE value="1/17&#10;実行中の動作をプログラム上に表示&#10;異なるスイッチでもONになるバグ発生" />
     <MESSAGE value="1/18&#10;異なるスイッチでもONになるバグ解消&#10;実行終了時に動作表示を削除" />
     <MESSAGE value="1/18&#10;プログラム整理関数の修正" />
@@ -609,6 +609,7 @@
     <MESSAGE value="1/29&#10;I/O割付表の機器側を最初に入力&#10;exe化" />
     <MESSAGE value="1/29&#10;保存ファイル変更" />
     <MESSAGE value="1/30&#10;立上りパルス、立下りパルス実装&#10;シミュレーション周期を0.02sへ変更" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/30&#10;立上りパルス、立下りパルス実装&#10;シミュレーション周期を0.02sへ変更" />
+    <MESSAGE value="1/30&#10;コンベヤの速度変更" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/30&#10;コンベヤの速度変更" />
   </component>
 </project>

@@ -985,6 +985,7 @@ class IOWin(tk.Frame):
 
         # 定義
         self.frm = tk.Frame(self.master)
+        self.csr = [0, 0]
         self.io_st = lst
         self.io_list = []
         self.keep = []
@@ -1012,6 +1013,7 @@ class IOWin(tk.Frame):
                     row[-1].configure(state="readonly")
                 row[-1].place(x=x[j], y=i*25+45)
             self.io_list.append(row)
+        self.io_list[0][0].focus_set()
 
         # 完了ボタン
         ok_b = tk.Button(self.frm, text=lg.ok, width=8, command=self.com_ok)
@@ -1033,10 +1035,18 @@ class IOWin(tk.Frame):
         def k_press(e):
             if e.keysym in self.keep:
                 return
-            print(e.keysym)
+            # print(e.keysym)
             self.keep.append(e.keysym)
-            if e.keysym == "k":
-                self.dev_type("pb")
+            if e.keysym == "Return":
+                self.csr_move("Down")
+            if e.keysym == "Down":
+                pass
+            if e.keysym == "Left":
+                pass
+            if e.keysym == "Right":
+                pass
+            if e.keysym in ["Up", "Down", "Left", "Right"]:
+                self.csr_move(e.keysym)
 
         def k_release(e):
             if e.keysym in self.keep:
@@ -1044,6 +1054,30 @@ class IOWin(tk.Frame):
 
         self.master.bind("<KeyPress>", k_press)
         self.master.bind("<KeyRelease>", k_release)
+
+    # カーソル移動
+    def csr_move(self, d=""):
+        if d == "Up":
+            self.csr[1] -= 1
+        elif d == "Down":
+            self.csr[1] += 1
+        elif d == "Left":
+            if self.csr[0] == 0:
+                self.csr[0] = 2
+                self.csr[1] -= 1
+            elif self.csr[0] == 2:
+                self.csr[0] = 0
+        elif d == "Right":
+            if self.csr[0] == 0:
+                self.csr[0] = 2
+            elif self.csr[0] == 2:
+                self.csr[0] = 0
+                self.csr[1] += 1
+        if self.csr[1] == -1:
+            self.csr[1] += 1
+        if self.csr[1] == len(self.io_st):
+            self.csr[1] -= 1
+        self.io_list[self.csr[1]][self.csr[0]].focus_set()
 
     # 割付決定
     def com_ok(self):
