@@ -714,20 +714,24 @@ class PBWin(tk.Frame):
         self.cvs.create_text(75, 75, text="LS5",font=("", 12, "bold"))
 
         # パイロットランプ1
-        self.cvs.create_image(350, 370, tags="pl1n", image=self.pl1n)
-        self.cvs.create_image(350, 370, tags="pl1f", image=self.pl1f)
+        self.cvs.create_image(350, 360, tags="pl1n", image=self.pl1n)
+        self.cvs.create_image(350, 360, tags="pl1f", image=self.pl1f)
+        self.cvs.create_text(350, 405, text="PL1", font=("", 12, "bold"))
 
         # パイロットランプ2
-        self.cvs.create_image(430, 370, tags="pl2n", image=self.pl2n)
-        self.cvs.create_image(430, 370, tags="pl2f", image=self.pl2f)
+        self.cvs.create_image(430, 360, tags="pl2n", image=self.pl2n)
+        self.cvs.create_image(430, 360, tags="pl2f", image=self.pl2f)
+        self.cvs.create_text(430, 405, text="PL2", font=("", 12, "bold"))
 
         # パイロットランプ3
-        self.cvs.create_image(510, 370, tags="pl3n", image=self.pl3n)
-        self.cvs.create_image(510, 370, tags="pl3f", image=self.pl3f)
+        self.cvs.create_image(510, 360, tags="pl3n", image=self.pl3n)
+        self.cvs.create_image(510, 360, tags="pl3f", image=self.pl3f)
+        self.cvs.create_text(510, 405, text="PL3", font=("", 12, "bold"))
 
         # パイロットランプ4
-        self.cvs.create_image(590, 370, tags="pl4n", image=self.pl4n)
-        self.cvs.create_image(590, 370, tags="pl4f", image=self.pl4f)
+        self.cvs.create_image(590, 360, tags="pl4n", image=self.pl4n)
+        self.cvs.create_image(590, 360, tags="pl4f", image=self.pl4f)
+        self.cvs.create_text(590, 405, text="PL4", font=("", 12, "bold"))
 
         # 製品
         self.cvs.create_image(self.pall_x, 120, tags="pall", image=self.pall)
