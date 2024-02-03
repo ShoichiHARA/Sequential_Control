@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/30&#10;実習盤の文字追加&#10;exe化">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
-    </list>
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/31&#10;実習盤の文字追加" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -171,14 +168,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00022" summary="1/6&#10;ラダー図記号の作成">
-      <option name="closed" value="true" />
-      <created>1704549333276</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1704549333276</updated>
     </task>
     <task id="LOCAL-00023" summary="1/6&#10;カーソルの作成">
       <option name="closed" value="true" />
@@ -564,7 +553,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706625944413</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="1/31&#10;実習盤の文字追加">
+      <option name="closed" value="true" />
+      <created>1706712571969</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1706712571969</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -585,7 +582,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/18&#10;プログラム整理関数の修正" />
     <MESSAGE value="1/19&#10;ファイル出力未完成" />
     <MESSAGE value="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定" />
     <MESSAGE value="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成" />
@@ -610,6 +606,7 @@
     <MESSAGE value="1/30&#10;コンベヤの速度変更" />
     <MESSAGE value="1/30&#10;割付表のカーソル移動を追加" />
     <MESSAGE value="1/30&#10;実習盤の文字追加&#10;exe化" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/30&#10;実習盤の文字追加&#10;exe化" />
+    <MESSAGE value="1/31&#10;実習盤の文字追加" />
+    <option name="LAST_COMMIT_MESSAGE" value="1/31&#10;実習盤の文字追加" />
   </component>
 </project>
