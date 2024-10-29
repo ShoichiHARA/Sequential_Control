@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="1/31&#10;実習盤の文字追加" />
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="2/3&#10;バグ修正&#10;exe化">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,18 +62,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.application.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.setup.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/shoic/PycharmProjects/Sequential_Control/main.py",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.application.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.setup.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/shoic/PycharmProjects/Sequential_Control&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PythonContentEntriesConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\shoic\PycharmProjects\Sequential_Control" />
@@ -168,14 +170,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00023" summary="1/6&#10;カーソルの作成">
-      <option name="closed" value="true" />
-      <created>1704552582550</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1704552582550</updated>
     </task>
     <task id="LOCAL-00024" summary="1/7&#10;カーソル移動を関数化">
       <option name="closed" value="true" />
@@ -561,7 +555,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706712571969</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="2/3&#10;バグ修正&#10;exe化">
+      <option name="closed" value="true" />
+      <created>1706928961184</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1706928961184</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -582,7 +584,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/19&#10;ファイル出力未完成" />
     <MESSAGE value="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定" />
     <MESSAGE value="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成" />
     <MESSAGE value="1/21&#10;スクロールバー作成&#10;スクロールバーで表示範囲の変更、&#10;プログラムの大きさで長さの変更を目指す" />
@@ -607,6 +608,7 @@
     <MESSAGE value="1/30&#10;割付表のカーソル移動を追加" />
     <MESSAGE value="1/30&#10;実習盤の文字追加&#10;exe化" />
     <MESSAGE value="1/31&#10;実習盤の文字追加" />
-    <option name="LAST_COMMIT_MESSAGE" value="1/31&#10;実習盤の文字追加" />
+    <MESSAGE value="2/3&#10;バグ修正&#10;exe化" />
+    <option name="LAST_COMMIT_MESSAGE" value="2/3&#10;バグ修正&#10;exe化" />
   </component>
 </project>
