@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="2/3&#10;バグ修正&#10;exe化">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="10/29&#10;新規作成開始" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,14 +168,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00024" summary="1/7&#10;カーソル移動を関数化">
-      <option name="closed" value="true" />
-      <created>1704629625056</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1704629625056</updated>
     </task>
     <task id="LOCAL-00025" summary="1/7&#10;命令入力ウインドウの作成&#10;命令種類の選択肢完成">
       <option name="closed" value="true" />
@@ -563,7 +553,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706928961184</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="10/29&#10;新規作成開始">
+      <option name="closed" value="true" />
+      <created>1730211594381</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1730211594382</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -584,7 +582,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/20&#10;プログラムのファイル入出力完成&#10;IO割付表もファイル作成予定" />
     <MESSAGE value="プログラムのファイル入出力完成&#10;IO割付表のファイル入出力完成" />
     <MESSAGE value="1/21&#10;スクロールバー作成&#10;スクロールバーで表示範囲の変更、&#10;プログラムの大きさで長さの変更を目指す" />
     <MESSAGE value="1/21&#10;図を小さく&#10;バックスペースで削除" />
@@ -609,6 +606,7 @@
     <MESSAGE value="1/30&#10;実習盤の文字追加&#10;exe化" />
     <MESSAGE value="1/31&#10;実習盤の文字追加" />
     <MESSAGE value="2/3&#10;バグ修正&#10;exe化" />
-    <option name="LAST_COMMIT_MESSAGE" value="2/3&#10;バグ修正&#10;exe化" />
+    <MESSAGE value="10/29&#10;新規作成開始" />
+    <option name="LAST_COMMIT_MESSAGE" value="10/29&#10;新規作成開始" />
   </component>
 </project>
