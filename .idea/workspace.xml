@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="11/05&#10;メニューバー作成">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="11/14&#10;カーソル完成&#10;母線完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application2.py" beforeDir="false" afterPath="$PROJECT_DIR$/application2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gvalue.py" beforeDir="false" afterPath="$PROJECT_DIR$/gvalue.py" afterDir="false" />
@@ -173,14 +173,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00026" summary="1/8&#10;命令入力ウインドウを簡略化&#10;コマンドのみで入力を目指す">
-      <option name="closed" value="true" />
-      <created>1704707980432</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1704707980432</updated>
     </task>
     <task id="LOCAL-00027" summary="1/8&#10;命令入力ウインドウをクラス化&#10;EnterやEscapeでも動作可能">
       <option name="closed" value="true" />
@@ -566,7 +558,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730813206555</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="11/14&#10;カーソル完成&#10;母線完成">
+      <option name="closed" value="true" />
+      <created>1731547716059</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1731547716060</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -587,7 +587,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/21&#10;スクロールバー作成&#10;スクロールバーで表示範囲の変更、&#10;プログラムの大きさで長さの変更を目指す" />
     <MESSAGE value="1/21&#10;図を小さく&#10;バックスペースで削除" />
     <MESSAGE value="1/22&#10;スクロールバーが正常に動作しない&#10;exeファイル化" />
     <MESSAGE value="1/23&#10;カーソルの色の修正" />
@@ -612,6 +611,7 @@
     <MESSAGE value="2/3&#10;バグ修正&#10;exe化" />
     <MESSAGE value="10/29&#10;新規作成開始" />
     <MESSAGE value="11/05&#10;メニューバー作成" />
-    <option name="LAST_COMMIT_MESSAGE" value="11/05&#10;メニューバー作成" />
+    <MESSAGE value="11/14&#10;カーソル完成&#10;母線完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="11/14&#10;カーソル完成&#10;母線完成" />
   </component>
 </project>

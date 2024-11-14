@@ -1,7 +1,8 @@
 import tkinter as tk
+from tkinter import ttk
 from functools import partial as pt
 import gvalue as g
-# import ladder as ld
+import ladder as ld
 
 
 # メインウインドウ
@@ -12,7 +13,7 @@ class MainWin(tk.Frame):
 
         # 定義
         self.bar = tk.Menu(self.master)
-        # self.lad = ld.Ladder1(self)  # ラダープログラム
+        self.lad = ld.Ladder1(self)  # ラダープログラム
         self.fl_tab = FileTab(self)  # ファイルタブ
         self.ed_tab = EditTab(self)  # 編集タブ
         self.sm_tab = SimuTab(self)  # シミュレーションタブ
@@ -22,12 +23,15 @@ class MainWin(tk.Frame):
 
         # ウインドウの定義
         self.master.title(g.lg.tit)  # ウインドウタイトル
-        self.master.geometry("400x300")  # ウインドウサイズ
+        self.master.geometry("600x400")  # ウインドウサイズ
         # self.master.state("zoomed")  # ウインドウ最大化
         self.master.configure(menu=self.bar)  # メニューバー追加
 
         # 設定
         self.fl_tab.add_menu()  # ファイルメニュー追加
+
+        # テスト表示
+        self.ed_tab.new()
 
 
 # ファイルタブクラス
@@ -78,6 +82,13 @@ class EditTab:
         self.frm = tk.Frame(self.mw.master)  # ラダー用フレーム
         self.cvs = tk.Canvas(self.frm, bg="white", highlightthickness=0)  # 描画キャンバス
         self.scr = tk.Scrollbar(self.frm, orient=tk.VERTICAL)  # スクロールバー
+        self.cm_fr = tk.Frame(self.mw.master)  # 命令入力用フレーム
+        self.lb_fr = tk.Frame(self.cm_fr)      # 1段目フレーム
+        self.bt_fr = tk.Frame(self.cm_fr)      # 2段目フレーム
+        self.cm_bx = ttk.Combobox(self.lb_fr)  # 命令種類プルダウン
+        self.cm_et = ttk.Entry(self.lb_fr)     # 入力フォーム
+        self.ok_bt = tk.Button(self.bt_fr)     # 決定ボタン
+        self.cn_bt = tk.Button(self.bt_fr)     # 取消ボタン
 
         # メニューバー設定
         self.mw.bar.add_cascade(label=g.lg.edt, menu=self.menu)  # 編集メニュー追加
@@ -90,16 +101,36 @@ class EditTab:
         self.scr.configure(command=self.cvs.yview)       # スクロールバーで画面を移動
 
         # カーソル設定
-        self.mw.master.bind("<KeyPress>", pt(self.csr_move))
         self.mw.master.bind("<KeyPress-Up>", pt(self.csr_move, k="U"), "+")
         self.mw.master.bind("<KeyPress-Down>", pt(self.csr_move, k="D"), "+")
         self.mw.master.bind("<KeyPress-Left>", pt(self.csr_move, k="L"), "+")
         self.mw.master.bind("<KeyPress-Right>", pt(self.csr_move, k="R"), "+")
 
+        # 命令入力設定
+        self.cm_fr.configure(bd=2, relief=tk.RAISED)  # フォーム用フレーム
+        self.lb_fr.configure(padx=10, pady=10)                 # 1段目フレーム
+        self.bt_fr.configure(pady=10)                 # 2段目フレーム
+        self.cm_bx.configure(width=5, values=self.mw.lad.cm_ls, font=("", 12))
+        self.cm_et.configure(width=20, font=("", 12))
+        self.ok_bt.configure(width=10, text=g.lg.ook, command=self.ok_clk)
+        self.cn_bt.configure(width=10, text=g.lg.ccl, command=self.cn_clk)
+        self.cm_bx.pack(side=tk.LEFT)
+        self.cm_et.pack(padx=10)
+        self.cn_bt.pack(side=tk.RIGHT, padx=10)
+        self.ok_bt.pack(anchor=tk.E)
+        self.lb_fr.pack(anchor=tk.W)
+        self.bt_fr.pack(anchor=tk.E)
+
+        # テスト用
+        self.imp_cmd(None)
+        self.mw.master.bind("<KeyPress>", pt(self.csr_move))
+        self.mw.master.bind("<KeyPress-l>", pt(self.draw_cmd, x=self.csr[0], y=self.csr[1], t="LD"), "+")
+        self.mw.master.bind("<KeyPress-k>", pt(self.imp_cmd), "+")
+
     # 新規作成
     def new(self):
         # 変数
-        x1 = self.mw.st_tab.column * self.mw.st_tab.size * 30 + 50
+        x1 = self.mw.st_tab.column * self.mw.st_tab.size * 25 + 50
         y1 = 600
 
         # 配置
@@ -118,7 +149,7 @@ class EditTab:
     # カーソル移動
     def csr_move(self, e, k=""):
         if k == "U":              # 上
-            if self.csr[1] > 0:   # 1列目でないばあい
+            if self.csr[1] > 0:   # 1列目でない場合
                 self.csr[1] -= 1  # 上へ
         elif k == "D":            # 下
             self.csr[1] += 1      # 下へ
@@ -139,11 +170,41 @@ class EditTab:
             pass
         else:
             print(e.keysym)
-        x0 = self.csr[0] * self.mw.st_tab.size * 30 + 50
+        x0 = self.csr[0] * self.mw.st_tab.size * 25 + 50
         y0 = self.csr[1] * self.mw.st_tab.size * self.mw.st_tab.height * 10 + 20
-        x1 = (self.csr[0] + 1) * self.mw.st_tab.size * 30 + 50
+        x1 = (self.csr[0] + 1) * self.mw.st_tab.size * 25 + 50
         y1 = (self.csr[1] + 1) * self.mw.st_tab.size * self.mw.st_tab.height * 10 + 20
         self.cvs.coords("csr", x0, y0, x1, y1)
+
+    # 命令入力フォーム
+    def imp_cmd(self, e, t="", r=""):
+        self.cm_bx.delete(0, tk.END)
+        self.cm_et.delete(0, tk.END)
+        self.cm_bx.insert(tk.END, t)
+        self.cm_et.insert(tk.END, r)
+        self.cm_fr.place(x=300, y=200)
+        self.cm_et.focus_set()  # 入力フォームにフォーカス
+
+    # 決定押下
+    def ok_clk(self):
+        t = self.cm_bx.get()  # 命令種類取得
+        r = self.cm_et.get()  # レジスタ取得
+        print(t, r)
+        self.cm_fr.place_forget()  # 命令入力フォーム非表示
+
+    # 取消押下
+    def cn_clk(self):
+        self.cm_fr.place_forget()
+
+    # 命令描画
+    def draw_cmd(self, e, x, y, t):
+        px = x * self.mw.st_tab.size * 25 + 50  # 画面上原点（左上）x座標
+        py = y * self.mw.st_tab.size * self.mw.st_tab.height * 10 + 20  # 画面上原点（左上）y座標
+        ax = self.mw.st_tab.size * 25 + px
+        ay = self.mw.st_tab.size * self.mw.st_tab.height * 5 + py
+
+        if t in ["LD", "AND", "OR"]:
+            self.cvs.create_line(px, ay, ax, ay)
 
 
 # シミュレーションタブクラス

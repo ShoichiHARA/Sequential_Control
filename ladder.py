@@ -291,6 +291,8 @@ class Ladder:
 
 # ラダークラス
 class Ladder1:
+    cm_ls = ["LD", "LDI", "AND", "ANI"]
+
     def __init__(self, mw: MainWin):
         # 定義
         self.mw = mw

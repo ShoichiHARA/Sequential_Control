@@ -33,6 +33,8 @@ class Language:
         self.cnv = ["Conveyor", "コンベア"][n]
         self.trf = ["Traffic Light", "信号機"][n]
         self.hlp = ["Help", "ヘルプ"][n]
+        self.ook = ["OK", "決定"][n]
+        self.ccl = ["Cancel", "取消"][n]
 
 
 lg = Language("JPN")
