@@ -1,3 +1,15 @@
+from __future__ import annotations
+
+import tkinter as tk
+from typing import TYPE_CHECKING
+from datetime import datetime
+import os
+import gvalue as g
+
+if TYPE_CHECKING:
+    from application2 import MainWin
+
+
 class Ladder:
     tag_list = ["M", "B", "P", "F", "R", "T", "C", "St", "Rs"]  # 名付命令リスト
     in_list = ["M", "B", "P", "F", "Ln"]  # 入力命令リスト
@@ -275,6 +287,13 @@ class Ladder:
                     ex_t = "ext=" + str(self.ladder[i][j].ext)
                     ot_t = "out=" + str(self.ladder[i][j].opt)
                     print(tp_t + " " + tg_t + " : " + ex_t + ", " + ot_t)
+
+
+# ラダークラス
+class Ladder1:
+    def __init__(self, mw: MainWin):
+        # 定義
+        self.mw = mw
 
 
 def test1():

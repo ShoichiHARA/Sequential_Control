@@ -13,6 +13,7 @@ class Language:
         self.opn = ["Open", "開く"][n]
         self.sav = ["Save", "上書き保存"][n]
         self.sva = ["Save as", "名前を付けて保存"][n]
+        self.cls = ["Close", "閉じる"][n],
         self.ext = ["Exit", "終了"][n]
         self.edt = ["Edit", "編集"][n]
         self.add = ["Addition", "追加"][n]
@@ -26,6 +27,8 @@ class Language:
         self.stp = ["Stop", "停止"][n]
         self.set = ["Setting", "設定"][n]
         self.viw = ["View", "表示"][n]
+        self.zin = ["Zoom in", "拡大"][n]
+        self.zot = ["Zoom out", "縮小"][n]
         self.iol = ["I/O Allocation", "入出力割付"][n]
         self.cnv = ["Conveyor", "コンベア"][n]
         self.trf = ["Traffic Light", "信号機"][n]
