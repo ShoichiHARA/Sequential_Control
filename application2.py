@@ -130,7 +130,7 @@ class EditTab:
     # 新規作成
     def new(self):
         # 変数
-        x1 = self.mw.st_tab.column * self.mw.st_tab.size * 25 + 50
+        x1 = self.mw.st_tab.column * self.mw.st_tab.size * 24 + 50
         y1 = 600
 
         # 配置
@@ -170,10 +170,10 @@ class EditTab:
             pass
         else:
             print(e.keysym)
-        x0 = self.csr[0] * self.mw.st_tab.size * 25 + 50
-        y0 = self.csr[1] * self.mw.st_tab.size * self.mw.st_tab.height * 10 + 20
-        x1 = (self.csr[0] + 1) * self.mw.st_tab.size * 25 + 50
-        y1 = (self.csr[1] + 1) * self.mw.st_tab.size * self.mw.st_tab.height * 10 + 20
+        x0 = self.csr[0] * self.mw.st_tab.size * 24 + 50
+        y0 = self.csr[1] * self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5 + 20
+        x1 = (self.csr[0] + 1) * self.mw.st_tab.size * 24 + 50
+        y1 = (self.csr[1] + 1) * self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5 + 20
         self.cvs.coords("csr", x0, y0, x1, y1)
 
     # 命令入力フォーム
@@ -197,14 +197,42 @@ class EditTab:
         self.cm_fr.place_forget()
 
     # 命令描画
-    def draw_cmd(self, e, x, y, t):
-        px = x * self.mw.st_tab.size * 25 + 50  # 画面上原点（左上）x座標
-        py = y * self.mw.st_tab.size * self.mw.st_tab.height * 10 + 20  # 画面上原点（左上）y座標
-        ax = self.mw.st_tab.size * 25 + px
-        ay = self.mw.st_tab.size * self.mw.st_tab.height * 5 + py
+    def draw_cmd(self, e, x, y, t):  # xy:カーソルxy座標、t:命令種類
+        self.delt_cmd(e, x, y)  # すでにあるもの削除
+        x0 = x * self.mw.st_tab.size * 24 + 50  # 画面上原点（左上）x座標
+        x1 = x0 + self.mw.st_tab.size * 8
+        x2 = x0 + self.mw.st_tab.size * 10
+        x3 = x0 + self.mw.st_tab.size * 12
+        x4 = x0 + self.mw.st_tab.size * 14
+        x5 = x0 + self.mw.st_tab.size * 16
+        x6 = x0 + self.mw.st_tab.size * 24
+        y0 = y * self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5 + 20  # 画面上原点（左上）y座標
+        y1 = y0 + self.mw.st_tab.size * 7
+        y2 = y0 + self.mw.st_tab.size * 9
+        y3 = y0 + self.mw.st_tab.size * 11
+        y4 = y0 + self.mw.st_tab.size * 18
+        tag = "t" + str(x) + str(y)
 
-        if t in ["LD", "AND", "OR"]:
-            self.cvs.create_line(px, ay, ax, ay)
+        if t in ["LD", "LDI", "LDP", "LDF", "AND", "OR"]:  # 入力命令基本
+            self.cvs.create_line(x0, y2, x1, y2, tag=tag)
+            self.cvs.create_line(x1, y1, x1, y3, tag=tag)
+            self.cvs.create_line(x5, y1, x5, y3, tag=tag)
+            self.cvs.create_line(x5, y2, x6, y2, tag=tag)
+        if t in ["LDI"]:  # 入力命令B接点
+            self.cvs.create_line(x1, y3, x5, y1, tag=tag)
+        elif t in ["LDP"]:  # 入力命令立上りパルス
+            self.cvs.create_line(x3, y1, x3, y3, tag=tag)
+            self.cvs.create_line(x2, y2, x3, y1, tag=tag)
+            self.cvs.create_line(x3, y1, x4, y2, tag=tag)
+        elif t in ["LDF"]:  # 入力命令立下りパルス
+            self.cvs.create_line(x3, y1, x3, y3, tag=tag)
+            self.cvs.create_line(x2, y2, x3, y3, tag=tag)
+            self.cvs.create_line(x3, y3, x4, y2, tag=tag)
+
+    # 命令削除
+    def delt_cmd(self, e, x, y):
+        self.cvs.delete("t"+str(x)+str(y))
+            
 
 
 # シミュレーションタブクラス
@@ -228,7 +256,7 @@ class SetTab:
         self.mw = mw
         self.column = 9  # 列数
         self.size = 5    # サイズ
-        self.height = 2  # 高さ
+        self.height = 1  # 高さ
         self.menu = tk.Menu(self.mw.bar, tearoff=0)  # 編集メニュー
 
         # 設定
