@@ -13,11 +13,11 @@ class MainWin(tk.Frame):
 
         # 定義
         self.bar = tk.Menu(self.master)
+        self.st_tab = SetTab(self)   # 設定タブ
         self.lad = ld.Ladder1(self)  # ラダープログラム
         self.fl_tab = FileTab(self)  # ファイルタブ
         self.ed_tab = EditTab(self)  # 編集タブ
         self.sm_tab = SimuTab(self)  # シミュレーションタブ
-        self.st_tab = SetTab(self)   # 設定タブ
         self.vw_tab = ViewTab(self)  # 表示タブ
         self.hp_tab = HelpTab(self)  # ヘルプタブ
 
@@ -26,12 +26,17 @@ class MainWin(tk.Frame):
         self.master.geometry("600x400")  # ウインドウサイズ
         # self.master.state("zoomed")  # ウインドウ最大化
         self.master.configure(menu=self.bar)  # メニューバー追加
+        self.master.bind("<KeyRelease-Escape>", self.exit)
 
         # 設定
         self.fl_tab.add_menu()  # ファイルメニュー追加
 
         # テスト表示
         self.ed_tab.new()
+
+    # アプリケーション終了
+    def exit(self, e=None):
+        self.master.destroy()
 
 
 # ファイルタブクラス
@@ -79,6 +84,8 @@ class EditTab:
         self.mw = mw
         self.menu = tk.Menu(self.mw.bar, tearoff=0)  # 編集メニュー
         self.csr = [0, 0]  # カーソル座標
+        self.ps_sh = False  # シフトーキー押下
+        self.ps_ct = False  # コントロールキー押下
         self.frm = tk.Frame(self.mw.master)  # ラダー用フレーム
         self.cvs = tk.Canvas(self.frm, bg="white", highlightthickness=0)  # 描画キャンバス
         self.scr = tk.Scrollbar(self.frm, orient=tk.VERTICAL)  # スクロールバー
@@ -101,19 +108,26 @@ class EditTab:
         self.scr.configure(command=self.cvs.yview)       # スクロールバーで画面を移動
 
         # カーソル設定
-        self.mw.master.bind("<KeyPress-Up>", pt(self.csr_move, k="U"), "+")
-        self.mw.master.bind("<KeyPress-Down>", pt(self.csr_move, k="D"), "+")
-        self.mw.master.bind("<KeyPress-Left>", pt(self.csr_move, k="L"), "+")
-        self.mw.master.bind("<KeyPress-Right>", pt(self.csr_move, k="R"), "+")
+        # self.cvs.bind("<KeyPress-Up>", pt(self.csr_move, k="U"), "+")
+        # self.cvs.bind("<KeyPress-Down>", pt(self.csr_move, k="D"), "+")
+        # self.cvs.bind("<KeyPress-Left>", pt(self.csr_move, k="L"), "+")
+        # self.cvs.bind("<KeyPress-Right>", pt(self.csr_move, k="R"), "+")
+        self.cvs.bind("<ButtonPress-1>", pt(self.csr_move, k="M"), "+")
+        self.cvs.bind("<Double-ButtonPress-1>", pt(self.csr_move, k="K"), "+")
+        # self.cvs.bind("<KeyPress-Return>", self.imp_cmd, "+")
+        # self.cvs.bind("<KeyPress-Delete>", self.delt_cmd, "+")
+        # self.cvs.bind("<KeyPress-BackSpace>", self.delt_cmd, "+")
 
         # 命令入力設定
         self.cm_fr.configure(bd=2, relief=tk.RAISED)  # フォーム用フレーム
-        self.lb_fr.configure(padx=10, pady=10)                 # 1段目フレーム
+        self.lb_fr.configure(padx=10, pady=10)        # 1段目フレーム
         self.bt_fr.configure(pady=10)                 # 2段目フレーム
         self.cm_bx.configure(width=5, values=self.mw.lad.cm_ls, font=("", 12))
         self.cm_et.configure(width=20, font=("", 12))
         self.ok_bt.configure(width=10, text=g.lg.ook, command=self.ok_clk)
         self.cn_bt.configure(width=10, text=g.lg.ccl, command=self.cn_clk)
+        self.cm_et.bind("<KeyPress-Return>", self.ok_clk)
+        self.cm_et.bind("<KeyPress-Escape>", self.cn_clk)
         self.cm_bx.pack(side=tk.LEFT)
         self.cm_et.pack(padx=10)
         self.cn_bt.pack(side=tk.RIGHT, padx=10)
@@ -122,117 +136,229 @@ class EditTab:
         self.bt_fr.pack(anchor=tk.E)
 
         # テスト用
-        self.imp_cmd(None)
-        self.mw.master.bind("<KeyPress>", pt(self.csr_move))
-        self.mw.master.bind("<KeyPress-l>", pt(self.draw_cmd, x=self.csr[0], y=self.csr[1], t="LD"), "+")
-        self.mw.master.bind("<KeyPress-k>", pt(self.imp_cmd), "+")
+        # self.imp_cmd(None)  # 命令入力フォーム表示
+        self.cvs.bind("<KeyPress>", self.key_prs, "+")
+        self.cvs.bind("<KeyRelease>", self.key_rls, "+")
+        # self.mw.master.bind("<KeyPress>", pt(self.csr_move))
+        # self.mw.master.bind("<KeyPress-l>", pt(self.draw_cmd, x=self.csr[0], y=self.csr[1], t="LD"), "+")
+        # self.mw.master.bind("<KeyPress-k>", pt(self.imp_cmd), "+")
 
     # 新規作成
     def new(self):
-        # 変数
-        x1 = self.mw.st_tab.column * self.mw.st_tab.size * 24 + 50
-        y1 = 600
-
         # 配置
         self.frm.pack(fill=tk.BOTH, expand=True)  # フレーム配置(fill:引き伸ばし)
         self.scr.pack(fill=tk.Y, side=tk.RIGHT)   # スクロールバー配置(side:右から)
         self.cvs.pack(fill=tk.BOTH, expand=True)  # キャンバス配置(expand:残領域に広げるか)
-        self.cvs.create_line(50, 20, 50, y1)  # 左母線
-        self.cvs.create_line(x1, 20, x1, y1)  # 右母線
-        self.cvs.create_rectangle(1, 1, 10, 10, tags="csr", width=3, outline="blue")  # カーソル配置
-        self.csr_move(None, "")
+
+        # 設定
+        self.draw_cmd("all", 0, 0)  # 全体再描画
+        self.cvs.focus_set()  # キャンバスにフォーカス
 
     # 画面削除
     def delete(self):
         self.frm.pack_forget()
 
+    # キーイベント振り分け
+    def key_prs(self, e):
+        print("e.keysym:", e.keysym)
+        if e.keysym in ["Up", "Down", "Right", "Left"]:
+            self.csr_move(e, e.keysym[0])  # カーソル移動
+        elif e.keysym == "Return":
+            self.imp_cmd(e)  # 命令入力
+        if e.keysym in ["Shift_L", "Shift_R"]:
+            self.ps_sh = True  # シフトキー有効
+        elif e.keysym in ["Control_L", "Control_R"]:
+            self.ps_ct = True  # コントロールキー有効
+        elif e.keysym in ["Delete", "BackSpace"]:
+            self.delt_cmd(e)  # 命令削除
+        elif e.keysym.isalpha() and (len(e.keysym) == 1):
+            self.imp_cmd(e)  # 命令入力
+        elif e.keysym == "F5":
+            self.mw.lad.display()  # 命令を文字で表示
+        elif e.keysym == "F6":
+            self.draw_cmd("all", 0, 0)  # 再描画
+
+    # キーイベント（離す）
+    def key_rls(self, e):
+        if e.keysym in ["Shift_L", "Shift_R"]:
+            self.ps_sh = False
+        elif e.keysym in ["Control_L", "Control_R"]:
+            self.ps_ct = False
+
+    # カーソル左上x座標計算
+    def cal_csr_x(self, n):
+        return n * self.mw.st_tab.size * 24 + 50
+
+    # カーソル左上y座標計算
+    def cal_csr_y(self, n):
+        return n * (self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5) + 20
+
     # カーソル移動
     def csr_move(self, e, k=""):
-        if k == "U":              # 上
-            if self.csr[1] > 0:   # 1列目でない場合
-                self.csr[1] -= 1  # 上へ
-        elif k == "D":            # 下
-            self.csr[1] += 1      # 下へ
-        elif k == "L":            # 左
-            if self.csr[0] > 0:   # 左端でない場合
-                self.csr[0] -= 1  # 左へ
-            else:                 # 左端の場合
-                if self.csr[1] > 0:  # 1列目でない場合
-                    self.csr[0] = self.mw.st_tab.column - 1  # 右端へ
-                    self.csr[1] -= 1                         # 一つ上へ
+        x = self.csr[0]
+        y = self.csr[1]
+        if k == "U":    # 上
+            if y > 0:   # 1列目でない場合
+                y -= 1  # 上へ
+        elif k == "D":  # 下
+            y += 1      # 下へ
+        elif k == "L":  # 左
+            if x > 0:   # 左端でない場合
+                x -= 1  # 左へ
+            else:       # 左端の場合
+                if y > 0:                          # 1列目でない場合
+                    x = self.mw.st_tab.column - 1  # 右端へ
+                    y -= 1                         # 一つ上へ
+            if self.ps_ct:  # コントロールキー押しながら
+                if self.mw.lad.dr_ls[y][x].t is None:          # 空欄の場合
+                    self.mw.lad.dr_ls[y][x].inp_cas(t="LINE")  # 線命令
+                    self.draw_cmd(e, x, y)                     # 線描画
+                elif self.mw.lad.dr_ls[y][x].t == "LINE":      # 線の場合
+                    self.mw.lad.dr_ls[y][x].inp_cas(t=None)    # 空白
+                    self.draw_cmd(e, x, y)                     # 空白描画
         elif k == "R":  # 右
-            if self.csr[0] < self.mw.st_tab.column - 1:  # 右端でない場合
-                self.csr[0] += 1  # 右へ
+            if x < self.mw.st_tab.column - 1:  # 右端でない場合
+                x += 1  # 右へ
             else:                 # 右端の場合
-                self.csr[0] = 0   # 左端へ
-                self.csr[1] += 1  # 一つ下へ
+                x = 0   # 左端へ
+                y += 1  # 一つ下へ
+        elif k in ["M", "K"]:  # 左クリック
+            if 50 <= e.x <= self.cal_csr_x(self.mw.st_tab.column):
+                if 20 <= e.y:
+                    x = (e.x - 50) // (self.cal_csr_x(1) - 50)
+                    y = (e.y - 20) // (self.cal_csr_y(1) - 20)
         elif e is None:
             pass
-        else:
-            print(e.keysym)
-        x0 = self.csr[0] * self.mw.st_tab.size * 24 + 50
-        y0 = self.csr[1] * self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5 + 20
-        x1 = (self.csr[0] + 1) * self.mw.st_tab.size * 24 + 50
-        y1 = (self.csr[1] + 1) * self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5 + 20
-        self.cvs.coords("csr", x0, y0, x1, y1)
 
-    # 命令入力フォーム
-    def imp_cmd(self, e, t="", r=""):
-        self.cm_bx.delete(0, tk.END)
-        self.cm_et.delete(0, tk.END)
-        self.cm_bx.insert(tk.END, t)
-        self.cm_et.insert(tk.END, r)
-        self.cm_fr.place(x=300, y=200)
+        # カーソル描画
+        x0 = self.cal_csr_x(x)
+        y0 = self.cal_csr_y(y)
+        x1 = self.cal_csr_x(x+1)
+        y1 = self.cal_csr_y(y+1)
+        self.cvs.coords("csr", x0, y0, x1, y1)  # カーソル図形移動
+
+        # 自身の変数に戻す
+        self.csr[0] = x
+        self.csr[1] = y
+
+        # 命令入力フォーム出現
+        if k == "K":  # ダブルクリック
+            self.imp_cmd(e)
+
+    # 命令入力フォーム(カーソル位置の情報)
+    def imp_cmd(self, e=None):
+        self.cm_bx.delete(0, tk.END)  # プルダウン初期化
+        self.cm_et.delete(0, tk.END)  # 入力欄初期化
+        x = self.csr[0]  # カーソルx座標
+        y = self.csr[1]  # カーソルy座標
+        if y < len(self.mw.lad.dr_ls):  # END命令より上の場合
+            if self.mw.lad.dr_ls[y][x].t not in [None, "LINE"]:  # 左の命令でない場合
+                self.cm_bx.insert(tk.END, self.mw.lad.dr_ls[y][x].t)  # 命令種類表示
+                self.cm_et.insert(tk.END, self.mw.lad.dr_ls[y][x].d)  # デバイス名表示
+        if e.keysym.isalpha() and (len(e.keysym) == 1):  # キーボードからの場合
+            print("hello")
+            self.cm_et.insert(tk.END, e.keysym)
+        self.cm_fr.place(x=300, y=200, anchor=tk.CENTER)
         self.cm_et.focus_set()  # 入力フォームにフォーカス
 
     # 決定押下
-    def ok_clk(self):
+    def ok_clk(self, e=None):
         t = self.cm_bx.get()  # 命令種類取得
-        r = self.cm_et.get()  # レジスタ取得
-        print(t, r)
+        d = self.cm_et.get()  # デバイス取得
+        x = self.csr[0]  # カーソルx座標
+        y = self.csr[1]  # カーソルy座標
+        print(t, d)
         self.cm_fr.place_forget()  # 命令入力フォーム非表示
+        print("len =", len(self.mw.lad.dr_ls))
+        if y >= len(self.mw.lad.dr_ls)-1:                # カーソル位置がENDより下の場合
+            for i in range(y-len(self.mw.lad.dr_ls)+2):  # 行が足りない分
+                self.mw.lad.ins_row()                    # 行追加
+                print(i)
+        self.mw.lad.dr_ls[y][x].inp_ent(t, d)  # 命令を入力
+        # self.mw.lad.dr_ls[self.csr[1]][self.csr[0]].t = t  # 命令種類
+        # self.mw.lad.dr_ls[self.csr[1]][self.csr[0]].d = d  # デバイス名
+        # l = self.mw.lad.dr_ls[y][x].l  # 縦線
+        self.draw_cmd(None, x, y)  # 描画
+        self.cvs.focus_set()  # キャンバスにフォーカス
+        self.csr_move(e, "R")  # カーソルを右へ
 
     # 取消押下
-    def cn_clk(self):
-        self.cm_fr.place_forget()
+    def cn_clk(self, e=None):
+        self.cm_fr.place_forget()  # 命令入力フォーム非表示
+        self.cvs.focus_set()  # キャンバスにフォーカス
 
     # 命令描画
-    def draw_cmd(self, e, x, y, t):  # xy:カーソルxy座標、t:命令種類
-        self.delt_cmd(e, x, y)  # すでにあるもの削除
-        x0 = x * self.mw.st_tab.size * 24 + 50  # 画面上原点（左上）x座標
+    def draw_cmd(self, e, x, y):  # xy:カーソルxy座標
+        # 命令情報
+        t = self.mw.lad.dr_ls[y][x].t
+        d = self.mw.lad.dr_ls[y][x].d
+        l = self.mw.lad.dr_ls[y][x].l
+
+        # 全描画
+        if e == "all":
+            self.cvs.delete("all")
+            for i in range(self.mw.st_tab.column):  # x軸
+                for j in range(len(self.mw.lad.dr_ls)):  # y軸
+                    self.draw_cmd(None, i, j)
+            x1 = self.mw.st_tab.column * self.mw.st_tab.size * 24 + 50  # 右母線x座標
+            y1 = 600                                                    # 母線y座標
+            self.cvs.create_line(50, 20, 50, y1)  # 左母線
+            self.cvs.create_line(x1, 20, x1, y1)  # 右母線
+            self.cvs.create_rectangle(0, 0, 0, 0, tags="csr", width=3, outline="blue")
+            self.csr_move(None)
+            return
+
+        x0 = self.cal_csr_x(x)  # 画面上原点（左上）x座標
         x1 = x0 + self.mw.st_tab.size * 8
         x2 = x0 + self.mw.st_tab.size * 10
         x3 = x0 + self.mw.st_tab.size * 12
         x4 = x0 + self.mw.st_tab.size * 14
         x5 = x0 + self.mw.st_tab.size * 16
         x6 = x0 + self.mw.st_tab.size * 24
-        y0 = y * self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5 + 20  # 画面上原点（左上）y座標
+        y0 = self.cal_csr_y(y)  # 画面上原点（左上）y座標
         y1 = y0 + self.mw.st_tab.size * 7
         y2 = y0 + self.mw.st_tab.size * 9
         y3 = y0 + self.mw.st_tab.size * 11
         y4 = y0 + self.mw.st_tab.size * 18
-        tag = "t" + str(x) + str(y)
+        tag = "x" + str(x) + "y" + str(y)
+        self.cvs.delete(tag)  # すでにある描画削除
 
-        if t in ["LD", "LDI", "LDP", "LDF", "AND", "OR"]:  # 入力命令基本
-            self.cvs.create_line(x0, y2, x1, y2, tag=tag)
-            self.cvs.create_line(x1, y1, x1, y3, tag=tag)
-            self.cvs.create_line(x5, y1, x5, y3, tag=tag)
-            self.cvs.create_line(x5, y2, x6, y2, tag=tag)
+        if t in ["LD", "LDI", "LDP", "LDF"]:  # 入力命令基本
+            self.cvs.create_line(x0, y2, x1, y2, tags=tag)
+            self.cvs.create_line(x1, y1, x1, y3, tags=tag)
+            self.cvs.create_line(x5, y1, x5, y3, tags=tag)
+            self.cvs.create_line(x5, y2, x6, y2, tags=tag)
+            self.cvs.create_text(
+                x3, y1, anchor=tk.S, text=d, font=("", self.mw.st_tab.font), tags=tag
+            )
+        elif t == "LINE":  # 横線
+            self.cvs.create_line(x0, y2, x6, y2, tags=tag)
         if t in ["LDI"]:  # 入力命令B接点
-            self.cvs.create_line(x1, y3, x5, y1, tag=tag)
+            self.cvs.create_line(x1, y3, x5, y1, tags=tag)
         elif t in ["LDP"]:  # 入力命令立上りパルス
-            self.cvs.create_line(x3, y1, x3, y3, tag=tag)
-            self.cvs.create_line(x2, y2, x3, y1, tag=tag)
-            self.cvs.create_line(x3, y1, x4, y2, tag=tag)
+            self.cvs.create_line(x3, y1, x3, y3, tags=tag)
+            self.cvs.create_line(x2, y2, x3, y1, tags=tag)
+            self.cvs.create_line(x3, y1, x4, y2, tags=tag)
         elif t in ["LDF"]:  # 入力命令立下りパルス
-            self.cvs.create_line(x3, y1, x3, y3, tag=tag)
-            self.cvs.create_line(x2, y2, x3, y3, tag=tag)
-            self.cvs.create_line(x3, y3, x4, y2, tag=tag)
+            self.cvs.create_line(x3, y1, x3, y3, tags=tag)
+            self.cvs.create_line(x2, y2, x3, y3, tags=tag)
+            self.cvs.create_line(x3, y3, x4, y2, tags=tag)
+        if l:
+            self.cvs.create_line(x0, y2, x0, y2+y4, tags=tag)
 
     # 命令削除
-    def delt_cmd(self, e, x, y):
-        self.cvs.delete("t"+str(x)+str(y))
-            
+    def delt_cmd(self, e, x=None, y=None):
+        if e is not None:
+            if e.keysym == "BackSpace":
+                self.csr_move(e, "L")
+        if x is None:
+            x = self.csr[0]
+        if y is None:
+            y = self.csr[1]
+        tag = "x" + str(x) + "y" + str(y)
+        self.cvs.delete(tag)
+        l = self.mw.lad.dr_ls[y][x].l
+        self.mw.lad.dr_ls[y][x] = ld.DrawCom(l=l)
 
 
 # シミュレーションタブクラス
@@ -257,6 +383,7 @@ class SetTab:
         self.column = 9  # 列数
         self.size = 5    # サイズ
         self.height = 1  # 高さ
+        self.font = 12   # フォントサイズ
         self.menu = tk.Menu(self.mw.bar, tearoff=0)  # 編集メニュー
 
         # 設定

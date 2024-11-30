@@ -291,11 +291,93 @@ class Ladder:
 
 # ラダークラス
 class Ladder1:
-    cm_ls = ["LD", "LDI", "AND", "ANI"]
+    cm_ls = ["LD", "LDI", "LDP", "LDF", "AND", "ANI"]
 
     def __init__(self, mw: MainWin):
         # 定義
         self.mw = mw
+        self.row = 1  # end命令行
+        self.dr_ls = []  # 描画用配列
+        self.ct_ls = [[], []]  # コメント集 [0]:デバイス名、[1]:コメント
+
+        # 初期描画
+        row = []
+        for i in range(self.mw.st_tab.column):
+            row.append(DrawCom(t="LINE"))
+        row[-1].t = "LD"
+        row[-1].d = "END"
+        for i in range(len(row)):
+            print(i, row[i].t, row[i].d)
+        self.dr_ls.append(row)
+
+        self.display()
+
+    # 描画用配列行挿入
+    def ins_row(self, n=-2):
+        row = []
+        for i in range(self.mw.st_tab.column):
+            row.append(DrawCom())
+        self.dr_ls.insert(n, row)
+        self.mw.ed_tab.draw_cmd("all", 0, 0)
+
+    # 描画用配列行削除
+    def del_row(self, n=-2):
+        del self.dr_ls[n]
+
+    # 表示
+    def display(self):
+        for i in range(len(self.dr_ls)):
+            t = ""
+            for j in range(self.mw.st_tab.column):
+                t += str(self.dr_ls[i][j].t)
+                t += ", "
+            print(t[:-2])
+
+
+# 描画用命令クラス
+class DrawCom:
+    def __init__(self, t=None, d="", l=False, c=0):
+        self.t = t  # 命令種類
+        self.d = d  # デバイス名
+        self.l = l  # 縦線
+        self.c = c  # その他設定値
+
+    # 表示
+    def display(self):
+        print("t =", self.t)
+        print("d =", self.d)
+        print("l =", self.l)
+        print("c =", self.c)
+
+    # 個別に変更
+    def inp_cas(self, t="", d=None, l=None, c=None):
+        if t != "":
+            self.t = t
+        if d is not None:
+            self.d = d
+        if l is not None:
+            self.l = l
+        if c is not None:
+            self.c = c
+
+    # 文字列から入力
+    def inp_ent(self, t=None, d=""):
+        if d == "":
+            return
+        d = d.upper().split()  # 大文字にしてスペース分割
+
+        # 命令種類決定
+        if t in Ladder1.cm_ls:
+            self.t = t
+        if d[0] in Ladder1.cm_ls:
+            self.t = d[0]
+            del d[0]
+
+        # デバイス名決定
+        if d[0][0] in ["X", "Y", "M", "T", "C"]:
+            self.d = d[0]
+
+        # self.display()
 
 
 def test1():
