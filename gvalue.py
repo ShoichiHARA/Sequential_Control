@@ -26,9 +26,11 @@ class Language:
         self.pus = ["Pause", "一時停止"][n]
         self.stp = ["Stop", "停止"][n]
         self.set = ["Setting", "設定"][n]
-        self.viw = ["View", "表示"][n]
+        self.siz = ["Draw Size", "描画サイズ"][n]
+        self.fnt = ["Font Size", "文字サイズ"][n]
         self.zin = ["Zoom in", "拡大"][n]
         self.zot = ["Zoom out", "縮小"][n]
+        self.viw = ["View", "表示"][n]
         self.iol = ["I/O Allocation", "入出力割付"][n]
         self.cnv = ["Conveyor", "コンベア"][n]
         self.trf = ["Traffic Light", "信号機"][n]
@@ -38,3 +40,5 @@ class Language:
 
 
 lg = Language("JPN")
+size0 = 3
+font0 = 12

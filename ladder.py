@@ -300,16 +300,17 @@ class Ladder1:
         self.dr_ls = []  # 描画用配列
         self.ct_ls = [[], []]  # コメント集 [0]:デバイス名、[1]:コメント
 
-        # 初期描画
-        row = []
-        for i in range(self.mw.st_tab.column):
-            row.append(DrawCom(t="LINE"))
-        row[-1].t = "LD"
-        row[-1].d = "END"
-        for i in range(len(row)):
-            print(i, row[i].t, row[i].d)
-        self.dr_ls.append(row)
+    # 描画用配列生成
+    def draw_lst(self):
+        row = []                                # END命令行
+        for i in range(self.mw.st_tab.column):  # 列数だけ繰り返し
+            row.append(DrawCom(t="LINE"))       # 線命令
+        row[-1].inp_cas(t="LD", d="END")        # 最後はEND命令
+        # for i in range(len(row)):1
+        #     print(i, row[i].t, row[i].d)
+        self.dr_ls.append(row)                  # 行追加
 
+        # テスト用
         self.display()
 
     # 描画用配列行挿入
@@ -318,7 +319,7 @@ class Ladder1:
         for i in range(self.mw.st_tab.column):
             row.append(DrawCom())
         self.dr_ls.insert(n, row)
-        self.mw.ed_tab.draw_cmd("all", 0, 0)
+        self.mw.ed_tab.draw_cmd("all")
 
     # 描画用配列行削除
     def del_row(self, n=-2):
