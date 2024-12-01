@@ -31,6 +31,7 @@ class MainWin(tk.Frame):
         # 設定
         self.lad.draw_lst()     # 描画用配列生成
         self.fl_tab.add_menu()  # ファイルメニュー追加
+        self.ed_tab.setting()   # 編集タブ設定
 
         # テスト表示
         self.ed_tab.new()
@@ -88,8 +89,9 @@ class EditTab:
         self.ps_sh = False  # シフトーキー押下
         self.ps_ct = False  # コントロールキー押下
         self.frm = tk.Frame(self.mw.master)  # ラダー用フレーム
-        self.cvs = tk.Canvas(self.frm, bg="white", highlightthickness=0)  # 描画キャンバス
-        self.scr = tk.Scrollbar(self.frm, orient=tk.VERTICAL)  # スクロールバー
+        self.cvs = tk.Canvas(self.frm, bg="white", highlightthickness=0)  # キャンバス
+        self.sr_xb = tk.Scrollbar(self.frm, orient=tk.HORIZONTAL)  # スクロールバー
+        self.sr_yb = tk.Scrollbar(self.frm, orient=tk.VERTICAL)    # スクロールバー
         self.cm_fr = tk.Frame(self.mw.master)  # 命令入力用フレーム
         self.lb_fr = tk.Frame(self.cm_fr)      # 1段目フレーム
         self.bt_fr = tk.Frame(self.cm_fr)      # 2段目フレーム
@@ -97,16 +99,21 @@ class EditTab:
         self.cm_et = ttk.Entry(self.lb_fr)     # 入力フォーム
         self.ok_bt = tk.Button(self.bt_fr)     # 決定ボタン
         self.cn_bt = tk.Button(self.bt_fr)     # 取消ボタン
-
-        # メニューバー設定
         self.mw.bar.add_cascade(label=g.lg.edt, menu=self.menu)  # 編集メニュー追加
+
+    # 設定
+    def setting(self):
+        # メニューバー設定
         self.menu.add_command(label=g.lg.add, command=kari)      # 追加
         self.menu.add_command(label=g.lg.ins, command=kari)      # 挿入
         self.menu.add_command(label=g.lg.dlt, command=kari)      # 削除
 
         # スクロールバー設定
-        self.cvs.configure(yscrollcommand=self.scr.set)  # 画面を移動させるスクロールバーを設定
-        self.scr.configure(command=self.cvs.yview)       # スクロールバーで画面を移動
+        self.set_siz()  # スクロール範囲
+        self.cvs.configure(xscrollcommand=self.sr_xb.set)  # スクロールバーを紐づけ
+        self.cvs.configure(yscrollcommand=self.sr_yb.set)  # スクロールバーを紐づけ
+        self.sr_xb.configure(command=self.cvs.xview)       # スクロールバーで画面を移動
+        self.sr_yb.configure(command=self.cvs.yview)       # スクロールバーで画面を移動
 
         # カーソル設定
         # self.cvs.bind("<KeyPress-Up>", pt(self.csr_move, k="U"), "+")
@@ -141,12 +148,17 @@ class EditTab:
     # 新規作成
     def new(self):
         # 配置
-        self.frm.pack(fill=tk.BOTH, expand=True)  # フレーム配置(fill:引き伸ばし)
-        self.scr.pack(fill=tk.Y, side=tk.RIGHT)   # スクロールバー配置(side:右から)
-        self.cvs.pack(fill=tk.BOTH, expand=True)  # キャンバス配置(expand:残領域に広げるか)
+        self.frm.pack(fill=tk.BOTH, expand=True)   # フレーム配置(fill:引き伸ばし)
+        self.sr_yb.grid(row=0, column=1, sticky=tk.N+tk.S)
+        self.sr_xb.grid(row=1, column=0, sticky=tk.W+tk.E)
+        self.cvs.grid(row=0, column=0, sticky=tk.NSEW)
+        self.frm.grid_columnconfigure(0, weight=1)  # スクリーンを右に広げる
+        self.frm.grid_rowconfigure(0, weight=1)     # スクリーンを下に広げる
+        # self.sr_yb.pack(fill=tk.Y, side=tk.RIGHT)  # スクロールバー配置(side:右から)
+        # self.cvs.pack(fill=tk.BOTH, expand=True)   # キャンバス配置(expand:残領域に広げるか)
 
         # 設定
-        self.draw_cmd("all", 0, 0)  # 全体再描画
+        self.draw_cmd("all")  # 全体再描画
         self.cvs.focus_set()  # キャンバスにフォーカス
 
     # 画面削除
@@ -182,11 +194,13 @@ class EditTab:
 
     # カーソル左上x座標計算
     def cal_csr_x(self, n):
-        return n * self.mw.st_tab.size * 24 + 50
+        n += 1
+        return n * self.mw.st_tab.size * 24
 
     # カーソル左上y座標計算
     def cal_csr_y(self, n):
-        return n * (self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5) + 20
+        n += 1
+        return n * (self.mw.st_tab.size * 18 + self.mw.st_tab.height * 5)
 
     # カーソル移動
     def csr_move(self, e, k=""):
@@ -252,10 +266,10 @@ class EditTab:
                 x = 0   # 左端へ
                 y += 1  # 一つ下へ
         elif k in ["M", "K"]:  # 左クリック
-            if 50 <= e.x <= self.cal_csr_x(self.mw.st_tab.column):
-                if 20 <= e.y:
-                    x = (e.x - 50) // (self.cal_csr_x(1) - 50)
-                    y = (e.y - 20) // (self.cal_csr_y(1) - 20)
+            if self.cal_csr_x(0) <= e.x <= self.cal_csr_x(self.mw.st_tab.column):
+                if self.cal_csr_y(0) <= e.y:
+                    x = (e.x - self.cal_csr_x(0)) // self.cal_csr_x(0)
+                    y = (e.y - self.cal_csr_y(0)) // self.cal_csr_y(0)
         elif e is None:
             pass
 
@@ -269,10 +283,19 @@ class EditTab:
         # 自身の変数に戻す
         self.csr[0] = x
         self.csr[1] = y
+        self.set_siz()  # スクロール範囲設定
 
         # 命令入力フォーム出現
         if k == "K":  # ダブルクリック
             self.imp_cmd(e)
+
+    # スクロール範囲変更
+    def set_siz(self):
+        x = self.cal_csr_x(self.mw.st_tab.column+1)
+        y = self.cal_csr_y(max(self.csr[1]+2, len(self.mw.lad.dr_ls)+1))
+        self.cvs.configure(scrollregion=(0, 0, x, y))  # スクロール範囲
+        print(x, y)
+        # print(max(self.csr[1], len(self.mw.lad.dr_ls)+1), self.csr[1])
 
     # 命令入力フォーム(カーソル位置の情報)
     def imp_cmd(self, e=None):
@@ -325,10 +348,12 @@ class EditTab:
             for i in range(self.mw.st_tab.column):  # x軸
                 for j in range(len(self.mw.lad.dr_ls)):  # y軸
                     self.draw_cmd(None, i, j)
-            x1 = self.mw.st_tab.column * self.mw.st_tab.size * 24 + 50  # 右母線x座標
-            y1 = 600                                                    # 母線y座標
-            self.cvs.create_line(50, 20, 50, y1)  # 左母線
-            self.cvs.create_line(x1, 20, x1, y1)  # 右母線
+            x0 = self.cal_csr_x(0)
+            y0 = self.cal_csr_y(0)
+            x1 = self.cal_csr_x(self.mw.st_tab.column)  # 右母線x座標
+            y1 = 600                                    # 母線y座標
+            self.cvs.create_line(x0, y0, x0, y1)  # 左母線
+            self.cvs.create_line(x1, y0, x1, y1)  # 右母線
             self.cvs.create_rectangle(0, 0, 0, 0, tags="csr", width=3, outline="blue")
             self.csr_move(None)
             return

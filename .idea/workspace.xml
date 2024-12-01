@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="11/30&#10;キーボードから入力可能&#10;END命令に合わせて自動で行挿入&#10;Ctr+左で線の変更">
+    <list default="true" id="63385c26-ff7c-4927-8eb2-ed7fccb95924" name="変更" comment="12/1&#10;Ctrl+上下左右で線を描いたり消したり&#10;描画や文字のサイズを変更">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application2.py" beforeDir="false" afterPath="$PROJECT_DIR$/application2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gvalue.py" beforeDir="false" afterPath="$PROJECT_DIR$/gvalue.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ladder.py" beforeDir="false" afterPath="$PROJECT_DIR$/ladder.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,14 +171,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703315342288</updated>
-    </task>
-    <task id="LOCAL-00029" summary="1/8&#10;細かな加筆修正">
-      <option name="closed" value="true" />
-      <created>1704726886133</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1704726886133</updated>
     </task>
     <task id="LOCAL-00030" summary="1/9&#10;コマンド通りに画面上に表示&#10;命令タグを表示予定">
       <option name="closed" value="true" />
@@ -566,7 +556,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732964203146</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="12/1&#10;Ctrl+上下左右で線を描いたり消したり&#10;描画や文字のサイズを変更">
+      <option name="closed" value="true" />
+      <created>1733056598370</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1733056598370</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -587,7 +585,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1/23&#10;カーソルの色の修正" />
     <MESSAGE value="1/24&#10;キーイベント追加" />
     <MESSAGE value="1/25&#10;分岐入力方法追加&#10;exe化" />
     <MESSAGE value="1/26&#10;コンベヤ完成&#10;exe化" />
@@ -612,6 +609,7 @@
     <MESSAGE value="11/14&#10;カーソル完成&#10;母線完成" />
     <MESSAGE value="11/15&#10;命令入力フォーム作成中" />
     <MESSAGE value="11/30&#10;キーボードから入力可能&#10;END命令に合わせて自動で行挿入&#10;Ctr+左で線の変更" />
-    <option name="LAST_COMMIT_MESSAGE" value="11/30&#10;キーボードから入力可能&#10;END命令に合わせて自動で行挿入&#10;Ctr+左で線の変更" />
+    <MESSAGE value="12/1&#10;Ctrl+上下左右で線を描いたり消したり&#10;描画や文字のサイズを変更" />
+    <option name="LAST_COMMIT_MESSAGE" value="12/1&#10;Ctrl+上下左右で線を描いたり消したり&#10;描画や文字のサイズを変更" />
   </component>
 </project>
